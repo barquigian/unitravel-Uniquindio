@@ -18,8 +18,7 @@ public class Vuelo implements Serializable {
     @EqualsAndHashCode.Include
     @Column(nullable = false,length = 10)
     private String codigo;
-    @Column(nullable = false,length = 10)
-    private float precio;
+
 
     @ManyToOne
     private Ciudad ciudadOrigen;

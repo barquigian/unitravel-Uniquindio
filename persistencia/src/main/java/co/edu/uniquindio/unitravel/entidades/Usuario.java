@@ -19,7 +19,7 @@ import java.util.List;
 public class Usuario extends Persona implements Serializable {
     @ElementCollection
     @ToString.Include
-    @Column(nullable = true)
+    @Column(nullable = true,length = 15)
     private List<String>telefono;
 
     @OneToMany(mappedBy = "usuario")

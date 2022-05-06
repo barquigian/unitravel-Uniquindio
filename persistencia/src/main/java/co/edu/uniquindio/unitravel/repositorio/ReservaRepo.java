@@ -27,7 +27,7 @@ public interface ReservaRepo extends JpaRepository <Reserva,String>  {
     int ObtenerNumeroReservas(String codigoHotel);
 
     //obtiene el valor de la reservas segun el codigo
-    @Query("select r.codigo,(select sum(rh.precio) from ReservaHabitacion rh where rh.reservaHabitacion= r group by r),(select sum(rs.precio) from ReservaSilla rs where rs.reserva= r group by r) from Reserva r where r.usuario.cedula= :codigoUsuario")
+    @Query("select r.codigo,(select sum(rh.precio) from ReservaHabitacion rh where rh.habitacion= r group by r),(select sum(rs.precio) from ReservaSilla rs where rs.reserva= r group by r) from Reserva r where r.usuario.cedula= :codigoUsuario")
     List<Object[]> obtenerValorReserva(String codigoUsuario);
 
     //obtiene las reservas segun el codigo
@@ -46,7 +46,7 @@ public interface ReservaRepo extends JpaRepository <Reserva,String>  {
     int obtenerNumeroResevas(Integer codigoHotel);
 
     //retorna el codigo de la reserva y la habitacion
-    @Query("select r.codigo,(select sum(rh.precio)from ReservaHabitacion rh where rh.reservaHabitacion=r group by r) from Reserva r where r.usuario.cedula=:codigoUsuario")
+    @Query("select r.codigo,(select sum(rh.precio)from ReservaHabitacion rh where rh.habitacion=r group by r) from Reserva r where r.usuario.cedula=:codigoUsuario")
     List<Object[]> obtenerTotalPorReserva(String codigoUsuario);
 
     @Query("select rs.silla.vuelo, sum(rs.reserva.cantidadPersonas) from ReservaSilla rs group by rs.silla.vuelo")

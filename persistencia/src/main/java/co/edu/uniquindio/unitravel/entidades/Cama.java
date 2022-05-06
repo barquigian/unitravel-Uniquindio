@@ -1,10 +1,32 @@
 package co.edu.uniquindio.unitravel.entidades;
 
-public enum Cama {
-    UnaCama,
-    dosCamas,
-    tresCamas,
-    cuatroCamas,
-    cincoCamas;
+import co.edu.uniquindio.unitravel.entidades.Habitacion;
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Cama implements Serializable {
+
+    @Id
+    @EqualsAndHashCode.Include
+    @Column(nullable = false,length = 10)
+    private String codigo;
+
+    @Column(nullable = false)
+    private Integer tipo;
+
+    @ManyToMany(mappedBy = "camas")
+    @ToString.Exclude
+    private List<Habitacion> habitaciones;
 
 }
+

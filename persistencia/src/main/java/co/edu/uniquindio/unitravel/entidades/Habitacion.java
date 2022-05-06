@@ -28,6 +28,8 @@ public class Habitacion implements Serializable {
     private Hotel hotel;
     @Column(nullable = false,length = 15)
     private String estado;
+    @Column(nullable = false)
+
 
     @OneToMany(mappedBy = "habitacion")
     @ToString.Exclude
@@ -39,7 +41,11 @@ public class Habitacion implements Serializable {
 
     @ManyToMany
     @ToString.Exclude
-    private List<Caracteristica>caracteristicasHabitacion;
+    private List<Caracteristica>caracteristicas;
+
+    @ManyToMany
+    @ToString.Exclude
+    private List<Cama> camas;
 
     public Habitacion(Integer codigo, float precio, Integer capacidad,String numeroHabitacion ,Hotel hotel, String estado) {
         this.codigo = codigo;

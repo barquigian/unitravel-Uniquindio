@@ -47,7 +47,7 @@ public class Hotel implements Serializable {
 
     @ManyToMany
     @ToString.Exclude
-    private List<Caracteristica>caracteristicasHotel;
+    private List<Caracteristica>caracteristicas;
 
     @OneToMany(mappedBy = "hotel")
     @ToString.Exclude

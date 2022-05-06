@@ -22,7 +22,7 @@ public class ReservaHabitacion implements Serializable {
     @Column(nullable = false,length = 10)
     private Double precio;
     @ManyToOne
-    private Reserva reservaHabitacion;
+    private Reserva reserva;
     @ManyToOne
     private Habitacion habitacion;
 }

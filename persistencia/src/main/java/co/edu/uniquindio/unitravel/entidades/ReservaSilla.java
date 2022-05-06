@@ -21,10 +21,6 @@ public class ReservaSilla implements Serializable {
     private String codigo;
 
     @Column(nullable = false,length = 10)
-    @Positive
-    private Integer numeroSilla;
-
-    @Column(nullable = false,length = 10)
     private float precio;
 
     @ManyToOne

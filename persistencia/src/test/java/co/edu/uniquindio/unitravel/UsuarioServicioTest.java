@@ -31,7 +31,7 @@ public class UsuarioServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarUsuarioTest(){
-        Usuario u = new Usuario("1234","lucas","lucas@correo.com","1234");
+        Usuario u = new Usuario("123412","lucas","lucas@correo.com","1234");
         List<String>telefonos=new ArrayList<>();
         telefonos.add("564334");
         telefonos.add("662343");

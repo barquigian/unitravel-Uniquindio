@@ -20,6 +20,8 @@ public class Silla implements Serializable {
 
     @ManyToOne
     private Vuelo vuelo;
+    @Column(nullable = false,length = 10)
+    private float precio;
 
     @OneToMany(mappedBy = "silla")
     @ToString.Exclude

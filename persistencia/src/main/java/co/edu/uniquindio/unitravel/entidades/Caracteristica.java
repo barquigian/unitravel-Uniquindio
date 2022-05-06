@@ -20,15 +20,15 @@ public class Caracteristica implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     @Column(length = 10)
-    private String codigo;
+    private Integer codigo;
     @Column(length = 100)
     private String nombre;
 
-    @ManyToMany(mappedBy = "caracteristicasHotel")
+    @ManyToMany(mappedBy = "caracteristicas")
     @ToString.Exclude
     private List<Hotel>hoteles;
 
-    @ManyToMany(mappedBy = "caracteristicasHabitacion")
+    @ManyToMany(mappedBy = "caracteristicas")
     @ToString.Exclude
     private List<Habitacion>habitaciones;
 }
