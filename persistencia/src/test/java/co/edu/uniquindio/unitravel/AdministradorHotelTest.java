@@ -29,11 +29,13 @@ public class AdministradorHotelTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void buscarNombreAdministradorTest() throws Exception {
-        String nombre= administradorHotelRepo.obtenerNombreAdministradorHotel("1");
-        if(nombre.isEmpty()){
-            System.out.println("el codigo es invalido");
-        }else {
-            System.out.println(nombre);
+        AdministradorHotel administradorHotel= administradorHotelRepo.obtenerAdministradorHotel("1");
+
+            try{
+                if (administradorHotel.getCodigo().equals("1"));
+                 Assertions.assertNotNull(administradorHotel.getCodigo());
+                 }catch (Exception e){
+                     e.printStackTrace();
         }
 
     }

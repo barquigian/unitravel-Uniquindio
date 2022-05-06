@@ -17,8 +17,7 @@ public interface AdministradorHotelServicio {
     void elimiarHotel(Integer codigo)throws Exception;
 
     List<Hotel>listarHoteles(String codigoAdmin)throws Exception;
-
-    Hotel modificarHotel(int codigoAntiguo,int codigo, String nombre, String direccion, String telefono, int numeroEstrellas, AdministradorHotel administradorHotel, Ciudad ciudad)throws Exception;
+    void modificarHotel(Hotel hotel)throws Exception;
 
     Hotel obtenerHotel(Integer codigo)throws Exception;
 }

@@ -25,28 +25,28 @@ public class UsuarioTest {
 
     @Test
     public void registrar(){
-        Usuario usuario= new Usuario("1234432","Fabian Mejia","Fabian123@correo", "12345");
+        Usuario usuario= new Usuario("66434","Esteban Vasquez","Esteban@correo", "12345");
         Usuario usuarioGuardado= usuarioRepo.save(usuario);
         Assertions.assertNotNull(usuarioGuardado);
 
     }
     @Test
     public void eliminar(){
-        Usuario usuario= new Usuario("1234432","Fabian Mejia","Fabian123@correo", "12345");
+        Usuario usuario= new Usuario("66434","Esteban Vasquez","Esteban@correo", "12345");
         Usuario usuarioGuardado= usuarioRepo.save(usuario);
         usuarioRepo.delete(usuarioGuardado);
-        Usuario usuarioEncontrado= usuarioRepo.findById("1234432").orElse(null);
+        Usuario usuarioEncontrado= usuarioRepo.findById("66434").orElse(null);
 
         Assertions.assertNull(usuarioEncontrado);
     }
     @Test
     public void actualizar(){
-        Usuario usuario= new Usuario("1234432","Fabian Mejia","Fabian123@correo", "12345");
+        Usuario usuario= new Usuario("66434","Esteban Vasquez","Esteban@correo", "12345");
         Usuario usuarioGuardado=usuarioRepo.save(usuario);
-        usuarioGuardado.setContrasena("12345");
+        usuarioGuardado.setContrasena("123456");
         usuarioRepo.save(usuarioGuardado);
-        Usuario usuarioBuscado= usuarioRepo.findById("1234432").orElse(null);
-        Assertions.assertEquals("12345",usuarioBuscado.getContrasena());
+        Usuario usuarioBuscado= usuarioRepo.findById("66434").orElse(null);
+        Assertions.assertEquals("123456",usuarioBuscado.getContrasena());
     }
     @Test
     @Sql("classpath:dataset.sql")
@@ -55,13 +55,14 @@ public class UsuarioTest {
         List<Usuario>usuarios=usuarioRepo.findAll();
 
         System.out.println(usuarios);
+        Assertions.assertNotNull(usuarios);
 
     }
     @Test
     @Sql("classpath:dataset.sql")
     public void listarUsuariosPorNombre(){
 
-        List<Usuario>usuarios=usuarioRepo.findAllByNombre("Carlos");
+        List<Usuario>usuarios=usuarioRepo.findAllByNombre("Carlos Soto");
         usuarios.forEach(System.out::println);
 
     }
@@ -69,7 +70,7 @@ public class UsuarioTest {
     @Sql("classpath:dataset.sql")
     public void AutenticacionCorreo(){
 
-        Optional<Usuario> usuarios=usuarioRepo.findByEmailAndContrasena("Manuel123@correo.com","12345");
+        Optional<Usuario> usuarios=usuarioRepo.findByEmailAndContrasena("Fabian123@correo.com","12345");
 
         System.out.println(usuarios.orElse(null));
 
@@ -93,7 +94,7 @@ public class UsuarioTest {
     @Sql("classpath:dataset.sql")
     public void cambiarContrasenaporCedula() {
 
-       Usuario usuario= usuarioRepo.buscarporCedula("123456");
+       Usuario usuario= usuarioRepo.buscarporCedula("1234432");
        usuario.setContrasena("123456");
        usuarioRepo.save(usuario);
        Assertions.assertEquals("123456",usuario.getContrasena());
@@ -103,7 +104,7 @@ public class UsuarioTest {
     @Sql("classpath:dataset.sql")
     public void cambiarEmailporCedula() {
 
-        Usuario usuario= usuarioRepo.buscarporCedula("123456");
+        Usuario usuario= usuarioRepo.buscarporCedula("1234432");
         System.out.println(usuario);
         usuario.setEmail("Fabi123@correo.com");
         usuarioRepo.save(usuario);
@@ -119,15 +120,15 @@ public class UsuarioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarComentariosPorUsuario(){
-        List<Object[]> comenterios= usuarioRepo.obtenerComentarios();
-        comenterios.forEach(c -> System.out.println(c[0]+" "+c[1]));
+        //List<Object[]> comenterios= usuarioRepo.obtenerComentarios();
+        //comenterios.forEach(c -> System.out.println(c[0]+" "+c[1]));
     }
-    @Test
+   /* @Test
     @Sql("classpath:dataset.sql")
     public void listarComentariosPorUsuarioDto(){
-        //List<ComentarioUsuarioDto> comenterios= usuarioRepo.obtenerComentariosDto();
-        //comenterios.forEach(System.out::println);
-    }
+        List<ComentarioUsuarioDto> comenterios= usuarioRepo.obtenerComentariosDto();
+        comenterios.forEach(System.out::println);
+    }*/
     @Test
     @Sql("classpath:dataset.sql")
     public void listarResevas(){
@@ -137,7 +138,7 @@ public class UsuarioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarUsuarioPorTelefono(){
-        List<Usuario> usuarios= usuarioRepo.obtenerUsuarioporTelefono("323443213");
+        List<Usuario> usuarios= usuarioRepo.obtenerUsuarioporTelefono("33456513");
         usuarios.forEach(System.out::println);
     }
     @Test
@@ -148,14 +149,15 @@ public class UsuarioTest {
     }
     @Test
     @Sql("classpath:dataset.sql")
-    public void crearUsuario(String codigo,String nombre,String email,String contrasena,List<String>telefonos){
+    public void crearUsuario(){
 
-        Usuario usuario= new Usuario(codigo,nombre,email,contrasena,telefonos);
-        if (usuario.getCedula().isEmpty()){
-            System.out.println("error al crear su usuario");
-        }else{
-            Assertions.assertNotNull(usuario);
-            System.out.println("El usuario a sido creado con exito");
+        Usuario usuario= new Usuario("6536", "Cristian Ortiz", "crisO@correo.com","12345");
+        try{
+
+            if(usuario!=null);
+            usuarioRepo.save(usuario);
+        }catch (Exception e){
+            Assertions.assertNull(usuario);
         }
     }
 }

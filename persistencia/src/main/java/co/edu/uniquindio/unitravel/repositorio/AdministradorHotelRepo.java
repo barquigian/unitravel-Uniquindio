@@ -17,6 +17,6 @@ public interface AdministradorHotelRepo extends JpaRepository<AdministradorHotel
         List<Hotel> obtenerHotelesAdmin(String codigoAdmin);
         @Query("select h from AdministradorHotel h where h.email=:correo and h.contrasena=:contrasena")
         AdministradorHotel findByEmailAndContrasena(String correo, String contrasena);
-        @Query("select a.nombre from AdministradorHotel a where a.codigo= :codigoAdministrador")
-        String obtenerNombreAdministradorHotel(String codigoAdministrador);
+        @Query("select a from AdministradorHotel a where a.codigo= :codigoAdministrador")
+        AdministradorHotel  obtenerAdministradorHotel(String codigoAdministrador);
 }

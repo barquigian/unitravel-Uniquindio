@@ -67,4 +67,19 @@ public class Hotel implements Serializable {
         this.administradorHotel = administradorHotel;
         this.ciudad = ciudad;
     }
+
+    public Hotel(Integer codigo, String nombre, String direccion, String telefono, Integer numEstrellas, AdministradorHotel administradorHotel, Ciudad ciudad, List<Habitacion> habitaciones, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Comentario> comentarios) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.numEstrellas = numEstrellas;
+        this.administradorHotel = administradorHotel;
+        this.ciudad = ciudad;
+        this.habitaciones = habitaciones;
+        this.fotos = fotos;
+        this.caracteristicas = caracteristicas;
+        this.comentarios = comentarios;
+    }
+
 }

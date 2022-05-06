@@ -35,11 +35,11 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
     public void elimiarHotel(Integer codigo) throws Exception {
         Optional<Hotel> hotel= hotelRepo.findById(codigo);
         if (hotel.isEmpty()){
-            JOptionPane.showMessageDialog(null,"no existe el hotel con este codigo");
+          throw new Exception();
 
         }else {
             hotelRepo.delete(hotel.get());
-            JOptionPane.showMessageDialog(null,"el hotel fue eliminado con exito");
+
         }
     }
 
@@ -49,17 +49,18 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
     }
 
     @Override
-    public Hotel modificarHotel(int codigoAntiguo, int codigo, String nombre, String direccion, String telefono, int numeroEstrellas, AdministradorHotel administradorHotel, Ciudad ciudad) throws Exception {
-        Optional<Hotel>hotel1= hotelRepo.findById(codigoAntiguo);
-        if (hotel1.isEmpty()){
-            JOptionPane.showMessageDialog(null,"no existe el hotel con este codigo");
-        }else {
-            ;
-            hotelRepo.save(new Hotel(codigo,nombre,direccion,telefono,numeroEstrellas,administradorHotel,ciudad));
-        }
-        return hotelRepo.save(hotel1.get());
-    }
+    public void modificarHotel(Hotel hotel) throws Exception {
+        hotel.setDireccion("Cra 20a #83");
+        hotelRepo.save(hotel);
 
+            if (hotel.getCodigo()==null) {
+                throw new Exception();
+
+            } else{
+                hotelRepo.save(hotel);
+            }
+
+    }
     @Override
     public Hotel obtenerHotel(Integer codigo) throws Exception {
         Optional<Hotel> hotel= hotelRepo.findById(codigo);

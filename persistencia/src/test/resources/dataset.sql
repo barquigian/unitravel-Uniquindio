@@ -2,10 +2,10 @@ insert into administrador values ("123456","12345","sebas123@gmail.com","Sebasti
 insert into administrador values ("456564","12345","carlos123@gmail.com","Carlos Mauricio", "2");
 insert into administrador values ("756743","12345","santiago@gmail.com","Santiago Quedaza", "3");
 
-insert into administrador_hotel values ("12345","12345","sebas123@gmail.com","Sebastian Mejia","1");
-insert into administrador_hotel values ("122545","12345","JairoHenao@gmail.com","Jairo Henao", "2");
-insert into administrador_hotel values ("12545","12345","JabierCubillos@gmail.com","Jabier Cubillos", "3");
-insert into administrador_hotel values ("14235","12345","HenaoOscar@gmail.com","Osacar Henao", "4");
+insert into administrador_hotel values ("1","12345","sebas123@gmail.com","Sebastian Mejia","1");
+insert into administrador_hotel values ("2","12345","JairoHenao@gmail.com","Jairo Henao", "2");
+insert into administrador_hotel values ("3","12345","JabierCubillos@gmail.com","Jabier Cubillos", "3");
+insert into administrador_hotel values ("4","12345","HenaoOscar@gmail.com","Osacar Henao", "4");
 
 insert into cama values (1,1);
 insert into cama values (2,2);
@@ -28,11 +28,14 @@ insert into ciudad values (2, "Cartagena");
 insert into ciudad values (3, "Cali");
 insert into ciudad values (4, "Medellin");
 
-insert into comentario values ("1",5,"muy buena atención","2022-03-20", 1,"1234432");
-insert into comentario values ("2",4,"excelente comida","2022-04-20", 2,"1234432");
-insert into comentario values ("3",3,"buen servicio","2022-04-21", 4,"123456");
-insert into comentario values ("4",4,"buena atención, disfrute mucho mi estadia","2022-04-22", 4,"123455");
-insert into comentario values ("5",2,"no habia agua caliente","2022-05-01", 4,"123456");
+insert into comentario values ("1",5,"muy buena atencion","2022-03-20", 1,"1234432");
+insert into comentario values ("2",4,"excelente comida","2022-04-20", 2,"423456");
+insert into comentario values ("3",3,"buen servicio","2022-04-21", 3,"323455");
+insert into comentario values ("4",4,"buena atencion,","2022-04-22", 4,"2289434");
+insert into comentario values ("5",2," agua caliente","2022-05-01", 5,"926564");
+insert into comentario values ("6",3,"buen servicio","2022-04-21", 6,"7234634");
+insert into comentario values ("7",4,"buena atencion ","2022-04-22", 7,"323455");
+insert into comentario values ("8",2," agua caliente","2022-05-01", 8,"926564");
 
 insert into foto values ("1","1",1);
 insert into foto values ("2","2",1);
