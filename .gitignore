@@ -1,0 +1,20 @@
+#java#
+*.class
+
+#package files#
+*.war
+*.ear
+
+#gradle#
+#exclude folder list #
+build/
+
+#PDT- specific
+.buildpath
+
+#intellij#
+*.iml
+*.ipr
+*.iws
+.idea/
+/bin
