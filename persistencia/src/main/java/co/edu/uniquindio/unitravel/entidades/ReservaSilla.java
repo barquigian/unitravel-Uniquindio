@@ -24,11 +24,11 @@ public class ReservaSilla implements Serializable {
     private float precio;
 
     @ManyToOne
-    @ToString.Exclude
+    @JoinColumn(nullable = false)
     private Reserva reserva;
 
     @ManyToOne
-    @ToString.Exclude
+    @JoinColumn(nullable = false)
     private Silla silla;
 
     public ReservaSilla(String codigo, int numeroSilla, float precio ) {
