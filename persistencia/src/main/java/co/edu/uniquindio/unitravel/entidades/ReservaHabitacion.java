@@ -17,12 +17,15 @@ import java.io.Serializable;
 public class ReservaHabitacion implements Serializable {
     @Id
     @EqualsAndHashCode.Include
-    @Column(nullable = false,length = 10)
+    @Column(length = 10)
     private String codigo;
     @Column(nullable = false,length = 10)
     private Double precio;
+    
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Reserva reserva;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Habitacion habitacion;
 }
