@@ -29,10 +29,13 @@ public class Comentario implements Serializable {
 
     @Column(nullable = false)
     private LocalDateTime fechaCalificacion;
+   
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Hotel hotel;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     public Comentario(String codigo, String comentario, int calificacion, Hotel hotel, Usuario usuario) {
