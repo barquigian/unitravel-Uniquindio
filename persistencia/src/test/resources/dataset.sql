@@ -1,3 +1,8 @@
+insert into ciudad values (1, "Armenia");
+insert into ciudad values (2, "Cartagena");
+insert into ciudad values (3, "Cali");
+insert into ciudad values (4, "Medellin");
+
 insert into administrador values ("123456","12345","sebas123@gmail.com","Sebastian Mejia", "1");
 insert into administrador values ("456564","12345","carlos123@gmail.com","Carlos Mauricio", "2");
 insert into administrador values ("756743","12345","santiago@gmail.com","Santiago Quedaza", "3");
@@ -6,6 +11,29 @@ insert into administrador_hotel values ("1","12345","sebas123@gmail.com","Sebast
 insert into administrador_hotel values ("2","12345","JairoHenao@gmail.com","Jairo Henao", "2");
 insert into administrador_hotel values ("3","12345","JabierCubillos@gmail.com","Jabier Cubillos", "3");
 insert into administrador_hotel values ("4","12345","HenaoOscar@gmail.com","Osacar Henao", "4");
+
+insert into usuario values ("1234432", "12345", "Manuel123@correo.com","Manuel Mejia");
+insert into usuario values ("423456", "12345", "Fabian123@correo.com","Fabian Mejia");
+insert into usuario values ("323455", "12345", "Carlos123@correo.com","Carlos Soto");
+insert into usuario values ("2289434", "12345", "Rodrigo123@correo.com","Rodrigo Perez");
+insert into usuario values ("926564", "12345", "Pedro123@correo.com","Pedro Muriel");
+insert into usuario values ("7234634", "12345", "JuanMiguel23@correo.com","Juan Miguel Ossa");
+
+insert into usuario_telefono values ("423456","33456513");
+insert into usuario_telefono values ("1234432","124256211");
+insert into usuario_telefono values ("323455","32334513");
+insert into usuario_telefono values ("2289434","323443213");
+insert into usuario_telefono values ("926564","124234511");
+insert into usuario_telefono values ("7234634","323443213");
+
+insert into hotel values(1,"cra 02 #23-11","hotel Tertulia",4,"324234241","12345",1);
+insert into hotel values(2,"cra 02 #2-31","hotel Armenia",3,"324334241","12345",1);
+insert into hotel values(3,"cra 12 #2-21","hotel Cartagena",4,"314234241","123345",2);
+insert into hotel values(4,"cra 13 #3-31","hotel Cartagena 2",5,"32437241","123345",2);
+insert into hotel values(5,"cra 5 #43-10","hotel Cali",4,"334424241","13345",3);
+insert into hotel values(6,"cra 9 #34-56","hotel Cali Mirador",3,"31432241","13345",3);
+insert into hotel values(7,"cra 32 #8-21","hotel Medellin",5,"31243241","14235",4);
+insert into hotel values(8,"cra 24 #7-19","hotel Medallo",3,"31232341","14235",4);
 
 insert into cama values (1,1);
 insert into cama values (2,2);
@@ -22,52 +50,6 @@ insert into caracteristica values ("6","almuerzo y cena incluida");
 insert into caracteristica values ("7","piscina");
 insert into caracteristica values ("8","buffet");
 insert into caracteristica values ("9","sala de juegos");
-
-insert into ciudad values (1, "Armenia");
-insert into ciudad values (2, "Cartagena");
-insert into ciudad values (3, "Cali");
-insert into ciudad values (4, "Medellin");
-
-insert into comentario values ("1",5,"muy buena atencion","2022-03-20", 1,"1234432");
-insert into comentario values ("2",4,"excelente comida","2022-04-20", 2,"423456");
-insert into comentario values ("3",3,"buen servicio","2022-04-21", 3,"323455");
-insert into comentario values ("4",4,"buena atencion,","2022-04-22", 4,"2289434");
-insert into comentario values ("5",2," agua caliente","2022-05-01", 5,"926564");
-insert into comentario values ("6",3,"buen servicio","2022-04-21", 6,"7234634");
-insert into comentario values ("7",4,"buena atencion ","2022-04-22", 7,"323455");
-insert into comentario values ("8",2," agua caliente","2022-05-01", 8,"926564");
-
-insert into foto values ("1","1",1);
-insert into foto values ("2","2",1);
-insert into foto values ("3","3",1);
-insert into foto values ("4","4",1);
-insert into foto values ("5","5",1);
-insert into foto values ("6","6",1);
-insert into foto values ("7","1",2);
-insert into foto values ("8","2",2);
-insert into foto values ("9","3",2);
-insert into foto values ("10","4",2);
-insert into foto values ("11","5",2);
-insert into foto values ("12","6",2);
-insert into foto values ("13","4",3);
-insert into foto values ("14","5",4);
-insert into foto values ("15","6",4);
-
-insert into foto_foto_url values ("1","1");
-insert into foto_foto_url values ("2","2");
-insert into foto_foto_url values ("3","3");
-insert into foto_foto_url values ("4","4");
-insert into foto_foto_url values ("5","5");
-insert into foto_foto_url values ("6","6");
-insert into foto_foto_url values ("7","1");
-insert into foto_foto_url values ("8","2");
-insert into foto_foto_url values ("9","3");
-insert into foto_foto_url values ("10","4");
-insert into foto_foto_url values ("11","5");
-insert into foto_foto_url values ("12","6");
-insert into foto_foto_url values ("13","4");
-insert into foto_foto_url values ("14","5");
-insert into foto_foto_url values ("15","6");
 
 insert into habitacion values(1,1,"disponible",45.000,1,"101");
 insert into habitacion values(2,2,"disponible",85.000,1,"102");
@@ -361,15 +343,46 @@ insert into habitacion_caracteristica_habitacion values("70","3");
 insert into habitacion_caracteristica_habitacion values("71","6");
 insert into habitacion_caracteristica_habitacion values("72","4");
 
+insert into comentario values ("1",5,"muy buena atencion","2022-03-20", 1,"1234432");
+insert into comentario values ("2",4,"excelente comida","2022-04-20", 2,"423456");
+insert into comentario values ("3",3,"buen servicio","2022-04-21", 3,"323455");
+insert into comentario values ("4",4,"buena atencion","2022-04-22", 4,"2289434");
+insert into comentario values ("5",2," agua caliente","2022-05-01", 5,"926564");
+insert into comentario values ("6",3,"buen servicio","2022-04-21", 6,"7234634");
+insert into comentario values ("7",4,"buena atencion ","2022-04-22", 7,"323455");
+insert into comentario values ("8",2," agua caliente","2022-05-01", 8,"926564");
 
-insert into hotel values(1,"cra 02 #23-11","hotel Tertulia",4,"324234241","12345",1);
-insert into hotel values(2,"cra 02 #2-31","hotel Armenia",3,"324334241","12345",1);
-insert into hotel values(3,"cra 12 #2-21","hotel Cartagena",4,"314234241","123345",2);
-insert into hotel values(4,"cra 13 #3-31","hotel Cartagena 2",5,"32437241","123345",2);
-insert into hotel values(5,"cra 5 #43-10","hotel Cali",4,"334424241","13345",3);
-insert into hotel values(6,"cra 9 #34-56","hotel Cali Mirador",3,"31432241","13345",3);
-insert into hotel values(7,"cra 32 #8-21","hotel Medellin",5,"31243241","14235",4);
-insert into hotel values(8,"cra 24 #7-19","hotel Medallo",3,"31232341","14235",4);
+insert into foto values ("1","1",1);
+insert into foto values ("2","2",1);
+insert into foto values ("3","3",1);
+insert into foto values ("4","4",1);
+insert into foto values ("5","5",1);
+insert into foto values ("6","6",1);
+insert into foto values ("7","1",2);
+insert into foto values ("8","2",2);
+insert into foto values ("9","3",2);
+insert into foto values ("10","4",2);
+insert into foto values ("11","5",2);
+insert into foto values ("12","6",2);
+insert into foto values ("13","4",3);
+insert into foto values ("14","5",4);
+insert into foto values ("15","6",4);
+
+insert into foto_foto_url values ("1","1");
+insert into foto_foto_url values ("2","2");
+insert into foto_foto_url values ("3","3");
+insert into foto_foto_url values ("4","4");
+insert into foto_foto_url values ("5","5");
+insert into foto_foto_url values ("6","6");
+insert into foto_foto_url values ("7","1");
+insert into foto_foto_url values ("8","2");
+insert into foto_foto_url values ("9","3");
+insert into foto_foto_url values ("10","4");
+insert into foto_foto_url values ("11","5");
+insert into foto_foto_url values ("12","6");
+insert into foto_foto_url values ("13","4");
+insert into foto_foto_url values ("14","5");
+insert into foto_foto_url values ("15","6");
 
 insert into hotel_caracteristica values (1,"9");
 insert into hotel_caracteristica values (2,"7");
@@ -389,41 +402,16 @@ insert into hotel_caracteristica_hotel values (6,"6");
 insert into hotel_caracteristica_hotel values (7,"7");
 insert into hotel_caracteristica_hotel values (8,"8");
 
-insert into hotel_reserva values (1,"1");
-insert into hotel_reserva values (2,"2");
-insert into hotel_reserva values (3,"4");
-insert into hotel_reserva values (4,"3");
-insert into hotel_reserva values (5,"6");
-insert into hotel_reserva values (6,"5");
 
-insert into reserva values ("1",2,205.000,"reservado","2022-03-28","2022-03-24","2022-03-20",1,"1234432");
-insert into reserva values ("2",3,245.500,"reservado","2022-04-18","2022-04-10","2022-04-02",2,"423456");
-insert into reserva values ("3",2,305.500,"reservado","2022-03-20","2022-03-12","2022-03-01",3,"323455");
-insert into reserva values ("4",1,235.500,"reservado","2022-05-28","2022-0-26","2022-05-02",4,"2289434");
-insert into reserva values ("5",2,455.500,"reservado","2022-01-26","2022-01-20","2022-01-10",5,"926564");
-insert into reserva values ("6",3,675.500,"reservado","2022-02-03","2022-02-01","2022-01-16",6,"7234634");
-
-insert into reserva_habitacion values ("1",45.000,"1","1");
-insert into reserva_habitacion values ("2",85.000,"2","2");
-insert into reserva_habitacion values ("3",85.000,"12","12");
-insert into reserva_habitacion values ("1",45.000,"13","13");
-insert into reserva_habitacion values ("2",150.000,"23","23");
-insert into reserva_habitacion values ("3",105.000,"16","16");
-
-insert into reserva_silla values ("1",2,80.000,"1","1");
-insert into reserva_silla values ("2",3,80.000,"1","2");
-insert into reserva_Silla values ("3",90.000,"2","5");
-insert into reserva_Silla values ("4",90.000,"2","5");
-insert into reserva_Silla values ("5",90.000,"2","5");
-insert into reserva_Silla values ("6",90.000,"3","9");
-insert into reserva_Silla values ("7",90.000,"3","10");
-insert into reserva_Silla values ("8",80.000,"4","15");
-insert into reserva_Silla values ("9",120.000,"5","17");
-insert into reserva_Silla values ("10",120.000,"5","18");
-insert into reserva_Silla values ("11",90.000,"6","6");
-insert into reserva_Silla values ("12",90.000,"6","7");
-insert into reserva_Silla values ("13",90.000,"6","8");
-
+insert into vuelo values ("abc1","vuelosDia", "programado",5,"123456","Bogota","Armenia");
+insert into vuelo values ("ssdaw","vuelosDia", "programado",5,"123456","Bogota","Cartagena");
+insert into vuelo values ("dafsf","vuelosDia", "programado",6,"123456","Bogota","Cali");
+insert into vuelo values ("sdgr","AviVuelos", "programado",5,"456564","Cali","Armenia");
+insert into vuelo values ("fgdgr","AviVuelos", "programado",6,"456564","Cali","Cartagena");
+insert into vuelo values ("acec","AviVuelos", "programado",6,"456564","Cali","Medellin");
+insert into vuelo values ("csvr","AviaTour", "programado",6,"756743","Medellin","Cartagena");
+insert into vuelo values ("fvssd","AviaTour", "programado",8,"756743","Medellin","Armenia");
+insert into vuelo values ("c3dsfr","AviaTour", "programado",5,"756743","Medellin","Cali");
 
 insert into silla values ("1",80.000,"abc1");
 insert into silla values ("2",80.000,"abc1");
@@ -445,34 +433,6 @@ insert into silla values ("17",120.000,"fvssd");
 insert into silla values ("18",120.000,"fvssd");
 insert into silla values ("19",120.000,"fvssd");
 insert into silla values ("20",120.000,"fvssd");
-
-
-
-
-insert into usuario values ("1234432", "12345", "Manuel123@correo.com","Manuel Mejia");
-insert into usuario values ("423456", "12345", "Fabian123@correo.com","Fabian Mejia");
-insert into usuario values ("323455", "12345", "Carlos123@correo.com","Carlos Soto");
-insert into usuario values ("2289434", "12345", "Rodrigo123@correo.com","Rodrigo Perez");
-insert into usuario values ("926564", "12345", "Pedro123@correo.com","Pedro Muriel");
-insert into usuario values ("7234634", "12345", "JuanMiguel23@correo.com","Juan Miguel Ossa");
-
-insert into usuario_telefono values ("423456","33456513");
-insert into usuario_telefono values ("1234432","124256211");
-insert into usuario_telefono values ("323455","32334513");
-insert into usuario_telefono values ("2289434","323443213");
-insert into usuario_telefono values ("926564","124234511");
-insert into usuario_telefono values ("7234634","323443213");
-
-
-insert into vuelo values ("abc1","vuelosDia", "programado",5,"123456","Bogota","Armenia");
-insert into vuelo values ("ssdaw","vuelosDia", "programado",5,"123456","Bogota","Cartagena");
-insert into vuelo values ("dafsf","vuelosDia", "programado",6,"123456","Bogota","Cali");
-insert into vuelo values ("sdgr","AviVuelos", "programado",5,"456564","Cali","Armenia");
-insert into vuelo values ("fgdgr","AviVuelos", "programado",6,"456564","Cali","Cartagena");
-insert into vuelo values ("acec","AviVuelos", "programado",6,"456564","Cali","Medellin");
-insert into vuelo values ("csvr","AviaTour", "programado",6,"756743","Medellin","Cartagena");
-insert into vuelo values ("fvssd","AviaTour", "programado",8,"756743","Medellin","Armenia");
-insert into vuelo values ("c3dsfr","AviaTour", "programado",5,"756743","Medellin","Cali");
 
 insert into vuelo_silla values ("abc1","1");
 insert into vuelo_silla values ("abc1","2");
@@ -526,4 +486,53 @@ insert into vuelo_silla values ("c3dsfr","2");
 insert into vuelo_silla values ("c3dsfr","3");
 insert into vuelo_silla values ("c3dsfr","4");
 insert into vuelo_silla values ("c3dsfr","5");
+
+insert into reserva values ("1",2,205.000,"reservado","2022-03-28","2022-03-24","2022-03-20",1,"1234432");
+insert into reserva values ("2",3,245.500,"reservado","2022-04-18","2022-04-10","2022-04-02",2,"423456");
+insert into reserva values ("3",2,305.500,"reservado","2022-03-20","2022-03-12","2022-03-01",3,"323455");
+insert into reserva values ("4",1,235.500,"reservado","2022-05-28","2022-0-26","2022-05-02",4,"2289434");
+insert into reserva values ("5",2,455.500,"reservado","2022-01-26","2022-01-20","2022-01-10",5,"926564");
+insert into reserva values ("6",3,675.500,"reservado","2022-02-03","2022-02-01","2022-01-16",6,"7234634");
+
+insert into reserva_habitacion values ("1",45.000,"1","1");
+insert into reserva_habitacion values ("2",85.000,"2","2");
+insert into reserva_habitacion values ("3",85.000,"12","12");
+insert into reserva_habitacion values ("1",45.000,"13","13");
+insert into reserva_habitacion values ("2",150.000,"23","23");
+insert into reserva_habitacion values ("3",105.000,"16","16");
+
+insert into hotel_reserva values (1,"1");
+insert into hotel_reserva values (2,"2");
+insert into hotel_reserva values (3,"4");
+insert into hotel_reserva values (4,"3");
+insert into hotel_reserva values (5,"6");
+insert into hotel_reserva values (6,"5");
+
+
+
+
+insert into reserva_silla values ("1",2,80.000,"1","1");
+insert into reserva_silla values ("2",3,80.000,"1","2");
+insert into reserva_Silla values ("3",90.000,"2","5");
+insert into reserva_Silla values ("4",90.000,"2","5");
+insert into reserva_Silla values ("5",90.000,"2","5");
+insert into reserva_Silla values ("6",90.000,"3","9");
+insert into reserva_Silla values ("7",90.000,"3","10");
+insert into reserva_Silla values ("8",80.000,"4","15");
+insert into reserva_Silla values ("9",120.000,"5","17");
+insert into reserva_Silla values ("10",120.000,"5","18");
+insert into reserva_Silla values ("11",90.000,"6","6");
+insert into reserva_Silla values ("12",90.000,"6","7");
+insert into reserva_Silla values ("13",90.000,"6","8");
+
+
+
+
+
+
+
+
+
+
+
 
