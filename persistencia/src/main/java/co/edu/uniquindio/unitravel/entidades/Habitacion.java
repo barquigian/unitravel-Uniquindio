@@ -16,7 +16,7 @@ import java.util.List;
 public class Habitacion implements Serializable {
     @Id
     @EqualsAndHashCode.Include
-    @Column(nullable = false,length = 10)
+    @Column(length = 10)
     private Integer codigo;
     @Column(nullable = false,length = 10)
     private float precio;
