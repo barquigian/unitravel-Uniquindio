@@ -16,14 +16,8 @@ import java.util.List;
 public class Vuelo implements Serializable {
     @Id
     @EqualsAndHashCode.Include
-    @Column(nullable = false,length = 10)
+    @Column(length = 10)
     private String codigo;
-
-
-    @ManyToOne
-    private Ciudad ciudadOrigen;
-    @ManyToOne
-    private Ciudad ciudadDestino;
 
     @Column(nullable = false)
     private Integer numeroSillas;
@@ -34,13 +28,21 @@ public class Vuelo implements Serializable {
     @Column(nullable = false,length = 10)
     private String aerolinea;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Ciudad ciudadOrigen;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Ciudad ciudadDestino;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Administrador administrador;
+
     @ManyToMany
     @ToString.Exclude
     private List<Silla> sillas;
 
-    @ManyToOne
-    @ToString.Exclude
-    private Administrador administrador;
+    
 
 
 }
