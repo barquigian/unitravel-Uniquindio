@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Hotel implements Serializable {
     @Id
-    @Column(nullable = false, length = 10)
+    @Column(length = 10)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
@@ -32,9 +32,11 @@ public class Hotel implements Serializable {
     private Integer numEstrellas;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private AdministradorHotel administradorHotel;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Ciudad ciudad;
 
     @OneToMany(mappedBy = "hotel")
