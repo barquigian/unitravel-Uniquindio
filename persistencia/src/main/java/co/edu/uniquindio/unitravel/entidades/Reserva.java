@@ -18,7 +18,7 @@ import java.util.List;
 public class Reserva implements Serializable {
     @Id
     @EqualsAndHashCode.Include
-    @Column(nullable = false,length = 10)
+    @Column(length = 10)
     private String codigo;
 
     @Column(nullable = false)
@@ -35,11 +35,15 @@ public class Reserva implements Serializable {
     @Column(nullable = false)
 
     private Integer cantidadPersonas;
+    
+    private Float costoTotal;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Hotel hotel;
 
     @OneToMany(mappedBy = "reserva")
@@ -53,8 +57,6 @@ public class Reserva implements Serializable {
     @OneToMany(mappedBy = "reserva")
     @ToString.Exclude
     private List<ReservaSilla> reservaSillas;
-
-    private Float costoTotal;
 
     public Reserva(String s, LocalDateTime fechaReserva, LocalDateTime fechaInicio, LocalDateTime fechaFin, String reservado, int cantidadPersonas, Usuario usuario, Hotel hotel) {
     }
