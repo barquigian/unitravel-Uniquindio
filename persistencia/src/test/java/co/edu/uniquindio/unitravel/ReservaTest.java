@@ -57,8 +57,12 @@ public class ReservaTest {
     }
     @Test
     @Sql
-    public void modificarReservaPorCodigoReserva(String codigoReserva){
-        Reserva reserva= reservaRepo.modificarReserva(codigoReserva);
+    public void modificarReservaPorCodigoReserva(){
+        Reserva reserva= reservaRepo.modificarReserva("1");
+        LocalDateTime fechafin=LocalDateTime.of(2022,03,28,5,32);
+        reserva.setFecha_fin(fechafin);
+        reservaRepo.save(reserva);
+        System.out.println(reserva);
     }
     @Test
     @Sql
@@ -66,8 +70,9 @@ public class ReservaTest {
                                 String estado, int cantidadPersonas, Usuario usuario, Hotel hotel){
         Reserva reserva=new Reserva(codigo,fecha,fechaInicio,fechaFin,estado,cantidadPersonas,usuario,hotel);
         if(reserva.getCodigo().equals(codigo)){
-            System.out.println("la reserva fue creada con exito. codigo:"+codigo);
+            reservaRepo.save(reserva);
         }
+        System.out.println(reserva);
     }
     @Test
     @Sql
@@ -85,7 +90,7 @@ public class ReservaTest {
     @Sql("classpath:dataset.sql")
     public void listarPrecioReservas() {
         List<Object[]> reservas= reservaRepo.obtenerTotalPorReserva("12345");
-        reservas.forEach(r-> System.out.println("reserva: "+r[0]+" precio:"+r[1]+ " "+r[2]));
+        reservas.forEach(r-> System.out.println("reserva: "+r[0]+" precio habitacion:"+r[1]+ "precio reserva silla "+r[2]));
     }
     @Test
     @Sql("classpath:dataset.sql")

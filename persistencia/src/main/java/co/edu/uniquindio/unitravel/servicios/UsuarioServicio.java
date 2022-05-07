@@ -20,7 +20,7 @@ public interface UsuarioServicio {
     Reserva modificarReserva(Reserva reserva)throws  Exception;
 
     void recuperarContraseña(String email)throws Exception;
-    List<Habitacion> cambiarEstadoDeHabitacion(Habitacion habitacion,String email)throws Exception;
+    Habitacion cambiarEstadoDeHabitacion(Habitacion habitacion,String email)throws Exception;
     Usuario crearUsuario(String codigo,String nombre,String email,String contrasena,List<String>telefonos);
     void eliminarUsuario(String codigo);
 

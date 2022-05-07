@@ -19,16 +19,22 @@ public class UsuarioServicioImp implements UsuarioServicio {
     private ReservaHabitacionRepo reservaHabitacionRepo;
     private EmailService emailService;
     private AdministradorRepo administradorRepo;
+    private HabitacionRepo habitacionRepo;
+
 
     public UsuarioServicioImp(UsuarioRepo usuarioRepo,HotelRepo hotelRepo,
-                              ComentarioRepo comentarioRepo, ReservaRepo reservaRepo,
-                                EmailService emailService,AdministradorRepo administradorRepo) {
+                              ComentarioRepo comentarioRepo, ReservaRepo reservaRepo,ReservaSillaRepo reservaSillaRepo,
+                              ReservaHabitacionRepo reservaHabitacionRepo,EmailService emailService,AdministradorRepo administradorRepo,
+                                    HabitacionRepo habitacionRepo) {
         this.usuarioRepo = usuarioRepo;
         this.hotelRepo=hotelRepo;
         this.comentarioRepo = comentarioRepo;
         this.reservaRepo = reservaRepo;
+        this.reservaSillaRepo=reservaSillaRepo;
+        this.reservaHabitacionRepo=reservaHabitacionRepo;
         this.emailService=emailService;
         this.administradorRepo=administradorRepo;
+        this.habitacionRepo= habitacionRepo;
     }
 
     @Override
@@ -84,8 +90,8 @@ public class UsuarioServicioImp implements UsuarioServicio {
     @Override
     public Comentario crearComentario(Comentario comentario) throws Exception {
         Comentario comentarioGuardado = comentarioRepo.save(comentario);
-        // Usuario buscado= obtenerUsuario(comentario.getComentario());
-        if (comentarioGuardado == null) {
+
+        if (comentarioGuardado.getCodigo()==null) {
             throw new Exception("El campo de comentario esta vacio");
         }
         return comentarioGuardado;
@@ -93,6 +99,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
     @Override
     public Reserva hacerReserva(Reserva reserva) throws Exception {
+
 
 
         /*
@@ -124,8 +131,13 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
     @Override
     public Reserva modificarReserva(Reserva reserva) throws Exception {
-      return null;
-        //  return reservaRepo.modificarReserva(reserva);
+
+        if (reserva.getCodigo().isEmpty()) {
+            throw new Exception("la reserva no existe");
+        }
+        reserva.setCantidadPersonas(2);
+        reservaRepo.save(reserva);
+         return reservaRepo.modificarReserva(reserva.getCodigo());
     }
 
 
@@ -146,12 +158,24 @@ public class UsuarioServicioImp implements UsuarioServicio {
     }
 
     @Override
-    public List<Habitacion> cambiarEstadoDeHabitacion(Habitacion habitacion,String estado) throws Exception {
+    public Habitacion cambiarEstadoDeHabitacion(Habitacion habitacion,String estado) throws Exception {
         String estadoHabitacion=habitacion.getEstado();
-        if(estado=="reservado"){
+
+        String disponible="disponible";
+        String reservado="reservado";
+
+        if(estadoHabitacion.equals("reservado")){
+            estadoHabitacion=disponible;
+            habitacion.setEstado(estadoHabitacion);
+            habitacionRepo.save(habitacion);
+        }
+        if (estadoHabitacion.equals("disponible")) {
+            estadoHabitacion = reservado;
+            habitacion.setEstado(estadoHabitacion);
+            habitacionRepo.save(habitacion);
 
         }
-        return null;
+            return habitacion;
     }
 
     @Override
@@ -166,9 +190,9 @@ public class UsuarioServicioImp implements UsuarioServicio {
         Usuario usuario=usuarioRepo.buscarporCedula(codigo);
         if (usuario.getCedula().equals(codigo)){
             usuarioRepo.delete(usuario);
-            System.out.println("el usuario a sido eliminado con exito");
+
         }else {
-            System.out.println("el usuario con este codigo no existe");
+          throw new RuntimeException();
         }
     }
 

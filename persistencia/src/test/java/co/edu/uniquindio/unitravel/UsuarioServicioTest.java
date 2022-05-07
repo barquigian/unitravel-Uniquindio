@@ -76,6 +76,12 @@ public class UsuarioServicioTest {
     }
     @Test
     @Sql("classpath:dataset.sql")
+    public void listarReservasTest() throws Exception {
+        List<Object[]> reservas=reservaRepo.listaReservaUsuaro("1234432");
+        reservas.forEach(r-> System.out.println(r[0]+" "+r[1]));
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
     public void loginUsuarioTest() throws Exception {
         try {
             Usuario usuario = usuarioServicio.validarLogin("Carlos123@correo.com", "12345");
@@ -140,17 +146,20 @@ public class UsuarioServicioTest {
     @Sql("classpath:dataset.sql")
     public void buscarHotelPorCiuadTest() throws Exception {
         List<Hotel> hotel= usuarioServicio.buscarHotelPorCiudad("Armenia");
+
     }
    @Test
    @Sql("classpath:dataset.sql")
    public void enviarCorreoTest() throws Exception {
        boolean estado= emailService.enviarEmail("prueba","nuevo mensaje del proyecto","barquigian@gmail.com");
+       System.out.println(estado);
 
    }
    @Test
     @Sql("classpath:dataset.sql")
    public void modificarReservaTest(String codigo) throws Exception {
-       reservaRepo.modificarReserva(codigo);
+
+        reservaRepo.modificarReserva(codigo);
    }
     @Test
     @Sql("classpath:dataset.sql")
