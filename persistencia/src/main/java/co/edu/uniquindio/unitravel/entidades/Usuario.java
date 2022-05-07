@@ -22,6 +22,10 @@ public class Usuario extends Persona implements Serializable {
     @Column(nullable = true,length = 15)
     private List<String>telefono;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Ciudad ciudad;
+    
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
     private List<Comentario> comentarios;
