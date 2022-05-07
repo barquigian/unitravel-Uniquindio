@@ -15,14 +15,15 @@ import java.util.List;
 public class Silla implements Serializable {
     @Id
     @EqualsAndHashCode.Include
-    @Column(nullable = false,length = 10)
+    @Column(length = 10)
     private String codigo;
-
-    @ManyToOne
-    private Vuelo vuelo;
     @Column(nullable = false,length = 10)
     private float precio;
-
+    
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Vuelo vuelo;
+    
     @OneToMany(mappedBy = "silla")
     @ToString.Exclude
     private List<ReservaSilla> reservaSillas;
