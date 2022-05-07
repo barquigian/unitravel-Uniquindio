@@ -19,8 +19,11 @@ public class Foto implements Serializable {
     private String codigo;
     @ElementCollection
     private List<String> fotoUrl;
+    
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Habitacion habitacion;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Hotel hotel;
 }
