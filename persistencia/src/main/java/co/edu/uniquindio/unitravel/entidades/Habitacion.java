@@ -31,6 +31,10 @@ public class Habitacion implements Serializable {
     @Column(nullable = false)
 
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Hotel hotel;
+    
     @OneToMany(mappedBy = "habitacion")
     @ToString.Exclude
     private List<ReservaHabitacion> reservaHabitaciones;
