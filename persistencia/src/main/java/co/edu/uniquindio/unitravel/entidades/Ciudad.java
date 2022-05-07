@@ -24,7 +24,7 @@ public class Ciudad implements Serializable {
 
     @OneToMany(mappedBy = "ciudad")
     @ToString.Exclude
-    private List<Usuario> usuarios;
+    private List<Usuario> usuario;
     
     @OneToMany(mappedBy = "ciudadOrigen")
     @ToString.Exclude
