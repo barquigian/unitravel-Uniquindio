@@ -48,10 +48,6 @@ public class Reserva implements Serializable {
 
     @OneToMany(mappedBy = "reserva")
     @ToString.Exclude
-    private List<ReservaSilla> reserva;
-
-    @OneToMany(mappedBy = "reserva")
-    @ToString.Exclude
     private List<ReservaHabitacion> reservaHabitaciones;
 
     @OneToMany(mappedBy = "reserva")
