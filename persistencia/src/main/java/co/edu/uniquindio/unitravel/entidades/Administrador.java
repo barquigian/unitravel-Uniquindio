@@ -21,13 +21,15 @@ public class Administrador extends Persona implements Serializable {
     @EqualsAndHashCode.Include
     private String codigo;
 
-    @OneToMany(mappedBy = "administradorHotel")
+    @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
-    private List<Hotel> hoteles;
+    private List<AdministradorHotel> administradoresHoteles;
+
 
     @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
     private List<Vuelo> vuelos;
+   
 
 
 }
