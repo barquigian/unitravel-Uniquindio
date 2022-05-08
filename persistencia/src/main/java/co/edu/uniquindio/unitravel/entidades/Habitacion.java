@@ -24,11 +24,8 @@ public class Habitacion implements Serializable {
     private Integer capacidad;
     @Column(nullable = false)
     private String numeroHabitacion;
-    @ManyToOne
-    private Hotel hotel;
     @Column(nullable = false,length = 15)
     private String estado;
-    @Column(nullable = false)
 
 
     @ManyToOne
