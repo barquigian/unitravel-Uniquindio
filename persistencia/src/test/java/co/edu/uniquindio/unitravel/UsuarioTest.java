@@ -123,12 +123,14 @@ public class UsuarioTest {
         List<Object[]> comenterios= usuarioRepo.obtenerComentarios();
         comenterios.forEach(c -> System.out.println(c[0]+" "+c[1]));
     }
-    @Test
+   /* @Test
     @Sql("classpath:dataset.sql")
     public void listarComentariosPorUsuarioDto(){
         List<ComentarioUsuarioDto> comenterios= usuarioRepo.obtenerComentariosDto();
         comenterios.forEach(System.out::println);
     }
+    /*
+    */
     @Test
     @Sql("classpath:dataset.sql")
     public void listarResevas(){
