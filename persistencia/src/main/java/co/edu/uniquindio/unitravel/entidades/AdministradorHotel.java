@@ -3,6 +3,8 @@ package co.edu.uniquindio.unitravel.entidades;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
@@ -18,6 +20,10 @@ import java.util.List;
 public class AdministradorHotel extends Persona implements Serializable {
     @EqualsAndHashCode.Include
     private String codigo;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Administrador administrador;
 
     @OneToMany(mappedBy = "administradorHotel")
     @ToString.Exclude

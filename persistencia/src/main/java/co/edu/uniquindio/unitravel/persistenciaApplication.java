@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class persistenciaApplication {
+public class  persistenciaApplication {
 
     public static void main(String[] args) {
 
