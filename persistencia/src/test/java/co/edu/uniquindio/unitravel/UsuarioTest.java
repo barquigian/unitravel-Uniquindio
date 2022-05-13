@@ -135,7 +135,7 @@ public class UsuarioTest {
     @Sql("classpath:dataset.sql")
     public void listarResevas(){
         List<Object[]> reservas= usuarioRepo.obtenerReservas();
-        reservas.forEach(c -> System.out.println(c[0]+" "+c[1]));
+        reservas.forEach(c -> System.out.println(c[0]));
     }
     @Test
     @Sql("classpath:dataset.sql")

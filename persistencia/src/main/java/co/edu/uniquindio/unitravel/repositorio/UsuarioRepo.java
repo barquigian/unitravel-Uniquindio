@@ -47,7 +47,7 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
      //lista los comentarios segun los usuarios por DTO
 //    List<ComentarioUsuarioDto> obtenerComentariosDto();
     //lista las reservas segun los usuarios
-    @Query("select u,r from Usuario u left join u.reservas r")
+    @Query("select u from Usuario u left join u.reservas r")
     List<Object[]> obtenerReservas();
 
     //lista los telefonos por usuario
