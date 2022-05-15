@@ -1,10 +1,8 @@
 package co.edu.uniquindio.unitravel;
 
 import co.edu.uniquindio.unitravel.dto.ReservaDto;
-import co.edu.uniquindio.unitravel.entidades.Hotel;
-import co.edu.uniquindio.unitravel.entidades.Reserva;
-import co.edu.uniquindio.unitravel.entidades.Usuario;
-import co.edu.uniquindio.unitravel.entidades.Vuelo;
+import co.edu.uniquindio.unitravel.entidades.*;
+import co.edu.uniquindio.unitravel.repositorio.AdministradorRepo;
 import co.edu.uniquindio.unitravel.repositorio.ReservaRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,6 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest
@@ -23,30 +22,33 @@ public class ReservaTest {
     @Autowired
     private ReservaRepo reservaRepo;
 
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarReservas() {
-        LocalDate fecha= LocalDate.of(2022,06,30);
-        List<Object[]> reservas = reservaRepo.obtenerReservasPorHabitacines("1",fecha);
+        LocalDateTime fecha= LocalDateTime.of(2022,05,15,05,30);
+        List<Object[]> reservas = reservaRepo.obtenerReservasPorHabitacines(1,fecha);
         reservas.forEach(r -> System.out.println(r[0]+"- "+r[1]+"- "+r[2]));
+        Assertions.assertNotNull(reservas);
     }
     @Test
     @Sql("classpath:dataset.sql")
     public void listarReservasDto() {
-        LocalDate fecha= LocalDate.of(2022,06,30);
-        List<ReservaDto> reservas = reservaRepo.obtenerReservasPorHabitacinesDto("1",fecha);
+        LocalDateTime fecha= LocalDateTime.of(2022,05,14,05,30);
+        List<ReservaDto> reservas = reservaRepo.obtenerReservasPorHabitacinesDto(1,fecha);
         reservas.forEach(System.out::println);
     }
     @Test
     @Sql("classpath:dataset.sql")
     public void numeroReservasPorHotel() {
-        int numeroReservas=reservaRepo.ObtenerNumeroReservas("1");
+        int numeroReservas=reservaRepo.ObtenerNumeroReservas(1);
         System.out.println(numeroReservas);
+        Assertions.assertNotNull(numeroReservas);
     }
     @Test
     @Sql("classpath:dataset.sql")
     public void consultarPrecioReservaPorCodigoUsuario() {
-        List<Object[]> reservas = reservaRepo.obtenerValorReserva("123456");
+        List<Object[]> reservas = reservaRepo.obtenerValorReserva("1234432");
         reservas.forEach(r -> System.out.println(r[0] + "- " + r[1]+"- "+r[2]+"- "+r[2]));
     }
     @Test
@@ -56,35 +58,44 @@ public class ReservaTest {
         reservas.forEach(r -> System.out.println(r[0] + "- " + r[1]));
     }
     @Test
-    @Sql
+    @Sql("classpath:dataset.sql")
     public void modificarReservaPorCodigoReserva(){
         Reserva reserva= reservaRepo.modificarReserva("1");
         LocalDateTime fechafin=LocalDateTime.of(2022,03,28,5,32);
-        reserva.setFecha_fin(fechafin);
+        reserva.setFechaFin(fechafin);
         reservaRepo.save(reserva);
         System.out.println(reserva);
+        Assertions.assertNotNull(reserva);
     }
     @Test
-    @Sql
-    public void crearReserva(String codigo, LocalDateTime fecha, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-                                String estado, int cantidadPersonas, Usuario usuario, Hotel hotel){
-        Reserva reserva=new Reserva(codigo,fecha,fechaInicio,fechaFin,estado,cantidadPersonas,usuario,hotel);
-        if(reserva.getCodigo().equals(codigo)){
+    public void crearReserva(){
+        LocalDateTime fechaFin=LocalDateTime.of(2022,03,28,5,32);
+        LocalDateTime fechaInicio=LocalDateTime.of(2022,03,25,5,32);
+        LocalDateTime fechaReserva=LocalDateTime.of(2022,03,10,5,32);
+        Ciudad ciudad= new Ciudad(10,"Calarca");
+        List<String>telefonos= new ArrayList<>();
+        telefonos.add("324132");
+        Administrador administrador= new Administrador("32141","Sergio Betacour","sergio@correo.com","12345","4");
+        Usuario usuario= new Usuario("163436", "Manuel Ortiz", "manu@correo.com","12345");
+        AdministradorHotel administradorHotel=new AdministradorHotel("prueba","12345","prueba@correo.com", "Ricardo prueba","1",administrador.getCedula());
+        Hotel hotel= new Hotel(9,"hotel imperial","cra 32#34-23","6665488",4,administradorHotel,ciudad);
+
+        Reserva reserva=new Reserva("prueba",fechaReserva,fechaInicio,fechaFin,"reservado",2,450.000,usuario.getCedula(),hotel.getCodigo());
+        if(reserva.getCodigo()!=null){
             reservaRepo.save(reserva);
+            Assertions.assertNotNull(reserva);
+            System.out.println(reserva);
         }
-        System.out.println(reserva);
+
     }
     @Test
-    @Sql
-    public void EliminarReserva(){
-        Reserva reserva= reservaRepo.obtenerReservaPorCedula("123456");
-        if(reserva.getCodigo()=="123456") {
+    @Sql("classpath:dataset.sql")
+    public void EliminarReserva() {
+        Reserva reserva = reservaRepo.obtenerReservaPorCedula("1234432");
+        if (reserva.getCodigo() == "123456") {
             reservaRepo.delete(reserva);
-            System.out.println("la reserva:"+"123456"+" a sido elimanada con exito");
-            Assertions.assertEquals("123456",reserva.getCodigo());
-        }else{
-            System.out.println("no existe una reserva con este codigo");
-            }
+            Assertions.assertNull(reserva);
+        }
     }
     @Test
     @Sql("classpath:dataset.sql")
@@ -109,5 +120,6 @@ public class ReservaTest {
     public void vuelosMasApetecidos(){
         List<Object[]> vuelos= reservaRepo.vuelosMasApetecidos();
         vuelos.forEach(v -> System.out.println("Codigo Vuelo:"+v[0]+" Cantidad Personas :"+v[1]));
+        Assertions.assertNotNull(vuelos);
     }
 }

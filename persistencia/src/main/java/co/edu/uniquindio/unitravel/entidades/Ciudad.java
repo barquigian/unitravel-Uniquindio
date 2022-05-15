@@ -39,5 +39,8 @@ public class Ciudad implements Serializable {
     private List<Hotel>hoteles;
 
 
-
+    public Ciudad(Integer codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
 }

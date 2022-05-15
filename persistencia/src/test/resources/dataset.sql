@@ -7,17 +7,17 @@ insert into administrador values ("123456","12345","sebas123@gmail.com","Sebasti
 insert into administrador values ("456564","12345","carlos123@gmail.com","Carlos Mauricio", "2");
 insert into administrador values ("756743","12345","santiago@gmail.com","Santiago Quedaza", "3");
 
-insert into administrador_hotel values ("1","12345","sebas123@gmail.com","Sebastian Mejia","1");
-insert into administrador_hotel values ("2","12345","JairoHenao@gmail.com","Jairo Henao", "2");
-insert into administrador_hotel values ("3","12345","JabierCubillos@gmail.com","Jabier Cubillos", "3");
-insert into administrador_hotel values ("4","12345","HenaoOscar@gmail.com","Osacar Henao", "4");
+insert into administrador_hotel values ("1","12345","sebas123@gmail.com","Sebastian Mejia","1","123456");
+insert into administrador_hotel values ("2","12345","JairoHenao@gmail.com","Jairo Henao", "2","123456");
+insert into administrador_hotel values ("3","12345","JabierCubillos@gmail.com","Jabier Cubillos", "3","456564");
+insert into administrador_hotel values ("4","12345","HenaoOscar@gmail.com","Osacar Henao", "4","756743");
 
-insert into usuario values ("1234432", "12345", "Manuel123@correo.com","Manuel Mejia");
-insert into usuario values ("423456", "12345", "Fabian123@correo.com","Fabian Mejia");
-insert into usuario values ("323455", "12345", "Carlos123@correo.com","Carlos Soto");
-insert into usuario values ("2289434", "12345", "Rodrigo123@correo.com","Rodrigo Perez");
-insert into usuario values ("926564", "12345", "Pedro123@correo.com","Pedro Muriel");
-insert into usuario values ("7234634", "12345", "JuanMiguel23@correo.com","Juan Miguel Ossa");
+insert into usuario values ("1234432", "12345", "Manuel123@correo.com","Manuel Mejia",1);
+insert into usuario values ("423456", "12345", "Fabian123@correo.com","Fabian Mejia",2);
+insert into usuario values ("323455", "12345", "Carlos123@correo.com","Carlos Soto",3);
+insert into usuario values ("2289434", "12345", "Rodrigo123@correo.com","Rodrigo Perez",1);
+insert into usuario values ("926564", "12345", "Pedro123@correo.com","Pedro Muriel",1);
+insert into usuario values ("7234634", "12345", "JuanMiguel23@correo.com","Juan Miguel Ossa",4);
 
 insert into usuario_telefono values ("423456","33456513");
 insert into usuario_telefono values ("1234432","124256211");

@@ -44,13 +44,13 @@ public class HotelTest {
     public void eliminarHotel() {
         Ciudad ciudad= ciudadRepo.findById(1).get();
         AdministradorHotel administradorHotel= administradorHotelRepo.obtenerAdministradorHotel("1");
-        Hotel hotel = new Hotel(9,"hotel Casa Grande","cra 02 #23-16","32345341",4 , administradorHotel,ciudad);
+        Hotel hotel = new Hotel(9,"hotel Casa Grande","cra 02 #23-16","32345341",4 ,administradorHotel,ciudad);
         hotelRepo.delete(hotel);
-        Assertions.assertNull(hotel);
+
     }
 
     @Test
-    @Sql
+    @Sql("classpath:dataset.sql")
     public void actualizarHotel() {
         Ciudad ciudad= ciudadRepo.findById(1).get();
         AdministradorHotel administradorHotel= administradorHotelRepo.obtenerAdministradorHotel("1");

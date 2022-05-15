@@ -48,12 +48,11 @@ public class Habitacion implements Serializable {
     @ToString.Exclude
     private List<Cama> camas;
 
-    public Habitacion(Integer codigo, float precio, Integer capacidad,String numeroHabitacion ,Hotel hotel, String estado) {
+    public Habitacion(Integer codigo, float precio, Integer capacidad,String numeroHabitacion , String estado) {
         this.codigo = codigo;
         this.precio = precio;
         this.capacidad = capacidad;
         this.numeroHabitacion= numeroHabitacion;
-        this.hotel = hotel;
         this.estado = estado;
     }
 }

@@ -20,9 +20,28 @@ public class AdministradorTest {
     private AdministradorRepo administradorRepo;
 
     @Test
-    @Sql
+    @Sql("classpath:dataset.sql")
     public void buscarAdministrador(){
         List<Administrador> administrador=administradorRepo.buscarporNombre("car");
+        Assertions.assertNotNull(administrador);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarAdministradorPorNombreCompleto(){
+        List<Administrador> administrador=administradorRepo.findAllByNombre("Carlos Mauricio");
+        Assertions.assertNotNull(administrador);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarPorCedulaAdministrador(){
+        Administrador administrador=administradorRepo.buscarporCedula("123456");
+        Assertions.assertNotNull(administrador);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void comprobarAutenticacionAdministrador(){
+        Administrador administrador=administradorRepo.findByEmailAndContrasena("sebas123@gmail.com","12345").get();
+        Assertions.assertNotNull(administrador);
 
     }
 }

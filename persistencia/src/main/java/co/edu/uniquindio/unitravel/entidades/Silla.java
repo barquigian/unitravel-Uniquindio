@@ -32,4 +32,9 @@ public class Silla implements Serializable {
     @ToString.Exclude
     private List<Vuelo> vuelos;
 
+    public Silla(String codigo, float precio, Vuelo vuelo) {
+        this.codigo = codigo;
+        this.precio = precio;
+        this.vuelo = vuelo;
+    }
 }

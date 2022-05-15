@@ -31,4 +31,9 @@ public class Caracteristica implements Serializable {
     @ManyToMany(mappedBy = "caracteristicas")
     @ToString.Exclude
     private List<Habitacion>habitaciones;
+
+    public Caracteristica(Integer codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
 }

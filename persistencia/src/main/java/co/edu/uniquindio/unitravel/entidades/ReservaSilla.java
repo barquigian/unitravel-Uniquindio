@@ -30,7 +30,4 @@ public class ReservaSilla implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Silla silla;
-
-    public ReservaSilla(String codigo, int numeroSilla, float precio ) {
-    }
 }

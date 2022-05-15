@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unitravel;
 
 import co.edu.uniquindio.unitravel.entidades.*;
+import co.edu.uniquindio.unitravel.repositorio.HotelRepo;
 import co.edu.uniquindio.unitravel.repositorio.ReservaRepo;
 import co.edu.uniquindio.unitravel.servicios.EmailService;
 import co.edu.uniquindio.unitravel.servicios.HotelServicio;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +27,8 @@ public class UsuarioServicioTest {
     private EmailService emailService;
     @Autowired
     private ReservaRepo reservaRepo;
+    @Autowired
+    private HotelRepo hotelRepo;
 
 
 
@@ -46,7 +50,7 @@ public class UsuarioServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarUsuarioTest() throws Exception {
-        Usuario usuario = usuarioServicio.obtenerUsuario("123456");
+        Usuario usuario = usuarioServicio.obtenerUsuario("1234432");
         usuario.setContrasena("123456");
         try {
             Usuario actualizado=usuarioServicio.actualizarUsuario(usuario);
@@ -145,7 +149,9 @@ public class UsuarioServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void buscarHotelPorCiuadTest() throws Exception {
-        List<Hotel> hotel= usuarioServicio.buscarHotelPorCiudad("Armenia");
+        List<Hotel> hotel= usuarioServicio.buscarHotelPorCiudad(1);
+                hotel.forEach(System.out::println);
+        Assertions.assertNotNull(hotel);
 
     }
    @Test
@@ -157,23 +163,20 @@ public class UsuarioServicioTest {
    }
    @Test
     @Sql("classpath:dataset.sql")
-   public void modificarReservaTest(String codigo) throws Exception {
+   public void modificarReservaTest() throws Exception {
 
-        reservaRepo.modificarReserva(codigo);
+        Reserva reserva= reservaRepo.modificarReserva("1");
+       LocalDateTime fechaFin= LocalDateTime.of(2022,03,28,05,30);
+        reserva.setFechaFin(fechaFin);
+        reservaRepo.save(reserva);
+        Assertions.assertEquals(reserva.getFechaFin(),fechaFin);
+
    }
     @Test
     @Sql("classpath:dataset.sql")
-    public void crearUsuarioTest(String codigo,String nombre,String email,String contrasena,List<String>telefonos) throws Exception {
-        Usuario usuario= usuarioServicio.crearUsuario(codigo,nombre,email,contrasena,telefonos);
+    public void crearUsuarioTest() throws Exception {
+        List<String>telefono=new ArrayList<>();
+        telefono.add("123442");
+        Usuario usuario= usuarioServicio.crearUsuario("3124132","Lizeth Baca","liz@correo.com","12345",telefono);
    }
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void eliminarUsuario2Test(String codigo)throws Exception{
-       Usuario usuario= usuarioServicio.obtenerUsuario(codigo);
-       if (usuario.getCedula().equals(codigo)) {
-           usuarioServicio.elimiarUsuario(codigo);
-           System.out.println("el usuario ha sido elimiando con exito");
-           Assertions.assertNull(usuario);
-       }
-    }
 }

@@ -83,5 +83,4 @@ public class Hotel implements Serializable {
         this.caracteristicas = caracteristicas;
         this.comentarios = comentarios;
     }
-
 }

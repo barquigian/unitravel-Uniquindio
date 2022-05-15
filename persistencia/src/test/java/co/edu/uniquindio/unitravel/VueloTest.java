@@ -32,7 +32,7 @@ public class VueloTest {
     }
     @Test
     @Sql("classpath:dataset.sql")
-    public void optenerVuelosEstado(){
+    public void obtenerVuelosEstado(){
         List<Vuelo> vuelos=vueloRepo.obtenerVuelosPorEstado("programado");
         vuelos.forEach(System.out::println);
     }
@@ -40,7 +40,7 @@ public class VueloTest {
     @Sql("classpath:dataset.sql")
     public void tableroDeVuelosEstado(){
         List<Object[]> vuelos=vueloRepo.obtenertableroVuelos("programado");
-        vuelos.forEach(v -> System.out.println("codigo:"+v[0]+" Ciudad Origen:"+v[1]+" Ciudad Destino:"+v[2]+" Precio:"+v[3]+" aerolinea:"+v[4]+" estado:"+v[5]));
+        vuelos.forEach(v -> System.out.println("codigo:"+v[0]+" Ciudad Origen:"+v[1]+" Ciudad Destino:"+v[2]+" Precio:"+v[3]+" aerolinea:"));
     }
 
 }

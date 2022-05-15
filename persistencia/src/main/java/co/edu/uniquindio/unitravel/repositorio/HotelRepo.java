@@ -13,9 +13,6 @@ import java.util.List;
 @Repository
 public interface HotelRepo extends JpaRepository<Hotel,Integer> {
 
-    //obtener un hotel por medio del número de estrellas
-    @Query("select h from Hotel h where h.numEstrellas= :estrellas")
-    List<Hotel> obtenerHotelesPorEstrellas(int estrellas);
 
     //inferido
     List<Hotel> findAllByNumEstrellas(int estrellas);

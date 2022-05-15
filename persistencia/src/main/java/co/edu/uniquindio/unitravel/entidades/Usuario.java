@@ -20,7 +20,7 @@ public class Usuario extends Persona implements Serializable {
     private List<String>telefono;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @ToString.Exclude
     private Ciudad ciudad;
     
     @OneToMany(mappedBy = "usuario")

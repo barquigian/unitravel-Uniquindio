@@ -15,7 +15,7 @@ public interface UsuarioServicio {
     Usuario validarLogin(String correo,String contrasena)throws Exception;
     Comentario crearComentario(Comentario comentario)throws Exception;
     Reserva hacerReserva(Reserva reserva)throws Exception;
-    List<Hotel> buscarHotelPorCiudad(String nombreCiudad)throws Exception;
+    List<Hotel> buscarHotelPorCiudad(Integer codigoCiudad)throws Exception;
     void eliminarReserva (String codigo)throws Exception;
     Reserva modificarReserva(Reserva reserva)throws  Exception;
 

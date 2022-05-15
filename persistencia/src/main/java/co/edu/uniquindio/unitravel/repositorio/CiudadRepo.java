@@ -20,8 +20,8 @@ public interface CiudadRepo extends JpaRepository<Ciudad,Integer> {
     List<Hotel> buscarHotelPorCiudadIn(String ciudad);
 
     //obtiene una lista de vuelos por medio de una determinada ciudad
-    @Query("select v from Ciudad c join c.codigoVueloOrigen v where c.nombre= :ciudad")
-    List<Vuelo> buscarVuelosPorCiudad(String ciudad);
+    @Query("select v from Ciudad c join c.codigoVueloOrigen v where c.codigo= :ciudad")
+    List<Vuelo> buscarVuelosPorCiudad(Integer ciudad);
     @Query("select c from Ciudad c")
     List<Ciudad> listarCiudades();
 }

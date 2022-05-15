@@ -119,8 +119,9 @@ public class UsuarioServicioImp implements UsuarioServicio {
     }
 
     @Override
-    public List<Hotel> buscarHotelPorCiudad(String nombreCiudad) throws Exception {
-        return hotelRepo.obtenerHotelesPorCiudad(nombreCiudad);
+    public List<Hotel> buscarHotelPorCiudad(Integer codigoCiudad) throws Exception {
+       List<Hotel>hoteles= hotelRepo.obtenerHotelesPorCiudadMenorAMayor(codigoCiudad);
+       return hoteles;
     }
 
     @Override

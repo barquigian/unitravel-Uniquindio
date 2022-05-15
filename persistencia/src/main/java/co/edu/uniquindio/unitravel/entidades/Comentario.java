@@ -38,7 +38,8 @@ public class Comentario implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuario;
 
-    public Comentario(String codigo, String comentario, int calificacion, Hotel hotel, Usuario usuario) {
+    /*
+    public Comentario(String codigo, String comentario, int calificacion,LocalDateTime fechaCalificacion, Hotel hotel, Usuario usuario) {
         this.codigo=codigo;
         this.comentario=comentario;
         this.calificacion=calificacion;
@@ -46,6 +47,6 @@ public class Comentario implements Serializable {
         this.hotel=hotel;
         this.usuario=usuario;
     }
-
+*/
 
 }

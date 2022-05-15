@@ -21,16 +21,14 @@ public interface AdministradorRepo extends JpaRepository<Administrador,String> {
     @Query("select a from Administrador a where a.nombre like concat('%',:nombre,'%')")
     List<Administrador> buscarporNombre(String nombre);
 
-    //autenticacion de email y contraseña
-    @Query("select a from Usuario a where a.email= :email and a.contrasena= :contrasena")
-    Optional<Administrador> comprobarAutenticacion(String email, String contrasena);
-
     //buscar por email y contraseña
     Optional<Administrador> findByEmailAndContrasena(String email, String contrasena);
 
     //buscar por cedula
     @Query("select a from Administrador a where a.cedula= :cedula")
     Administrador buscarporCedula(String cedula);
+
+
 
 
 

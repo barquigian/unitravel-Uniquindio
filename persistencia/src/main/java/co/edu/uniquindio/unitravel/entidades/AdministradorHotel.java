@@ -29,7 +29,13 @@ public class AdministradorHotel extends Persona implements Serializable {
     @ToString.Exclude
     private List<Hotel> hoteles;
 
+    public AdministradorHotel(String codigo, String cedula, String nombre, @Email String email, String contrasena,String cedulaAdministrador) {
+        super(cedula, nombre, email, contrasena);
+        this.codigo = codigo;
 
+    }
 
-
+    public AdministradorHotel(String codigo) {
+        this.codigo = codigo;
+    }
 }

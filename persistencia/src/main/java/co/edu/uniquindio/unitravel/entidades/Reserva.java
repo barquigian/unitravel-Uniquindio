@@ -22,13 +22,13 @@ public class Reserva implements Serializable {
     private String codigo;
 
     @Column(nullable = false)
-    private LocalDateTime fecha_reserva;
+    private LocalDateTime fechaReserva;
 
     @Column(nullable = false)
-    private LocalDateTime fecha_inicio;
+    private LocalDateTime fechaInicio;
 
     @Column(nullable = false)
-    private LocalDateTime fecha_fin;
+    private LocalDateTime fechaFin;
 
     @Column(nullable = false)
     private String estado;
@@ -36,7 +36,7 @@ public class Reserva implements Serializable {
 
     private Integer cantidadPersonas;
     
-    private Float costoTotal;
+    private double costoTotal;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -54,6 +54,19 @@ public class Reserva implements Serializable {
     @ToString.Exclude
     private List<ReservaSilla> reservaSillas;
 
-    public Reserva(String s, LocalDateTime fechaReserva, LocalDateTime fechaInicio, LocalDateTime fechaFin, String reservado, int cantidadPersonas, Usuario usuario, Hotel hotel) {
+
+
+    public Reserva(String codigo, LocalDateTime fechaReserva, LocalDateTime fechaInicio, LocalDateTime fechaFin, String estado, Integer cantidadPersonas, double costoTotal, String codigoUsuario, Integer codigoHotel) {
+        this.codigo = codigo;
+        this.fechaReserva = fechaReserva;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.estado = estado;
+        this.cantidadPersonas = cantidadPersonas;
+        this.costoTotal = costoTotal;
+        this.usuario = usuario;
+        this.hotel = hotel;
     }
+
+
 }
