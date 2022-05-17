@@ -51,4 +51,10 @@ public interface ReservaRepo extends JpaRepository <Reserva,String>  {
 
     @Query("select rs.silla.vuelo, sum(rs.reserva.cantidadPersonas) from ReservaSilla rs group by rs.silla.vuelo")
     List<Object[]> vuelosMasApetecidos();
+
+    @Query("select r.estado from Reserva r where r.codigo= :codigoReserva")
+    String obtenerEstadoReserva(String codigoReserva);
+
+    @Query("select r from Reserva r where r.codigo= :codigoReserva")
+    Reserva obtenerReservaPorCodigo(String codigoReserva);
 }

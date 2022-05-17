@@ -122,4 +122,19 @@ public class ReservaTest {
         vuelos.forEach(v -> System.out.println("Codigo Vuelo:"+v[0]+" Cantidad Personas :"+v[1]));
         Assertions.assertNotNull(vuelos);
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void cambiarEstadoReserva(){
+        String estadoReserva=reservaRepo.obtenerEstadoReserva("1");
+        if(estadoReserva.equals("reservado")){
+            estadoReserva="disponible";
+        }
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarReserva(){
+        Reserva reserva=reservaRepo.obtenerReservaPorCodigo("1");
+        if(reserva!=null)
+        reservaRepo.delete(reserva);
+    }
 }

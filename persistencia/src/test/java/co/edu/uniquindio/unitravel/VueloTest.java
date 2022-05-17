@@ -40,7 +40,7 @@ public class VueloTest {
     @Sql("classpath:dataset.sql")
     public void tableroDeVuelosEstado(){
         List<Object[]> vuelos=vueloRepo.obtenertableroVuelos("programado");
-        vuelos.forEach(v -> System.out.println("codigo:"+v[0]+" Ciudad Origen:"+v[1]+" Ciudad Destino:"+v[2]+" Precio:"+v[3]+" aerolinea:"));
+        vuelos.forEach(v -> System.out.println("codigo:"+v[0]+" Ciudad Origen:"+v[1]+" Ciudad Destino:"+v[2]+" aerolinea:"+v[3]));
     }
 
 }

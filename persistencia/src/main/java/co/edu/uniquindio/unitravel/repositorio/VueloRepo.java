@@ -25,4 +25,6 @@ public interface VueloRepo extends JpaRepository<Vuelo,String>{
     List<Object[]> obtenertableroVuelos(String estado);
 
 
+
+
 }

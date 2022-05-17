@@ -18,7 +18,6 @@ public interface UsuarioServicio {
     List<Hotel> buscarHotelPorCiudad(Integer codigoCiudad)throws Exception;
     void eliminarReserva (String codigo)throws Exception;
     Reserva modificarReserva(Reserva reserva)throws  Exception;
-
     void recuperarContraseña(String email)throws Exception;
     Habitacion cambiarEstadoDeHabitacion(Habitacion habitacion,String email)throws Exception;
     Usuario crearUsuario(String codigo,String nombre,String email,String contrasena,List<String>telefonos);

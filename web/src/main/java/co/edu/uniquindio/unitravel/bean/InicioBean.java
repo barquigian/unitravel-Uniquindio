@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unitravel.config.bean;
+package co.edu.uniquindio.unitravel.bean;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +12,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class InicioBean implements Serializable {
-    private String mensaje = "Mi primera página en JSF";
+    private String mensaje = "UniTravel";
 
 }
