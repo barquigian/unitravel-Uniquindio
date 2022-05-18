@@ -42,7 +42,14 @@ public class Vuelo implements Serializable {
     @ToString.Exclude
     private List<Silla> sillas;
 
-    
 
-
+    public Vuelo(String codigo, int numeroSillas, String estado, Ciudad ciudadOrigen, Ciudad ciudadDestino, Administrador administrador, String aerolinea) {
+    this.codigo=codigo;
+    this.numeroSillas=numeroSillas;
+    this.estado=estado;
+    this.ciudadOrigen=ciudadOrigen;
+    this.ciudadDestino=ciudadDestino;
+    this.administrador=administrador;
+    this.aerolinea=aerolinea;
+    }
 }

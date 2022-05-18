@@ -46,7 +46,7 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
     List<Object[]> obtenerCalificacionPorHotel();
 
     //Obtiene los hoteles por orden ascendente
-    @Query("select h from Hotel h where h.ciudad.nombre= :ciudad order by h.nombre asc ")
+    @Query("select h from Hotel h where h.ciudad.codigo= :ciudad order by h.nombre asc ")
     List<Hotel> obtenerHotelesPorCiudadMenorAMayor(Integer ciudad);
 
     //Obtiene un hotel sugun su precio

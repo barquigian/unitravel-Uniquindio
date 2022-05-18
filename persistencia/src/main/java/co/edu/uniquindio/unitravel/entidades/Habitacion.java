@@ -55,4 +55,13 @@ public class Habitacion implements Serializable {
         this.numeroHabitacion= numeroHabitacion;
         this.estado = estado;
     }
+
+    public Habitacion(Integer codigo, float precio, Integer capacidad, String numeroHabitacion, String estado, Hotel hotel) {
+        this.codigo = codigo;
+        this.precio = precio;
+        this.capacidad = capacidad;
+        this.numeroHabitacion = numeroHabitacion;
+        this.estado = estado;
+        this.hotel = hotel;
+    }
 }

@@ -21,7 +21,7 @@ public class ReservaSilla implements Serializable {
     private String codigo;
 
     @Column(nullable = false,length = 10)
-    private float precio;
+    private double precio;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -30,4 +30,8 @@ public class ReservaSilla implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Silla silla;
+
+
 }
+
+

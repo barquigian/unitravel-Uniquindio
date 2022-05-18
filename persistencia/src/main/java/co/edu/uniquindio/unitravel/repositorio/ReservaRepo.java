@@ -49,7 +49,7 @@ public interface ReservaRepo extends JpaRepository <Reserva,String>  {
     @Query("select r.codigo,(select sum(rh.precio)from ReservaHabitacion rh where rh.habitacion=r group by r),(select sum(rs.precio) from ReservaSilla rs where rs.silla=r group by r) from Reserva r where r.usuario.cedula=:codigoUsuario")
     List<Object[]> obtenerTotalPorReserva(String codigoUsuario);
 
-    @Query("select rs.silla.vuelo, sum(rs.reserva.cantidadPersonas) from ReservaSilla rs group by rs.silla.vuelo")
+    @Query("select rs.silla.vuelos, sum(rs.reserva.cantidadPersonas) from ReservaSilla rs group by rs.silla.vuelos")
     List<Object[]> vuelosMasApetecidos();
 
     @Query("select r.estado from Reserva r where r.codigo= :codigoReserva")
@@ -57,4 +57,14 @@ public interface ReservaRepo extends JpaRepository <Reserva,String>  {
 
     @Query("select r from Reserva r where r.codigo= :codigoReserva")
     Reserva obtenerReservaPorCodigo(String codigoReserva);
+
+
+    @Query("select sum(s.precio) from Silla s join s.reservaSillas rs where rs.reserva.codigo= :codigoReserva group by rs.reserva")
+    double calcularPrecioReservaSilla(String codigoReserva);
+
+    @Query("select sum(h.precio) from Habitacion h join h.reservaHabitaciones rh where rh.reserva.codigo= :codigoReserva group by rh.reserva")
+    double calcularPrecioReservaHabitacion(String codigoReserva);
+
+
+    void verificarfechaReserva(String codigoReserva);
 }

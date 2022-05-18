@@ -132,9 +132,32 @@ public class ReservaTest {
     }
     @Test
     @Sql("classpath:dataset.sql")
-    public void eliminarReserva(){
+    public void eliminarReservaTest(){
         Reserva reserva=reservaRepo.obtenerReservaPorCodigo("1");
         if(reserva!=null)
         reservaRepo.delete(reserva);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void calcularPrecioReservaSillaTest(){
+        double precioReservaSilla= reservaRepo.calcularPrecioReservaSilla("1");
+        Reserva reserva=reservaRepo.obtenerReservaPorCodigo("1");
+        System.out.println(reserva);
+
+
+        System.out.println("costo sillas: "+precioReservaSilla);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void calcularPrecioReservaHabitacionTest(){
+
+        try {
+            Reserva reserva=reservaRepo.obtenerReservaPorCodigo("1");
+            double precioReservaHabitacion= reservaRepo.calcularPrecioReservaHabitacion("1");
+            System.out.println("costo habitaciones: "+precioReservaHabitacion);
+
+        }catch (Exception e){
+            throw new RuntimeException();
+        }
     }
 }

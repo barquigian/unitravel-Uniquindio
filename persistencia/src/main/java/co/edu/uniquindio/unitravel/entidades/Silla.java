@@ -18,11 +18,7 @@ public class Silla implements Serializable {
     @Column(length = 10)
     private String codigo;
     @Column(nullable = false,length = 10)
-    private float precio;
-    
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Vuelo vuelo;
+    private double precio;
     
     @OneToMany(mappedBy = "silla")
     @ToString.Exclude
@@ -32,9 +28,19 @@ public class Silla implements Serializable {
     @ToString.Exclude
     private List<Vuelo> vuelos;
 
-    public Silla(String codigo, float precio, Vuelo vuelo) {
+    public Silla(String codigo, double precio) {
         this.codigo = codigo;
         this.precio = precio;
-        this.vuelo = vuelo;
+
+    }
+
+    public Silla(String codigo, double precio, List<Vuelo> vuelos) {
+        this.codigo = codigo;
+        this.precio = precio;
+        this.vuelos = vuelos;
+    }
+    public Silla(String codigo,double precio, String codigoVuelo){
+        this.codigo=codigo;
+        this.precio=precio;
     }
 }

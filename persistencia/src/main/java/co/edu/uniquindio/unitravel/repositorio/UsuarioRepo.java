@@ -58,13 +58,10 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     @Query("select distinct t from Usuario u join u.telefono t")
     List<String> obtenerUsuarioPorTelefonoDisnic();
 
-
     Optional<Usuario> findByEmail(String correo);
-
-    @Query("select u from Usuario u where u.cedula=:codigo and u.nombre=:nombre and u.email=:email and u.contrasena=:contrasena and u.telefono=:telefonos")
-    Usuario crearUsuarioNuevo (String codigo,String nombre,String email,String contrasena,List<String>telefonos);
 
     @Query("select u from Usuario u where u.cedula=:codigo")
     void eliminarUsuario(String codigo);
+
 
 }

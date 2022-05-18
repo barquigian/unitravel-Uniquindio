@@ -22,6 +22,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
     private HabitacionRepo habitacionRepo;
 
 
+
     public UsuarioServicioImp(UsuarioRepo usuarioRepo,HotelRepo hotelRepo,
                               ComentarioRepo comentarioRepo, ReservaRepo reservaRepo,ReservaSillaRepo reservaSillaRepo,
                               ReservaHabitacionRepo reservaHabitacionRepo,EmailService emailService,AdministradorRepo administradorRepo,
@@ -148,12 +149,16 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
     @Override
     public List<Reserva> listarReservas(String email) throws Exception {
-        return usuarioRepo.obtenerListaReservasPorEmail(email);
+
+        List<Reserva>reservas=usuarioRepo.obtenerListaReservasPorEmail(email);
+        return reservas;
     }
 
     @Override
     public void recuperarContraseña(String email) throws Exception {
+
         Optional<Usuario> usuario=usuarioRepo.findByEmail(email);
+        recuperarContraseña(usuario.get().getEmail());
         if (usuario.isEmpty()){
             throw new Exception("el email no pertenece a ningun usuario");
         }
@@ -163,24 +168,26 @@ public class UsuarioServicioImp implements UsuarioServicio {
     }
 
     @Override
-    public Habitacion cambiarEstadoDeHabitacion(Habitacion habitacion,String estado) throws Exception {
-        String estadoHabitacion=habitacion.getEstado();
+    public void cambiarEstadoDeHabitacion(Habitacion habitacion,String estado) throws Exception {
+        String estadoHabitacion;
+
 
         String disponible="disponible";
         String reservado="reservado";
-
-        if(estadoHabitacion.equals("reservado")){
+        cambiarEstadoDeHabitacion(habitacion,estado);
+        if(estado.equals("reservado")){
             estadoHabitacion=disponible;
             habitacion.setEstado(estadoHabitacion);
             habitacionRepo.save(habitacion);
+
+
         }
-        if (estadoHabitacion.equals("disponible")) {
+        if (estado.equals("disponible")) {
             estadoHabitacion = reservado;
             habitacion.setEstado(estadoHabitacion);
             habitacionRepo.save(habitacion);
 
         }
-            return habitacion;
     }
 
     @Override
@@ -193,11 +200,38 @@ public class UsuarioServicioImp implements UsuarioServicio {
     @Override
     public void eliminarUsuario(String codigo) {
         Usuario usuario=usuarioRepo.buscarporCedula(codigo);
+        eliminarUsuario(usuario.getCedula());
         if (usuario.getCedula().equals(codigo)){
             usuarioRepo.delete(usuario);
 
         }else {
           throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public double consultarPrecioReserva(String codigoReserva) throws Exception {
+        try {
+
+            double costoIva= reservaRepo.calcularPrecioReservaHabitacion(codigoReserva)+reservaRepo.calcularPrecioReservaSilla(codigoReserva);
+
+            return costoIva;
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+
+
+    }
+
+    @Override
+    public double consultarPrecioReservaMasIva(String codigoReserva) throws Exception {
+        try {
+
+            double costoIva= reservaRepo.calcularPrecioReservaHabitacion(codigoReserva)*1.05+reservaRepo.calcularPrecioReservaSilla(codigoReserva)*1.05;
+
+            return costoIva;
+        }catch (Exception e){
+            throw new Exception(e);
         }
     }
 

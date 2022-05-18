@@ -3,6 +3,7 @@ package co.edu.uniquindio.unitravel;
 import co.edu.uniquindio.unitravel.entidades.*;
 import co.edu.uniquindio.unitravel.repositorio.HotelRepo;
 import co.edu.uniquindio.unitravel.repositorio.ReservaRepo;
+import co.edu.uniquindio.unitravel.repositorio.UsuarioRepo;
 import co.edu.uniquindio.unitravel.servicios.EmailService;
 import co.edu.uniquindio.unitravel.servicios.HotelServicio;
 import co.edu.uniquindio.unitravel.servicios.UsuarioServicio;
@@ -29,6 +30,9 @@ public class UsuarioServicioTest {
     private ReservaRepo reservaRepo;
     @Autowired
     private HotelRepo hotelRepo;
+    @Autowired
+    private UsuarioRepo usuarioRepo;
+
 
 
 
@@ -98,46 +102,56 @@ public class UsuarioServicioTest {
     @Sql("classpath:dataset.sql")
     public void hacerComentarioTest() throws Exception {
 
-       /* AdministradorHotel adminHotel=new AdministradorHotel("Admin3","12345","Willian Henao","williHenao@gmail.com", "12345");
+       AdministradorHotel adminHotel=new AdministradorHotel("243342","12345","williHenao@gmail.com","Willian Henao", "prueba","1");
         Ciudad ciudad= new Ciudad(5, "Pereira");
-        Hotel hotel=new Hotel(5,"hotel Pereira","cra 05 #23-11","3246464",5,adminHotel,ciudad);
-        Usuario u = new Usuario("1234","lucas","lucas@correo.com","1234");*/
+        Hotel hotel=new Hotel(10,"hotel Pereira","cra 05 #23-11","3246464",5,adminHotel,ciudad);
+        Usuario u = new Usuario("1234","lucas","lucas@correo.com","1234");
 
-        /*
-        Usuario usuario=usuarioServicio.obtenerUsuario("12345");
-        Hotel hotel=hotelServicio.obtenerHotel("1");
-        Date fecha= new Date(2022,03,13);
+
+        Usuario usuario=usuarioServicio.obtenerUsuario("1234432");
+
+        LocalDateTime fecha=LocalDateTime.of(2022,03,10,5,32);
         try {
             Comentario c ;
             usuarioServicio.crearComentario(c= new Comentario("1", "muy buen servicio", 5, fecha, hotel, usuario));
+            System.out.println(c);
         }catch (Exception e){
             e.printStackTrace();
         }
-*/
+
     }
-    /*@Test
+    @Test
     @Sql("classpath:dataset.sql")
     public void hacerResevaTest() throws Exception {
-        Date fechaReserva= new Date(2022,03,25);
-        Date fechaInicio= new Date(2022,04,25);
-        Date fechaFin= new Date(2022,04,28);
-        Usuario usuario=usuarioServicio.obtenerUsuario("12345");
-        Hotel hotel=hotelServicio.obtenerHotel("1");
-
-        Reserva reserva=new Reserva("1",fechaReserva,fechaInicio,fechaFin,"reservado",2,usuario,hotel);
-        Habitacion habitacion= new Habitacion("7",45000,2,hotel);
+        LocalDateTime fechaReserva=LocalDateTime.of(2022,03,25,5,32);
+        LocalDateTime fechaInicio=LocalDateTime.of(2022,04,25,5,32);
+        LocalDateTime fechaFin=LocalDateTime.of(2022,04,28,5,32);
+        AdministradorHotel adminHotel=new AdministradorHotel("243342","12345","williHenao@gmail.com","Willian Henao", "prueba","1");
+        Ciudad ciudad= new Ciudad(5, "Pereira");
+        Usuario usuario=usuarioServicio.obtenerUsuario("1234432");
+        Hotel hotel=new Hotel(10,"hotel Pereira","cra 05 #23-11","3246464",5,adminHotel,ciudad);
+        Administrador administrador= new Administrador("prueba","nombre pueba","prueba@gmail.com","12345", "prueva");
+        Reserva reserva=new Reserva("prueba",fechaReserva,fechaInicio,fechaFin,"reservado",2,250.500,"1234432",10);
+        Habitacion habitacion= new Habitacion(239,155000,2,"102","reservado",hotel);
 
         List<ReservaHabitacion> habitacionesReserva= new ArrayList<>();
         habitacionesReserva.add(new ReservaHabitacion("1",45.000,reserva,habitacion));
 
         Ciudad ciudadOrigen= new Ciudad(5,"Pereira");
         Ciudad ciudadDestino= new Ciudad(6,"Cartago");
-        Vuelo vuelo= new Vuelo("c3dsfr",400.000,ciudadOrigen,ciudadDestino,24, "programado","AviaTour");
+        List<Silla> sillas= new ArrayList<>();
 
-        List<ReservaSilla> reservaSilla=new ArrayList<>();
-        reservaSilla.add(new ReservaSilla("1",3,200000));
+        Vuelo vuelo= new Vuelo("prueba",5,"disponible",ciudadOrigen,ciudadDestino, administrador,"AviaTour");
+        List<Vuelo>vuelos=new ArrayList<>();
+        vuelos.add(vuelo);
 
-        reserva.setReservaSillas(reservaSilla);
+       // sillas.add("prueba",106.200,vuelos.get(0));
+
+
+       // List<ReservaSilla> reservaSilla=new ArrayList<>();
+        //reservaSilla.add(new ReservaSilla("prueba",200.000,reserva,sillas.get(0)));
+
+        //reserva.setReservaSillas(reservaSilla);
         reserva.setReservaHabitaciones(habitacionesReserva);
         try {
             usuarioServicio.hacerReserva(reserva);
@@ -145,7 +159,7 @@ public class UsuarioServicioTest {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }*/
+    }
     @Test
     @Sql("classpath:dataset.sql")
     public void buscarHotelPorCiuadTest() throws Exception {
@@ -179,4 +193,35 @@ public class UsuarioServicioTest {
         telefono.add("123442");
         Usuario usuario= usuarioServicio.crearUsuario("3124132","Lizeth Baca","liz@correo.com","12345",telefono);
    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarReservaTest() throws Exception {
+
+        Reserva reserva=reservaRepo.obtenerReservaPorCodigo("1");
+        if (reserva!=null) {
+            usuarioServicio.eliminarReserva(reserva.getCodigo());
+            reservaRepo.delete(reserva);
+        }
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void recuperarContrasenaTest() throws Exception {
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void consultarPrecioReservaTest() throws Exception {
+        double costoTotal=usuarioServicio.consultarPrecioReserva("1");
+        System.out.println("costo total: "+costoTotal);
+
+
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void consultarPrecioReservaMasIvaTest() throws Exception {
+        double costoSubTotal=usuarioServicio.consultarPrecioReserva("1");
+        double costoMasIva=usuarioServicio.consultarPrecioReservaMasIva("1");
+        System.out.println("costo subTotal: "+costoSubTotal+" costo más iva: "+costoMasIva);
+    }
 }
