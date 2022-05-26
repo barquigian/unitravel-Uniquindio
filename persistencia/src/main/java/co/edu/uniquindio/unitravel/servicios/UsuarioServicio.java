@@ -24,6 +24,7 @@ public interface UsuarioServicio {
     void eliminarUsuario(String codigo);
     double consultarPrecioReserva(String codigoReserva)throws Exception;
     double consultarPrecioReservaMasIva(String codigoReserva)throws Exception;
-
+    boolean verificarDisponibilidadFecha(Reserva reserva);
+    List<Hotel> buscarHotelporNombre(String nombreHotel);
 
 }

@@ -24,4 +24,7 @@ public interface CiudadRepo extends JpaRepository<Ciudad,Integer> {
     List<Vuelo> buscarVuelosPorCiudad(Integer ciudad);
     @Query("select c from Ciudad c")
     List<Ciudad> listarCiudades();
+
+    @Query("select c from Ciudad c where c.nombre= :nombre" )
+    Ciudad obtenerCiudad(String nombre);
 }

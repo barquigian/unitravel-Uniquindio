@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,6 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     //buscar usuario por medio de un nombre
     @Query("select u from Usuario u where u.nombre= :nombre")
-
     List<Usuario> buscarporNombre(String nombre);
 
     //comprueba si es correcto un correo y su contraseña
@@ -45,8 +45,8 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     List<Object[]> obtenerComentarios();
 
      //lista los comentarios segun los usuarios por DTO
-//    List<ComentarioUsuarioDto> obtenerComentariosDto();
-    //lista las reservas segun los usuarios
+   //List<ComentarioUsuarioDto> obtenerComentariosDto();
+   // lista las reservas segun los usuarios
     @Query("select u from Usuario u left join u.reservas r")
     List<Object[]> obtenerReservas();
 
@@ -62,6 +62,8 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     @Query("select u from Usuario u where u.cedula=:codigo")
     void eliminarUsuario(String codigo);
+
+
 
 
 }

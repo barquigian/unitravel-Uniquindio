@@ -22,6 +22,7 @@ public class ReservaHabitacion implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Reserva reserva;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Habitacion habitacion;

@@ -4,6 +4,7 @@ import co.edu.uniquindio.unitravel.entidades.AdministradorHotel;
 import co.edu.uniquindio.unitravel.entidades.Ciudad;
 import co.edu.uniquindio.unitravel.entidades.Hotel;
 import co.edu.uniquindio.unitravel.repositorio.AdministradorHotelRepo;
+import co.edu.uniquindio.unitravel.repositorio.CiudadRepo;
 import co.edu.uniquindio.unitravel.repositorio.HotelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
     private AdministradorHotelRepo administradorHotelRepo;
     @Autowired
     private HotelRepo hotelRepo;
+    @Autowired
+    private CiudadRepo ciudadRepo;
 
     @Override
     public AdministradorHotel gestionarLogin(String email, String contrasena) throws Exception {
@@ -28,7 +31,9 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
     @Override
     public Hotel crearHotel(Hotel hotel) throws Exception {
 
-        return hotelRepo.save(hotel);
+
+         return hotelRepo.save(hotel);
+
     }
 
     @Override
@@ -61,11 +66,17 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
             }
 
     }
+
     @Override
-    public Hotel obtenerHotel(Integer codigo) throws Exception {
-        Optional<Hotel> hotel= hotelRepo.findById(codigo);
+    public AdministradorHotel obtenerAdministradorHotel(String codigo) throws Exception {
+        return administradorHotelRepo.findById(codigo).orElse(null);
+    }
 
-            return hotel.get();
 
+
+    @Override
+    public Ciudad obtenerCiudad(Integer codigo) throws Exception {
+
+        return  ciudadRepo.findById(codigo).orElse(null);
     }
 }

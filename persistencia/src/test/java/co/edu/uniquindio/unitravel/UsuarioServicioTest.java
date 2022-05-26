@@ -222,6 +222,6 @@ public class UsuarioServicioTest {
     public void consultarPrecioReservaMasIvaTest() throws Exception {
         double costoSubTotal=usuarioServicio.consultarPrecioReserva("1");
         double costoMasIva=usuarioServicio.consultarPrecioReservaMasIva("1");
-        System.out.println("costo subTotal: "+costoSubTotal+" costo más iva: "+costoMasIva);
+        Assertions.assertEquals(304.5, costoMasIva);
     }
 }

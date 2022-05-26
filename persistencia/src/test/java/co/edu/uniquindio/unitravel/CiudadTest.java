@@ -41,4 +41,10 @@ public class CiudadTest {
         Assertions.assertNotNull(ciudades);
 
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarCiudad(){
+        Ciudad ciudad= ciudadRepo.obtenerCiudad("Armenia");
+        Assertions.assertEquals("Armenia",ciudad.getNombre());
+    }
 }

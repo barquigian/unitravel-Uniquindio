@@ -1,8 +1,9 @@
 package co.edu.uniquindio.unitravel;
 
 import co.edu.uniquindio.unitravel.dto.ComentarioUsuarioDto;
-import co.edu.uniquindio.unitravel.entidades.Reserva;
-import co.edu.uniquindio.unitravel.entidades.Usuario;
+import co.edu.uniquindio.unitravel.entidades.*;
+import co.edu.uniquindio.unitravel.repositorio.HotelRepo;
+import co.edu.uniquindio.unitravel.repositorio.ReservaRepo;
 import co.edu.uniquindio.unitravel.repositorio.UsuarioRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +24,11 @@ import java.util.Optional;
 public class UsuarioTest {
     @Autowired
     private UsuarioRepo usuarioRepo;
+    @Autowired
+    private ReservaRepo reservaRepo;
+
+    @Autowired
+    private HotelRepo hotelRepo;
 
     @Test
     public void registrar(){
@@ -123,14 +130,14 @@ public class UsuarioTest {
         List<Object[]> comenterios= usuarioRepo.obtenerComentarios();
         comenterios.forEach(c -> System.out.println(c[0]+" "+c[1]));
     }
-   /* @Test
+    /*@Test
     @Sql("classpath:dataset.sql")
     public void listarComentariosPorUsuarioDto(){
         List<ComentarioUsuarioDto> comenterios= usuarioRepo.obtenerComentariosDto();
         comenterios.forEach(System.out::println);
     }
-    /*
     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarResevas(){
@@ -162,4 +169,32 @@ public class UsuarioTest {
             Assertions.assertNull(usuario);
         }
     }
+    @Test//en contruccion
+    @Sql("classpath:dataset.sql")
+    public void vefiricarDisponibilidadDeFecha(){
+
+        LocalDateTime fechaInicio=LocalDateTime.of(2022,04,25,5,32);
+        LocalDateTime fechaFin=LocalDateTime.of(2022,04,28,5,32);
+               Optional<Reserva> reserva= reservaRepo.vereficarFechasReserva(fechaInicio,fechaFin);
+               Assertions.assertNotNull(reserva.get());
+
+
+/*
+        AdministradorHotel adminHotel=new AdministradorHotel("243342","12345","williHenao@gmail.com","Willian Henao", "prueba","1");
+        Ciudad ciudad= new Ciudad(5, "Pereira");
+        Usuario usuario=usuarioServicio.obtenerUsuario("1234432");
+        Hotel hotel=new Hotel(10,"hotel Pereira","cra 05 #23-11","3246464",5,adminHotel,ciudad);
+        Administrador administrador= new Administrador("prueba","nombre pueba","prueba@gmail.com","12345", "prueva");
+        Reserva reserva=new Reserva("prueba",fechaReserva,fechaInicio,fechaFin,"reservado",2,250.500,"1234432",10);
+        Habitacion habitacion= new Habitacion(239,155000,2,"102","reservado",hotel);
+
+
+         LocalDateTime fechaInicio=LocalDateTime.of(2022,04,25,5,32);
+        LocalDateTime fechaFin=LocalDateTime.of(2022,04,28,5,32);
+        Hotel hotel= hotelRepo.findById(1).get();
+        Usuario usuario=usuarioRepo.buscarporCedula("323455");
+        Reserva reserva= new Reserva();
+    */
+    }
+
 }

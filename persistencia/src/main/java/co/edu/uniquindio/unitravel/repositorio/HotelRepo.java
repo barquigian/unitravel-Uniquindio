@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface HotelRepo extends JpaRepository<Hotel,Integer> {
@@ -16,6 +18,8 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
 
     //inferido
     List<Hotel> findAllByNumEstrellas(int estrellas);
+
+    Optional<Hotel> findById(Integer codigoHotel);
 
     //obtiene los hoteles de mayor o igual a un número de estrellas
     @Query("select h from Hotel h where h.numEstrellas>= :estrellas")
@@ -53,7 +57,7 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
     @Query("select h from Hotel h join h.habitaciones ha where ha.precio between :precioMin and :precioMax and ha.capacidad= :cantidadPersonas")
     List<Hotel> obtenerHotelPorPrecioRango(float precioMin,float precioMax,int cantidadPersonas);
 
-    @Query("select h from Hotel h where h.nombre like concat('%',:nombre, '%') ")
+    @Query("select h from Hotel h where lower(h.nombre) like concat('%',lower(:nombre), '%') ")
     List<Hotel> obtenerHotelesNombre(String nombre);
 
     @Query("select f from Hotel h join h.fotos f where h.codigo=:codigo")
@@ -61,4 +65,6 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
 
     @Query("select h from Hotel h where h.numEstrellas>3")
     List<Hotel> hotelesPopulares();
+
+    List<Hotel> findAllByNombreContainsIgnoreCase(String nombreHotel);
 }

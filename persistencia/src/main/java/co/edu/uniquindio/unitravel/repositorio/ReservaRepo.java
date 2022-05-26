@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReservaRepo extends JpaRepository <Reserva,String>  {
@@ -66,5 +67,12 @@ public interface ReservaRepo extends JpaRepository <Reserva,String>  {
     double calcularPrecioReservaHabitacion(String codigoReserva);
 
 
-    void verificarfechaReserva(String codigoReserva);
+    //void verificarfechaReserva(String codigoReserva);
+
+    //metodo en construccion.
+  //  @Query("select r from Reserva r where r.fechaInicio< :fechaFin and r.fechaFin>:fechaInicio ")
+    //Optional<Reserva> vereficarFechasReserva(LocalDateTime fechaInicio, LocalDateTime fechaFin);
+
+    //@Query("select rs from ReservaSilla rs where rs.codigo=:codigoReserva and rs.reserva.fechaInicio< :fechaFin and rs.fechaFin>:fechaInicio ")
+    //boolean vereficarDisponiblididadSilla(LocalDateTime fechaInicio, LocalDateTime fechaFin);
 }

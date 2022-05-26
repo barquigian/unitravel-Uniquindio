@@ -235,5 +235,16 @@ public class UsuarioServicioImp implements UsuarioServicio {
         }
     }
 
+    @Override
+    public boolean verificarDisponibilidadFecha(Reserva reserva) {
+
+        return false;
+    }
+
+    @Override
+    public List<Hotel> buscarHotelporNombre(String nombreHotel) {
+            return hotelRepo.obtenerHotelesPorNombre(nombreHotel);
+    }
+
 
 }

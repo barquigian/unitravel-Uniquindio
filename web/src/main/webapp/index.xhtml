@@ -8,11 +8,61 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>Unitravel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Unitravel</title>
+    <h:outputStylesheet library="css" name="boostrap.min.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="boostrap.min.css"/>
 </h:head>
 <h:body>
-    <h1>Hola Mundo</h1>
-    <h1>#{inicioBean.mensaje}</h1>
+    <div id="encabezado">
+        <div class="p-3 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <h:graphicImage library="img" name="icono.png" styleClass="icon_p"/>
+                        <span class="fs-4">Unitravel</span>
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" class="nav-link px-2 text-secondary"><i class="pi pi-home d-block mx-auto mb-1 icon-menu"></i>Home</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-check-circle d-block mx-auto mb-1 icon-menu"></i>Reservas</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-dollar d-block mx-auto mb-1 icon-menu"></i>Precios</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-flag d-block mx-auto mb-1 icon-menu"></i>Vuelos</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="p-col-12 p-md-2 d-block mx-auto mb-1 icon-menu"></i>Hoteles</a></li>
+                    </ul>
+                    <p>23:11 14.1</p>
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                        <input type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Search..." aria-label="Search" />
+                    </form>
+
+                    <div class="text-end">
+                        <button type="button" class="btn btn-outline-light me-2">Login</button>
+                        <button type="button" class="btn btn-warning">Sign-up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <ul>
+            <li><a href="">inicio</a> </li>
+            <li><h:link outcome="registrar_usuario">Registrarse</h:link> </li>
+            <li> <a href="mis_reservas.xhtml">listar mis reservas</a> </li>
+        </ul>
+    </div>
+    <div id="contenido">
+        <h:form>
+            <div class="input-search ui-inputgroup">
+                <p:inputText placeholder="Que hotel esta buscano" required="true" value="#{busquedaBean.busqueda}"/>
+                <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
+
+            </div>
+
+        </h:form>
+
+
+
+    </div>
 </h:body>
 </html>

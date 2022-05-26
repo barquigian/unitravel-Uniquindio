@@ -187,4 +187,11 @@ public class HotelTest {
 
         hoteles.forEach(System.out::println);
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarHotelesPorId(){
+        Hotel hotel= hotelRepo.findById(1).get();
+        System.out.println(hotel);
+        Assertions.assertNotNull(hotel);
+    }
 }
