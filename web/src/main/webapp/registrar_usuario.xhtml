@@ -27,7 +27,7 @@
         <p:outputLabel value="contraseña: " for="contrasenaU"/>
         <p:password id="contrasenaU" value="#{usuarioBean.usuario.contrasena}" toggleMask="true" redisplay="true" required="true"/>
 
-        <p:commandButton value="registrase" action="#{usuarioBean.registrarUsuario()}"update="@form" icon="pi pi-plus"/>
+        <p:commandButton value="registrase" action="#{usuarioBean.registrarUsuario()}" update="@form" icon="pi pi-plus"/>
         </h:panelGrid>
         <p:growl showDetail="true"/>
 
