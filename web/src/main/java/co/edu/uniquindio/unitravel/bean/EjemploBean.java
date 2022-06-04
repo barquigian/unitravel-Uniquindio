@@ -14,8 +14,8 @@ public class EjemploBean implements Serializable {
 
 
     public void cambiarValores() {
-        String temp = atributo1;
+        String aux = atributo1;
         atributo1 = atributo2;
-        atributo2 = temp;
+        atributo2 = aux;
     }
 }

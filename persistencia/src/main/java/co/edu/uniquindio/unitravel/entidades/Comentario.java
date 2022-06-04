@@ -38,15 +38,14 @@ public class Comentario implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuario;
 
-    /*
-    public Comentario(String codigo, String comentario, int calificacion,LocalDateTime fechaCalificacion, Hotel hotel, Usuario usuario) {
-        this.codigo=codigo;
+
+    public Comentario(String comentario, int calificacion, Hotel hotel, Usuario usuario) {
         this.comentario=comentario;
         this.calificacion=calificacion;
         this.fechaCalificacion= LocalDateTime.now();
         this.hotel=hotel;
         this.usuario=usuario;
     }
-*/
+
 
 }

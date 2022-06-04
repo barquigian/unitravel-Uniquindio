@@ -13,25 +13,26 @@
 </h:head>
 <h:body>
     <p:panel header="registro usuario">
-    <h:form>
-        <h:panelGrid columns="2" cellpadding="5">
-        <p:outputLabel value="cedula: " for="cedulaU" />
-        <p:inputText id="cedulaU" value="#{usuarioBean.usuario.cedula}" required="true"/>
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
 
-        <p:outputLabel value="nombre: " for="nombreU"/>
-        <p:inputText id="nombreU" value="#{usuarioBean.usuario.nombre}" required="true"/>
+                <p:outputLabel value="cedula: " for="cedulaU" />
+                <p:inputText id="cedulaU" value="#{usuarioBean.usuario.cedula}" required="true"/>
 
-        <p:outputLabel value="email: " for="correoU"/>
-        <p:inputText id="correoU" type="email" value="#{usuarioBean.usuario.email}" required="true"/>
+                <p:outputLabel value="nombre: " for="nombreU"/>
+                <p:inputText id="nombreU" value="#{usuarioBean.usuario.nombre}" required="true"/>
 
-        <p:outputLabel value="contraseña: " for="contrasenaU"/>
-        <p:password id="contrasenaU" value="#{usuarioBean.usuario.contrasena}" toggleMask="true" redisplay="true" required="true"/>
+                <p:outputLabel value="email: " for="correoU"/>
+                <p:inputText id="correoU" type="email" value="#{usuarioBean.usuario.email}" required="true"/>
 
-        <p:commandButton value="registrase" action="#{usuarioBean.registrarUsuario()}"update="@form" icon="pi pi-plus"/>
-        </h:panelGrid>
+                <p:outputLabel value="contraseña: " for="contrasenaU"/>
+                <p:password id="contrasenaU" value="#{usuarioBean.usuario.contrasena}" toggleMask="true" redisplay="true" required="true"/>
+
+                <p:commandButton value="registrase" action="#{usuarioBean.registrarUsuario()}" update="@form" icon="pi pi-plus"/>
+            </h:panelGrid>
         <p:growl showDetail="true"/>
 
-    </h:form>
+        </h:form>
     </p:panel>
 </h:body>
 </html>

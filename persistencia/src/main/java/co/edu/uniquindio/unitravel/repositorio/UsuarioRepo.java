@@ -41,12 +41,12 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     List<Reserva> obtenerListaReservasPorEmail(String email);
 
     //lista los comentarios segun los usuarios
-   @Query("select u.comentarios,c from Usuario u left join u.comentarios c")
+    @Query("select u.comentarios,c from Usuario u left join u.comentarios c")
     List<Object[]> obtenerComentarios();
 
-     //lista los comentarios segun los usuarios por DTO
-   //List<ComentarioUsuarioDto> obtenerComentariosDto();
-   // lista las reservas segun los usuarios
+    //lista los comentarios segun los usuarios por DTO
+    //List<ComentarioUsuarioDto> obtenerComentariosDto();
+    // lista las reservas segun los usuarios
     @Query("select u from Usuario u left join u.reservas r")
     List<Object[]> obtenerReservas();
 
@@ -67,3 +67,4 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
 
 }
+
