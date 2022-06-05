@@ -14,8 +14,19 @@
 <body>
 <p:panel header="Espacio Administrador">
     <h:form>
-        <h:panelGrid columns="2" cellpadding="5">
-
+        <h:panelGrid columns="2" cellpadding="2">
+            <p:growl id="messages" showDetail="true"/>
+            <div class="card">
+                <p:menu>
+                    <p:submenu label="CRUD">
+                        <p:menuitem value="Usuarios" outcome="crud_usuarios" icon="pi pi-users"/>
+                        <p:menuitem value="Admin Hoteles" action="#" update="messages" ajax="false" icon="pi pi-user-plus"/>
+                        <p:menuitem value="Hoteles" action="#" update="messages" icon="pi pi-building"/>
+                        <p:menuitem value="Reservas" action="#" update="messages" icon="pi pi-check-circle"/>
+                        <p:menuitem value="Vuelos" action="#" update="messages" icon="pi pi-flag"/>
+                    </p:submenu>
+                </p:menu>
+            </div>
         </h:panelGrid>
     </h:form>
 </p:panel>

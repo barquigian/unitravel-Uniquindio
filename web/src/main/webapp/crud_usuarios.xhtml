@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CRUD Usuarios</title>
+</h:head>
+<body>
+    <p:panel header="Espacio Administrador">
+        <h:form id="form">
+            <div class="card crud-demo">
+                <p:growl id="messages" showDetail="true"/>
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{crudUsuarioBean.openNew()}"
+                            update=":form:manage-product-content" oncomplete="PF('manageProductDialog').show()"
+                            styleClass="ui-button-success" style="margin-right: .5rem">
+                        <p:resetInput target=":form:manage-product-content"/>
+                        </p:commandButton>
+                        <p:commandButton id="delete-products-button" value="#{crudUsuarioBean.deleteButtonMessage}"
+                            icon="pi pi-trash" actionListener="#{crudUsuarioBean.deleteSelectedProducts}"
+                            styleClass="ui-button-danger" disabled="#{!crudUsuarioBean.hasSelectedProducts()}"
+                            update="@this">
+                        <p:confirm header="Confirmacion" message="Eliminar los usuarios seleccionados?"
+                            icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable id="dt-products" widgetVar="dtProducts" var="usuario" value="#{crudUsuarioBean.usuarios}"
+                             reflow="true" styleClass="products-table"
+                             selection="#{crudUsuarioBean.selectedUsuarios}" rowKey="#{usuario.cedula}" paginator="true"
+                             rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                    <f:facet name="header">
+                        <div class="products-table-header">
+                            <span style="font-weight: bold">Clientes</span>
+
+                            <span class="filter-container ui-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <p:inputText id="globalFilter" onkeyup="PF('dtProducts').filter()" placeholder="Search"/>
+                    </span>
+
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" update=":form:delete-products-button"/>
+                    <p:ajax event="rowUnselect" update=":form:delete-products-button"/>
+                    <p:ajax event="rowSelectCheckbox" update=":form:delete-products-button"/>
+                    <p:ajax event="rowUnselectCheckbox" update=":form:delete-products-button"/>
+                    <p:ajax event="toggleSelect" update=":form:delete-products-button"/>
+
+                    <p:column selectionMode="multiple" exportable="false"></p:column>
+
+                    <p:column headerText="Cedula" sortBy="#{usuario.cedula}" filterBy="#{usuario.cedula}">
+                        <h:outputText value="#{usuario.cedula}"/>
+                    </p:column>
+                    <p:column headerText="Nombre" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}">
+                        <h:outputText value="#{usuario.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Contraseña" sortBy="#{usuario.contrasena}" filterBy="#{usuario.contrasena}">
+                        <h:outputText value="#{usuario.contrasena}"/>
+                    </p:column>
+                    <p:column headerText="Email" sortBy="#{usuario.email}" filterBy="#{usuario.email}">
+                        <h:outputText value="#{usuario.email}"/>
+                    </p:column>
+                    <p:column exportable="false">
+                        <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
+                                         oncomplete="PF('manageProductDialog').show()"
+                                         styleClass="edit-button rounded-button ui-button-success" process="@this">
+                            <f:setPropertyActionListener value="#{usuario}" target="#{crudUsuarioBean.selectedUsuario}"/>
+                            <p:resetInput target=":form:manage-product-content"/>
+                        </p:commandButton>
+                        <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                         oncomplete="PF('deleteProductDialog').show()">
+                            <f:setPropertyActionListener value="#{usuario}" target="#{crudUsuarioBean.selectedUsuario}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:dialog header="Detalles Usuario" showEffect="fade" modal="true"
+                          widgetVar="manageProductDialog" responsive="true">
+                <p:outputPanel id="manage-product-content" class="ui-fluid">
+                    <p:outputPanel rendered="#{not empty crudUsuarioBean.selectedUsuario}">
+                        <div class="p-field">
+                            <p:outputLabel for="cedula">Cedula</p:outputLabel>
+                            <p:inputText id="cedula" value="#{crudUsuarioBean.selectedUsuario.cedula}" required="true"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                            <p:inputText id="nombre" value="#{crudUsuarioBean.selectedUsuario.nombre}" required="true"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="contrasena">Contraseña</p:outputLabel>
+                            <p:inputText id="contrasena" value="#{crudUsuarioBean.selectedUsuario.contrasena}" required="true"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="email">Email</p:outputLabel>
+                            <p:inputText id="email" value="#{crudUsuarioBean.selectedUsuario.email}" required="true"/>
+                        </div>
+                    </p:outputPanel>
+                </p:outputPanel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Save" icon="pi pi-check" actionListener="#{crudUsuarioBean.saveProduct}"
+                                         update="manage-product-content" process="manage-product-content @this"/>
+                        <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageProductDialog').hide()"
+                                         class="ui-button-secondary"/>
+                    </f:facet>
+                </p:dialog>
+
+                <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
+                                 message="Eliminar Usuario?" header="Confirmar" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{crudUsuarioBean.deleteProduct}"
+                                     process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteProductDialog').hide()"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+
+            </div>
+        </h:form>
+    </p:panel>
+</body>
+</html>

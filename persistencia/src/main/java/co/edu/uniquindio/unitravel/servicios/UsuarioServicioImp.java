@@ -70,7 +70,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
     }
 
     @Override
-    public List<Usuario> listarUsuario() throws Exception {
+    public List<Usuario> listarUsuario(){
         return usuarioRepo.findAll();
     }
 
@@ -82,6 +82,22 @@ public class UsuarioServicioImp implements UsuarioServicio {
             throw new Exception("El usuario no existe");
         }
         usuarioRepo.delete(usuario);
+    }
+
+    /**
+     * @param usuarioList
+     * @throws Exception
+     */
+    @Override
+    public void elimiarUsuarios(List<Usuario> usuarioList) throws Exception {
+        for(Usuario usuario: usuarioList){
+            Usuario usuarioBuscado = obtenerUsuario(usuario.getCedula());
+
+            if (usuarioBuscado == null) {
+                throw new Exception("El usuario no existe");
+            }
+            usuarioRepo.delete(usuarioBuscado);
+        }
     }
 
     @Override

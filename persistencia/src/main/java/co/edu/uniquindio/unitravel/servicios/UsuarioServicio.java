@@ -9,9 +9,10 @@ public interface UsuarioServicio {
     Usuario registrarUsuario(Usuario u) throws Exception;
     Usuario obtenerUsuario(String codigo)throws Exception;
     Usuario actualizarUsuario(Usuario u)throws Exception;
-    List<Usuario> listarUsuario()throws Exception;
+    List<Usuario> listarUsuario();
     List<Reserva> listarReservas(String codigo)throws Exception;
     void elimiarUsuario(String cedula)throws Exception;
+    void elimiarUsuarios(List<Usuario> usuarioList)throws Exception;
     Usuario validarLogin(String correo,String contrasena)throws Exception;
     Comentario crearComentario(Comentario comentario)throws Exception;
     Reserva hacerReserva(Reserva reserva)throws Exception;

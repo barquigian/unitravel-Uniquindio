@@ -169,7 +169,7 @@ public class UsuarioTest {
             Assertions.assertNull(usuario);
         }
     }
-    @Test//en contruccion
+/*    @Test//en contruccion
     @Sql("classpath:dataset.sql")
     public void vefiricarDisponibilidadDeFecha(){
 
@@ -179,7 +179,7 @@ public class UsuarioTest {
               // Assertions.assertNotNull(reserva.get());
 
 
-/*
+
         AdministradorHotel adminHotel=new AdministradorHotel("243342","12345","williHenao@gmail.com","Willian Henao", "prueba","1");
         Ciudad ciudad= new Ciudad(5, "Pereira");
         Usuario usuario=usuarioServicio.obtenerUsuario("1234432");
@@ -194,7 +194,7 @@ public class UsuarioTest {
         Hotel hotel= hotelRepo.findById(1).get();
         Usuario usuario=usuarioRepo.buscarporCedula("323455");
         Reserva reserva= new Reserva();
-    */
-    }
+
+    }*/
 
 }
