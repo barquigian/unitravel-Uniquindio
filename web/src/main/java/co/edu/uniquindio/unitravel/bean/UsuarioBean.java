@@ -25,6 +25,10 @@ public class UsuarioBean implements Serializable {
     private Usuario usuario;
     @Getter @Setter
     private List<Ciudad> ciudades;
+    @Getter @Setter
+    private String email;
+    @Getter @Setter
+    private String contrasena;
 
     @PostConstruct
     public void init(){
@@ -42,9 +46,5 @@ public class UsuarioBean implements Serializable {
             FacesMessage msj=new FacesMessage(FacesMessage.SEVERITY_ERROR,"alerta",e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msj);
         }
-    }
-
-    public void validarLogin(){
-       // usuarioServicio.validarLogin();
     }
 }

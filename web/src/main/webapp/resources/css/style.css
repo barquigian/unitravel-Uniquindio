@@ -31,3 +31,6 @@
 .imagen_hotel{
     width: 100%;
 }
+.ui-dataview-content{
+    background:none;
+}
