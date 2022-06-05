@@ -13,6 +13,8 @@
     <h:outputStylesheet library="css" name="boostrap.min.css"/>
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="boostrap.min.css"/>
+
+
 </h:head>
 <h:body>
     <div id="encabezado">
@@ -49,13 +51,21 @@
             <li><a href="">inicio</a> </li>
             <li><h:link outcome="registrar_usuario">Registrarse</h:link> </li>
             <li> <a href="mis_reservas.xhtml">listar mis reservas</a> </li>
+            <li><h:link outcome="espacio_administrador.xhtml">Espacio Administrador</h:link> </li>
         </ul>
     </div>
     <div id="contenido">
         <h:form>
             <div class="input-search ui-inputgroup">
-                <p:inputText placeholder="Que hotel esta buscano" required="true" value="#{busquedaBean.busqueda}"/>
-                <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
+                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                <h:panelGrid columns="6" cellpadding="1">
+                    <p:inputText placeholder="A donde vas?..." required="true" value="#{busquedaBean.busqueda}"/>
+                    <p:outputLabel for="fecha_inicio" value="Chek in:"/>
+                    <p:calendar id="fecha_inicio" value="#{calendarViewBean.fecha_inicio}" />
+                    <p:outputLabel for="fecha_final" value="Chek out:"/>
+                    <p:calendar id="fecha_final" value="#{calendarViewBean.fecha_final}" />
+                    <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
+                </h:panelGrid>
 
             </div>
 
