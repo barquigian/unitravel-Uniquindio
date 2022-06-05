@@ -44,7 +44,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
         Usuario buscado = obtenerUsuario(usuario.getCedula());
         //Usuario usuarioEmail= bus
         if (buscado != null) {
-            throw new Exception("El codigo de usuario ya esta registrado");
+            throw new Exception("La cédula del usuario ya está registrada");
         }
         if(buscado!=null){
 
