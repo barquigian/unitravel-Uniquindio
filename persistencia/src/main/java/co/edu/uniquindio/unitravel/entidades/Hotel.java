@@ -88,13 +88,13 @@ public class Hotel implements Serializable {
         this.caracteristicas = caracteristicas;
         this.comentarios = comentarios;
     }
-    public String getImagenPirncipal(){
+    public String getImagenPrincipal(){
 
-        if(fotos!=null){
+       /* if(fotos!=null){
             if(fotos.isEmpty()){
                 return fotos.get(0);
             }
-        }
+        }*/
         return "default.png";
     }
 }

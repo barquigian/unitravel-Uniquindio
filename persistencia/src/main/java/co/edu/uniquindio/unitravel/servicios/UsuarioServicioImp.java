@@ -276,7 +276,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
     @Override
     public List<Hotel> listarHoteles() {
-        return null;
+        return hotelRepo.listarHoteles();
     }
 
 

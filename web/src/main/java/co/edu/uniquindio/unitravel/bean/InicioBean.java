@@ -8,14 +8,13 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Component
 @ViewScoped
-@Getter
-@Setter
 public class InicioBean implements Serializable {
     private String mensaje = "UniTravel";
 
@@ -27,6 +26,7 @@ public class InicioBean implements Serializable {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @PostConstruct
     public void inicializar(){
         hoteles= usuarioServicio.listarHoteles();
         ciudades= usuarioServicio.listarCiudades();
