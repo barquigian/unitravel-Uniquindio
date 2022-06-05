@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>crear hotel</title>
 </h:head>
 <h:body>
-    <p:panel header="registro usuario">
+    <p:panel header="Registrar hotel">
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
                 <p:outputLabel value="nombre: " for="nombre_h" />
@@ -29,7 +29,7 @@
 
             </h:panelGrid>
             <p:growl showDetail="true"/>
-            <p:commandButton value="registrar hotel" action="#{hotelBean.}"update="@form" icon="pi pi-plus"/>
+            <p:commandButton value="Registrar hotel" action="#{hotelBean.registrarHotel()}" update="@form" icon="pi pi-plus"/>
 
         </h:form>
     </p:panel>
