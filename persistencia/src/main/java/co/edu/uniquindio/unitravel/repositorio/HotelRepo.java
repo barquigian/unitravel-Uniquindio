@@ -66,5 +66,6 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
     @Query("select h from Hotel h where h.numEstrellas>3")
     List<Hotel> hotelesPopulares();
 
-    List<Hotel> findAllByNombreContainsIgnoreCase(String nombreHotel);
+    @Query("select h from Hotel h")
+    List<Hotel> listarHoteles();
 }

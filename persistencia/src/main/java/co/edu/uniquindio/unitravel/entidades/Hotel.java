@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unitravel.entidades;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,6 +33,9 @@ public class Hotel implements Serializable {
     @Column(nullable = false, length = 20)
     private Integer numEstrellas;
 
+    @Lob
+    private String descripcion;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private AdministradorHotel administradorHotel;
@@ -43,9 +48,9 @@ public class Hotel implements Serializable {
     @ToString.Exclude
     private List<Habitacion> habitaciones;
 
-    @OneToMany(mappedBy = "hotel")
-    @ToString.Exclude
-    private List<Foto>fotos;
+   @ElementCollection
+   @LazyCollection(LazyCollectionOption.FALSE)
+    private List<String>fotos;
 
     @ManyToMany
     @ToString.Exclude
@@ -70,7 +75,7 @@ public class Hotel implements Serializable {
         this.ciudad = ciudad;
     }
 
-    public Hotel(Integer codigo, String nombre, String direccion, String telefono, Integer numEstrellas, AdministradorHotel administradorHotel, Ciudad ciudad, List<Habitacion> habitaciones, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Comentario> comentarios) {
+    public Hotel(Integer codigo, String nombre, String direccion, String telefono, Integer numEstrellas, AdministradorHotel administradorHotel, Ciudad ciudad, List<Habitacion> habitaciones, List<String> fotos, List<Caracteristica> caracteristicas, List<Comentario> comentarios) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -82,5 +87,14 @@ public class Hotel implements Serializable {
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
         this.comentarios = comentarios;
+    }
+    public String getImagenPirncipal(){
+
+        if(fotos!=null){
+            if(fotos.isEmpty()){
+                return fotos.get(0);
+            }
+        }
+        return "default.png";
     }
 }

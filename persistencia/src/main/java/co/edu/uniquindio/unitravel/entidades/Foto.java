@@ -23,13 +23,9 @@ public class Foto implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Habitacion habitacion;
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Hotel hotel;
 
     public Foto(String codigo, Habitacion habitacion, Hotel hotel) {
         this.codigo = codigo;
         this.habitacion = habitacion;
-        this.hotel = hotel;
     }
 }

@@ -4,13 +4,22 @@ import co.edu.uniquindio.unitravel.entidades.Hotel;
 import co.edu.uniquindio.unitravel.entidades.Usuario;
 import co.edu.uniquindio.unitravel.repositorio.HotelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class HotelServicioImp {
+import java.util.List;
+
+@Service
+public class HotelServicioImp  implements HotelServicio{
     public HotelServicioImp(HotelRepo hotelRepo){this.hotelRepo=hotelRepo;}
     @Autowired
     private HotelRepo hotelRepo;
 
     public Hotel obtenerHotel(Integer codigo) throws Exception{
-        return hotelRepo.findById(codigo).orElse(null);
+       try {
+           return hotelRepo.findById(codigo).orElse(null);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+        return null;
     }
 }

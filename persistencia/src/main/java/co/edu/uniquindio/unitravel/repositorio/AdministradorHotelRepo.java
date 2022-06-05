@@ -1,8 +1,6 @@
 package co.edu.uniquindio.unitravel.repositorio;
 
-import co.edu.uniquindio.unitravel.entidades.AdministradorHotel;
-import co.edu.uniquindio.unitravel.entidades.Hotel;
-import co.edu.uniquindio.unitravel.entidades.Usuario;
+import co.edu.uniquindio.unitravel.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,4 +17,8 @@ public interface AdministradorHotelRepo extends JpaRepository<AdministradorHotel
         AdministradorHotel findByEmailAndContrasena(String correo, String contrasena);
         @Query("select a from AdministradorHotel a where a.codigo= :codigoAdministrador")
         AdministradorHotel  obtenerAdministradorHotel(String codigoAdministrador);
+        @Query("select h from Habitacion h ")
+        List<Habitacion> listarHabitaciones();
+        @Query("select c from Cama c")
+        List<Cama> listarCamas();
 }

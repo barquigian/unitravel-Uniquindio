@@ -22,7 +22,7 @@
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                        <h:graphicImage library="img" name="icono.png" styleClass="icon_p"/>
+                        <h:graphicImage library="img" name="icono.png" styleClass="icon_p" width="80" />
                         <span class="fs-4">Unitravel</span>
                     </a>
 
@@ -33,15 +33,16 @@
                         <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-flag d-block mx-auto mb-1 icon-menu"></i>Vuelos</a></li>
                         <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-building d-block mx-auto mb-1 icon-menu"></i>Hoteles</a></li>
                     </ul>
-                    <p>23:11 14.1</p>
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                        <input type="search" class="form-control form-control-dark text-white bg-dark" placeholder="Search..." aria-label="Search" />
-                    </form>
-
+                <div class="px-3 py-2 border-bottom mb-3">
+                    <div class="container d-flex flex-wrap justify-content-center">
                     <div class="text-end">
-                        <button type="button" class="btn btn-outline-light me-2">Login</button>
-                        <button type="button" class="btn btn-warning">Sign-up</button>
+                        <h:form >
+                            <p:commandButton value="Login" type="button" class="btn btn-outline-light me-2" action="#{inicioBean.irLogin}"/>
+                            <p:commandButton value="Registrarse" class="btn btn-warning" action="#{inicioBean.irRegistro}"/>
+                        </h:form>
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -54,7 +55,8 @@
             <li><h:link outcome="espacio_administrador.xhtml">Espacio Administrador</h:link> </li>
         </ul>
     </div>
-    <div id="contenido">
+    <div id="contenido" class="fondo-c">
+        <div class="container">
         <h:form>
             <div class="input-search ui-inputgroup">
                 <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
@@ -68,11 +70,89 @@
                 </h:panelGrid>
 
             </div>
-
+            <br/>
         </h:form>
+            <p>Hoteles recomendados</p>
+            <h:form>
+                <p:dataView id="lista-h" value="#{inicioBean.hoteles}" var="hotel" listIcon="pi pi-bars" gridIcon="pi pi-th-large">
+                    <p:dataViewListItem>
+                        <div>
+                            <h1>#{hotel.nombre}</h1>
+                            <div class="card" >
+                                <img src="/uploads/#{hotel.imagenPirncipal}" class="card-img-top"
+                                     alt="..." />
+                                <div class="card-body">
+                                    <h5 class="card-title">#{hotel.nombre}</h5>
+                                    <p class="card-text">#{hotel.ciudad.nombre}</p>
+                                    <hr />
+                                    <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
+                                                     icon="pi pi-arrow-right" iconPos="right" />
+                                </div>
+                            </div>
 
+                        </div>
+                    </p:dataViewListItem>
+                    <p:dataViewGridItem>
+                        <h:form id="form">
+                            <p:dataView id="lista-hotels" var="hotel" value="#{inicioBean.hotels}" rows="12" paginator="true" gridIcon="pi pi-th-large" listIcon="pi
+pi-bars" >
+                                <p:dataViewGridItem>
+                                    <div class="card" >
+                                        <img src="/uploads/#{hotel.imagenPrincipal}" class="card-img-top"
+                                             alt="..." />
+                                        <div class="card-body">
+                                            <h5 class="card-title">#{hotel.nombre}</h5>
+                                            <p class="card-text">#{hotel.ciudad.nombre}</p>
+                                            <hr />
+                                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
+                                                             icon="pi pi-arrow-right" iconPos="right" />
+                                        </div>
+                                    </div>
+                                </p:dataViewGridItem>
+                                <p:dataViewListItem>
+                                    <div class="row d-flex" >
+                                        <div class="col-lg-2 col-md-1" style="text-align: center" >
+                                            <img src="/uploads/#{hotel.imagenPrincipal}" class="imagen-hotel" alt="Imagen"/> </div>
+                                        <div class="col-lg-8 col-md-1 align-self-center" >
+                                            <p:outputPanel>
+                                                <h:panelGrid columns="2" cellpadding="5">
+                                                    <h:outputText value="Nombre:" />
+                                                    <h:outputText value="#{hotel.nombre}" style="font-weight:bold" />
+                                                    <h:outputText value="Ciudad:" />
+                                                    <h:outputText value="#{hotel.ciudad.nombre}" />
+                                                    <h:outputText value="Características:" />
+                                                    <h:outputText value="#{hotel.caracteristicas}" />
+                                                    <h:outputText value="Descripción:" />
+                                                    <h:outputText value="#{hotel.descripcion}" />
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                        </div>
+                                        <div class="col-lg-2 col-md-1 align-self-center" >
+                                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
+                                                             icon="pi pi-arrow-right" iconPos="right" />
+                                        </div>
+                                    </div>
+                                </p:dataViewListItem>
+                            </p:dataView>
+                        </h:form>
 
+                    </p:dataViewGridItem>
 
+                </p:dataView>
+            </h:form>
+        </div>
+        <div class="container">
+            <footer class="d-flex-wrap justify-content-end list-unstyled d-flex">
+                <div class="col-md-4 d-flex align-items-center">
+                    <span class="text-muted"> 2022 Unitravel, Inc</span>
+                </div>
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="pi pi-twitter icon-menu"></i> </a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="pi pi-instagram icon-menu"></i> </a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="pi pi-facebook icon-menu"></i> </a></li>
+                </ul>
+            </footer>
+        </div>
     </div>
 </h:body>
 </html>

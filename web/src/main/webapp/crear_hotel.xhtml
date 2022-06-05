@@ -9,10 +9,10 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>crear hotel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>Unitravel | Crear hotel</title>
 </h:head>
 <h:body>
-    <p:panel header="Registrar hotel">
+    <p:panel header="Crear Hotel">
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
                 <p:outputLabel value="nombre: " for="nombre_h" />
@@ -25,13 +25,72 @@
                 <p:inputText id="numero_estrellas" type="number" value="#{hotelBean.hotel.numEstrellas}" required="true"/>
 
                 <p:outputLabel value="telefono: "  for="telefono_h"/>
-                <p:password id="telefono_h" value="#{hotelBean.hotel.telefono}"  required="true"/>
+                <p:inputText id="telefono_h" type="number" value="#{hotelBean.hotel.telefono}"  required="true"/>
+
+                <p:outputLabel value="descricion: "  for="descripcion_h"/>
+                <p:inputText id="descripcion_h" type="text" value="#{hotelBean.hotel.descripcion}"  required="true"/>
+
+                <p:outputLabel value="ciudad: " for="ciudadU"/>
+                <p:selectOneMenu id="ciudadU" value="#{hotelBean.hotel.ciudad}" required="true" converter="#{ciudadConverter}"/>
+                <f:selectItem itemLabel="seleccionar ciudad" noSelectionOption="true"/>
+                <f:selectItems value="#{hotelBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                <p:selectOneMenu/>
+                <br/>
+
+                <p:outputLabel value="Caracteristicas: " for="caracteristicah"/>
+                <p:selectManyCheckbox id="caracteristicah" value="#{hotelBean.hotel.caracteristicas}" required="true" converter="#{caracteristicasConverter}"/>
+                <f:selectItems value="#{hotelBean.caracteristicas}" var="caracteristica" itemLabel="#{caracteristica.nombre}" itemValue="#{caracteristica}"/>
+                <p:selectManyCheckbox/>
+
+                <p:outputLabel for="imagenes_hotel" value="Imágenes: " />
+                <p:fileUpload id="imagenes_hotel"
+                              listener="#{hotelBean.subirImagenes}" mode="advanced"
+                              multiple="true" sizeLimit="1000000" fileLimit="5"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+
+                <p:commandButton value="adicionar habitacion" onclick="PF9('crear_hab').show()" update="@form" icon="pi pi-plus"/>
+                <p:dialog header="Header" widgetVar="dlg2" minHeight="40" width="350" showEffect="fade" modal="true">
+                    <p class="p-m-0">Crear habitacion</p>
+
+                </p:dialog>
+                <br/>
+                <br/>
 
             </h:panelGrid>
             <p:growl showDetail="true"/>
-            <p:commandButton value="Registrar hotel" action="#{hotelBean.registrarHotel()}" update="@form" icon="pi pi-plus"/>
+            <p:commandButton value="Crear hotel" action="#{hotelBean.registrarHotel()}" update="@form" icon="pi pi-check"/>
 
         </h:form>
     </p:panel>
+    <p:dialog header="Crear habitacion" widgetVar="crear_hab" modal="true" showEffect="fade" draggable="false">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Numero habitación: " for="numero_hab" />
+                <p:inputText id="numero_hab" type="text" value="#{hotelBean.habitacion.numeroHabitacion}" required="true"/>
+
+                <p:outputLabel value="Precio: " for="precio_hab"/>
+                <p:inputText id="precio_hab" type="text" value="#{hotelBean.habitacion.precio}" required="true"/>
+
+                <p:outputLabel value="Capacidad: " for="capacidad_hab"/>
+                <p:inputText id="capacidad_hab" type="number" value="#{hotelBean.habitacion.capacidad}" required="true"/>
+
+                <p:outputLabel value="Camas: "  for="camas_hab"/>
+                <p:selectManyCheckbox id="camas_hab" value="#{hotelBean.habitacion.camas}"  required="true">
+                    <f:selectItems value="#{HotelBean.camas}"/>
+                </p:selectManyCheckbox>
+
+                <p:outputLabel value="Caracteristicas: " for="caracteristica_hab"/>
+                <p:selectManyCheckbox id="caracteristica_hab" value="#{hotelBean.habitacion.caracteristicas}" required="true" converter="#{caracteristicasConverter}"/>
+                <f:selectItems value="#{hotelBean.caracteristicasHabitacion}" var="caracteristica" itemLabel="#{caracteristica.nombre}" itemValue="#{caracteristica}"/>
+                <p:selectManyCheckbox/>
+
+                <p:outputLabel for="imagenes_hab" value="Imágenes: " />
+                <p:fileUpload id="imagenes_hab"
+                              listener="#{hotelBean.subirImagenes}" mode="advanced"
+                              multiple="true" sizeLimit="1000000" fileLimit="5"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
 </h:body>
 </html>

@@ -19,3 +19,15 @@
 .text-active{
     color: #0dcaf0 !important;
 }
+#busqueda_h .ui.inputtext{
+    width: 400px;
+}
+.contenedor-btn{
+    margin-top:20px;
+}
+#crear_Hotel_f ui.inputfield.ui-widget, #crear_Hotel_f .ui-selectonmenu.ui-widget{
+    width: 400px;
+}
+.imagen_hotel{
+    width: 100%;
+}

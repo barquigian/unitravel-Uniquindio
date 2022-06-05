@@ -26,5 +26,8 @@ public interface UsuarioServicio {
     double consultarPrecioReservaMasIva(String codigoReserva)throws Exception;
     boolean verificarDisponibilidadFecha(Reserva reserva);
     List<Hotel> buscarHotelporNombre(String nombreHotel);
+    List<Ciudad> listarCiudades();
+    Ciudad obtenerCiudad(Integer codigo);
+    List<Hotel> listarHoteles();
 
 }
