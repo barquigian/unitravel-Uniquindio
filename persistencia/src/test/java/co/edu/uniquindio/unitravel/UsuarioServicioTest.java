@@ -224,4 +224,11 @@ public class UsuarioServicioTest {
         double costoMasIva=usuarioServicio.consultarPrecioReservaMasIva("1");
         Assertions.assertEquals(304.5, costoMasIva);
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCiudadesTest(){
+        List<Ciudad> ciudades= usuarioServicio.listarCiudades();
+        System.out.println(ciudades);
+        Assertions.assertNotNull(ciudades);
+    }
 }

@@ -20,13 +20,14 @@ public class UsuarioServicioImp implements UsuarioServicio {
     private EmailService emailService;
     private AdministradorRepo administradorRepo;
     private HabitacionRepo habitacionRepo;
+    private CiudadRepo ciudadRepo;
 
 
 
     public UsuarioServicioImp(UsuarioRepo usuarioRepo,HotelRepo hotelRepo,
                               ComentarioRepo comentarioRepo, ReservaRepo reservaRepo,ReservaSillaRepo reservaSillaRepo,
                               ReservaHabitacionRepo reservaHabitacionRepo,EmailService emailService,AdministradorRepo administradorRepo,
-                                    HabitacionRepo habitacionRepo) {
+                                    HabitacionRepo habitacionRepo, CiudadRepo ciudadRepo) {
         this.usuarioRepo = usuarioRepo;
         this.hotelRepo=hotelRepo;
         this.comentarioRepo = comentarioRepo;
@@ -36,6 +37,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
         this.emailService=emailService;
         this.administradorRepo=administradorRepo;
         this.habitacionRepo= habitacionRepo;
+        this.ciudadRepo=ciudadRepo;
     }
 
     @Override
@@ -260,6 +262,21 @@ public class UsuarioServicioImp implements UsuarioServicio {
     @Override
     public List<Hotel> buscarHotelporNombre(String nombreHotel) {
             return hotelRepo.obtenerHotelesPorNombre(nombreHotel);
+    }
+
+    @Override
+    public List<Ciudad> listarCiudades() {
+        return ciudadRepo.findAll();
+    }
+
+    @Override
+    public Ciudad obtenerCiudad(Integer codigo) {
+        return ciudadRepo.findById(codigo).orElse(null);
+    }
+
+    @Override
+    public List<Hotel> listarHoteles() {
+        return null;
     }
 
 

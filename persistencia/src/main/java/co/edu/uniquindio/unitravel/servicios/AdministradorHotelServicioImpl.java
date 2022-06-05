@@ -1,11 +1,7 @@
 package co.edu.uniquindio.unitravel.servicios;
 
-import co.edu.uniquindio.unitravel.entidades.AdministradorHotel;
-import co.edu.uniquindio.unitravel.entidades.Ciudad;
-import co.edu.uniquindio.unitravel.entidades.Hotel;
-import co.edu.uniquindio.unitravel.repositorio.AdministradorHotelRepo;
-import co.edu.uniquindio.unitravel.repositorio.CiudadRepo;
-import co.edu.uniquindio.unitravel.repositorio.HotelRepo;
+import co.edu.uniquindio.unitravel.entidades.*;
+import co.edu.uniquindio.unitravel.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +17,11 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
     private HotelRepo hotelRepo;
     @Autowired
     private CiudadRepo ciudadRepo;
+
+    @Autowired
+    private CaracteristicaRepo caracteristicaRepo;
+    @Autowired
+    private HabitacionRepo habitacionRepo;
 
     @Override
     public AdministradorHotel gestionarLogin(String email, String contrasena) throws Exception {
@@ -79,4 +80,43 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
 
         return  ciudadRepo.findById(codigo).orElse(null);
     }
+
+    @Override
+    public List<Ciudad> listarCiudades() {
+        return ciudadRepo.findAll();
+    }
+
+    @Override
+    public Caracteristica obtenerCaracteristica(Integer codigo) throws Exception {
+        try {
+            Caracteristica caracteristica = caracteristicaRepo.obtenerCaracteristica(1);
+            return caracteristica;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Caracteristica> listarCaracteristicas() {
+        return caracteristicaRepo.findAll();
+    }
+
+    @Override
+    public void crearHabitacion(Habitacion habitacion) {
+
+            habitacionRepo.save(habitacion);
+    }
+
+    @Override
+    public List<Habitacion> listarHabitaciones() {
+
+        return administradorHotelRepo.listarHabitaciones();
+    }
+
+    @Override
+    public List<Cama> listarCamas() {
+        return administradorHotelRepo.listarCamas();
+    }
+
 }

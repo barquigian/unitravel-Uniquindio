@@ -27,12 +27,4 @@ public interface AdministradorRepo extends JpaRepository<Administrador,String> {
     //buscar por cedula
     @Query("select a from Administrador a where a.cedula= :cedula")
     Administrador buscarporCedula(String cedula);
-
-
-
-
-
-
-
-
 }

@@ -1,10 +1,9 @@
 package co.edu.uniquindio.unitravel.servicios;
 
-import co.edu.uniquindio.unitravel.entidades.AdministradorHotel;
-import co.edu.uniquindio.unitravel.entidades.Ciudad;
-import co.edu.uniquindio.unitravel.entidades.Hotel;
+import co.edu.uniquindio.unitravel.entidades.*;
 import co.edu.uniquindio.unitravel.repositorio.AdministradorHotelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -22,4 +21,16 @@ public interface AdministradorHotelServicio {
     AdministradorHotel obtenerAdministradorHotel(String codigo)throws Exception;
 
     Ciudad obtenerCiudad(Integer codigo) throws Exception;
+
+    List<Ciudad> listarCiudades();
+
+    Caracteristica obtenerCaracteristica(Integer codigo)throws Exception;
+
+    List<Caracteristica> listarCaracteristicas();
+
+    void crearHabitacion(Habitacion habitacion);
+
+    List<Habitacion> listarHabitaciones();
+
+    List<Cama> listarCamas();
 }

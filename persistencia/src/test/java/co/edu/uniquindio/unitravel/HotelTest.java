@@ -32,19 +32,19 @@ public class HotelTest {
     @Sql("classpath:dataset.sql")
     public void registrarHotel() {
 
-        Ciudad ciudad= ciudadRepo.findById(1).get();
-        AdministradorHotel administradorHotel= administradorHotelRepo.obtenerAdministradorHotel("1");
-        Hotel hotel = new Hotel(9,"hotel Casa Grande","cra 02 #23-16","32345341",4 , administradorHotel,ciudad);
-       Hotel hotelReistrado= hotelRepo.save(hotel);
-       Assertions.assertNotNull(hotelReistrado);
+        Ciudad ciudad = ciudadRepo.findById(1).get();
+        AdministradorHotel administradorHotel = administradorHotelRepo.obtenerAdministradorHotel("1");
+        Hotel hotel = new Hotel(9, "hotel Casa Grande", "cra 02 #23-16", "32345341", 4, administradorHotel, ciudad);
+        Hotel hotelReistrado = hotelRepo.save(hotel);
+        Assertions.assertNotNull(hotelReistrado);
     }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarHotel() {
-        Ciudad ciudad= ciudadRepo.findById(1).get();
-        AdministradorHotel administradorHotel= administradorHotelRepo.obtenerAdministradorHotel("1");
-        Hotel hotel = new Hotel(9,"hotel Casa Grande","cra 02 #23-16","32345341",4 ,administradorHotel,ciudad);
+        Ciudad ciudad = ciudadRepo.findById(1).get();
+        AdministradorHotel administradorHotel = administradorHotelRepo.obtenerAdministradorHotel("1");
+        Hotel hotel = new Hotel(9, "hotel Casa Grande", "cra 02 #23-16", "32345341", 4, administradorHotel, ciudad);
         hotelRepo.delete(hotel);
 
     }
@@ -52,9 +52,9 @@ public class HotelTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarHotel() {
-        Ciudad ciudad= ciudadRepo.findById(1).get();
-        AdministradorHotel administradorHotel= administradorHotelRepo.obtenerAdministradorHotel("1");
-        Hotel hotel = new Hotel(9,"hotel Casa Grande","cra 02 #23-16","32345341",4 , administradorHotel,ciudad);
+        Ciudad ciudad = ciudadRepo.findById(1).get();
+        AdministradorHotel administradorHotel = administradorHotelRepo.obtenerAdministradorHotel("1");
+        Hotel hotel = new Hotel(9, "hotel Casa Grande", "cra 02 #23-16", "32345341", 4, administradorHotel, ciudad);
         hotel.setDireccion("cra 04 #22-16");
         hotelRepo.save(hotel);
         Assertions.assertEquals("cra 04 #22-16", hotel.getDireccion());
@@ -176,22 +176,32 @@ public class HotelTest {
     @Test
     @Sql
     private void obtenerFotosPorHotel() {
-        List<Foto> fotos=hotelRepo.fotosPorHotel("1");
+        List<Foto> fotos = hotelRepo.fotosPorHotel("1");
         fotos.forEach(System.out::println);
         Assertions.assertNotNull(fotos);
     }
+
     @Test
     @Sql
     private void obtenerHotelesPopulares() {
-        List<Hotel>hoteles=hotelRepo.hotelesPopulares();
+        List<Hotel> hoteles = hotelRepo.hotelesPopulares();
 
         hoteles.forEach(System.out::println);
     }
+
     @Test
     @Sql("classpath:dataset.sql")
-    public void buscarHotelesPorId(){
-        Hotel hotel= hotelRepo.findById(1).get();
+    public void buscarHotelesPorId() {
+        Hotel hotel = hotelRepo.findById(1).get();
         System.out.println(hotel);
         Assertions.assertNotNull(hotel);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarHoteles() {
+        List<Hotel> hoteles= hotelRepo.listarHoteles();
+        System.out.println(hoteles);
+        Assertions.assertNotNull(hoteles);
     }
 }

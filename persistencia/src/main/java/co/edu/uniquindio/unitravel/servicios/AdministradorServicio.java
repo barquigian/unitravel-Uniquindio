@@ -1,9 +1,9 @@
 package co.edu.uniquindio.unitravel.servicios;
 
-import co.edu.uniquindio.unitravel.entidades.Administrador;
-import co.edu.uniquindio.unitravel.entidades.AdministradorHotel;
-import co.edu.uniquindio.unitravel.entidades.Ciudad;
-import co.edu.uniquindio.unitravel.entidades.Vuelo;
+import co.edu.uniquindio.unitravel.entidades.*;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.List;
 
 public interface AdministradorServicio {
 
@@ -15,4 +15,6 @@ public interface AdministradorServicio {
     Ciudad crearCiudad(Ciudad ciudad)throws Exception;
     Ciudad modificarCiudad(Integer codigo)throws Exception;
     void elimiarCiudad(Integer cedula)throws Exception;
+    Caracteristica obtenerCaracteristica(Integer codigo)throws Exception;
+    List<Caracteristica> listarCaracteristicas();
 }

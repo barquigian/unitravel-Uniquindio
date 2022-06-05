@@ -2,6 +2,7 @@ package co.edu.uniquindio.unitravel;
 
 
 import co.edu.uniquindio.unitravel.entidades.Administrador;
+import co.edu.uniquindio.unitravel.entidades.Caracteristica;
 import co.edu.uniquindio.unitravel.entidades.Usuario;
 import co.edu.uniquindio.unitravel.repositorio.AdministradorRepo;
 import org.junit.jupiter.api.Assertions;
@@ -44,4 +45,5 @@ public class AdministradorTest {
         Assertions.assertNotNull(administrador);
 
     }
+
 }

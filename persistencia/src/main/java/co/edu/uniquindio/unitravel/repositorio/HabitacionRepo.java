@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HabitacionRepo extends JpaRepository<Habitacion,String> {
+
 }

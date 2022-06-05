@@ -5,6 +5,7 @@ import co.edu.uniquindio.unitravel.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,9 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
     @Autowired
     private ReservaRepo reservaRepo;
+
+    @Autowired
+    private CaracteristicaRepo caracteristicaRepo;
 
     @Override
     public Administrador gestionarLogin(String email, String contrasena) throws Exception {
@@ -90,4 +94,22 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             throw new Exception();
         }
     }
+
+    @Override
+    public Caracteristica obtenerCaracteristica(Integer codigo) throws Exception {
+
+        try{
+            Caracteristica caracteristica= caracteristicaRepo.obtenerCaracteristica(codigo);
+            return caracteristica;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Caracteristica> listarCaracteristicas() {
+        return caracteristicaRepo.findAll();
+    }
+
 }
