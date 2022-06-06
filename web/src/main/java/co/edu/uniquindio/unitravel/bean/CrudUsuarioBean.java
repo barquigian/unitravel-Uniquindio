@@ -1,7 +1,10 @@
 package co.edu.uniquindio.unitravel.bean;
 
+import co.edu.uniquindio.unitravel.entidades.Ciudad;
 import co.edu.uniquindio.unitravel.entidades.Usuario;
 import co.edu.uniquindio.unitravel.servicios.UsuarioServicio;
+import lombok.Getter;
+import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +31,10 @@ public class CrudUsuarioBean implements Serializable {
 
     private List<Usuario> selectedUsuarios;
 
+    @Getter
+    @Setter
+    private List<Ciudad> ciudades;
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -37,6 +44,7 @@ public class CrudUsuarioBean implements Serializable {
         this.selectedUsuarios = new ArrayList<>();
         this.selectedUsuario = new Usuario();
         this.usuarios = usuarioServicio.listarUsuario();
+        this.ciudades= usuarioServicio.listarCiudades();
     }
 
     public List<Usuario> getUsuarios() {
@@ -64,26 +72,30 @@ public class CrudUsuarioBean implements Serializable {
     }
 
     public void saveProduct() {
-        if (this.selectedUsuario.getCiudad() == null) {
-            this.selectedUsuario.setContrasena(selectedUsuario.getEmail());
-            try {
-                this.usuarioServicio.registrarUsuario(this.selectedUsuario);
-                this.usuarios = this.usuarioServicio.listarUsuario();
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario añadido"));
-            } catch (Exception e) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La cedula ya existe"));
-            }
 
-        }
-        else {
             try {
                 this.usuarioServicio.actualizarUsuario(this.selectedUsuario);
                 this.usuarios = this.usuarioServicio.listarUsuario();
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario actualizado"));
             } catch (Exception e) {
+                e.printStackTrace();
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La cedula no existe"));
             }
-        }
+
+        PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
+        PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
+    }
+
+    public void saveNewProduct() {
+            try {
+                this.selectedUsuario.setContrasena("12345");
+                System.out.println(selectedUsuario.toString());
+                this.usuarioServicio.registrarUsuario(this.selectedUsuario);
+                this.usuarios = this.usuarioServicio.listarUsuario();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario añadido"));
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error"));
+            }
         PrimeFaces.current().executeScript("PF('manageProductDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-products");
     }
@@ -116,6 +128,7 @@ public class CrudUsuarioBean implements Serializable {
     public void deleteSelectedProducts() {
         try {
             this.usuarioServicio.elimiarUsuarios(this.selectedUsuarios);
+            this.usuarios = this.usuarioServicio.listarUsuario();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Uno de los usuarios no pudo ser elmiminado"));
         }
