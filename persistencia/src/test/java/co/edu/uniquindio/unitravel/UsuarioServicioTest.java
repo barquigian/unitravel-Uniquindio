@@ -186,13 +186,13 @@ public class UsuarioServicioTest {
         Assertions.assertEquals(reserva.getFechaFin(),fechaFin);
 
    }
-    @Test
+   /* @Test
     @Sql("classpath:dataset.sql")
     public void crearUsuarioTest() throws Exception {
         List<String>telefono=new ArrayList<>();
         telefono.add("123442");
         Usuario usuario= usuarioServicio.crearUsuario("3124132","Lizeth Baca","liz@correo.com","12345",telefono);
-   }
+   }*/
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarReservaTest() throws Exception {

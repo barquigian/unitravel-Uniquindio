@@ -17,12 +17,14 @@ public class Foto implements Serializable {
     @EqualsAndHashCode.Include
     @Column(nullable = false,length = 10)
     private String codigo;
-    @ElementCollection
-    private List<String> fotoUrl;
+    @Column(nullable = false,length = 50)
+    private String fotoUrl;
     
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Habitacion habitacion;
+
+    @ManyToOne
+    private Hotel hotel;
 
     public Foto(String codigo, Habitacion habitacion, Hotel hotel) {
         this.codigo = codigo;

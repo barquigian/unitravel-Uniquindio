@@ -48,9 +48,14 @@ public class Hotel implements Serializable {
     @ToString.Exclude
     private List<Habitacion> habitaciones;
 
-   @ElementCollection
+    @OneToMany(mappedBy = "hotel")
+    @ToString.Exclude
+    private List<Foto> fotos;
+
+
+   /*@ElementCollection
    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<String>fotos;
+    private List<String>fotos;*/
 
     @ManyToMany
     @ToString.Exclude
@@ -75,7 +80,8 @@ public class Hotel implements Serializable {
         this.ciudad = ciudad;
     }
 
-    public Hotel(Integer codigo, String nombre, String direccion, String telefono, Integer numEstrellas, AdministradorHotel administradorHotel, Ciudad ciudad, List<Habitacion> habitaciones, List<String> fotos, List<Caracteristica> caracteristicas, List<Comentario> comentarios) {
+    public Hotel(Integer codigo, String nombre, String direccion, String telefono, Integer numEstrellas, AdministradorHotel administradorHotel,
+                 Ciudad ciudad, List<Habitacion> habitaciones, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Comentario> comentarios) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
