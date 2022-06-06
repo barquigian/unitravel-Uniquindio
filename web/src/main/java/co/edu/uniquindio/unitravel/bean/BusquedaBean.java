@@ -17,8 +17,6 @@ import java.util.List;
 @Component
 @ViewScoped
 public class BusquedaBean implements Serializable {
-
-
     @Getter @Setter
     private String busqueda;
 
@@ -31,7 +29,7 @@ public class BusquedaBean implements Serializable {
     @Getter @Setter
     private List<Hotel> hoteles;
     @PostConstruct
-    public void iniciarlizar() {
+    public void inicializar() {
         hoteles=new ArrayList<>();
         try {
             if (busquedaParam != null && !busquedaParam.isEmpty()) {

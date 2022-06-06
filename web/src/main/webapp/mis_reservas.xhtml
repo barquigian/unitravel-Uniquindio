@@ -8,15 +8,72 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Unitravel</title>
+    <h:outputStylesheet library="css" name="boostrap.min.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="boostrap.min.css"/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>mis reservas</title>
+
 </h:head>
 <h:body>
     <div id="encabezado">
-        <ul>
-            <li><a href="">inicio</a> </li>
-            <li><h:link outcome="registrar_usuario">Registrarse</h:link> </li>
-        </ul>
+        <div class="p-3 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <h:graphicImage library="img" name="icono.png" styleClass="icon_p" width="80" />
+                        <span class="fs-4">Unitravel</span>
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" class="nav-link px-2 text-secondary"><i class="pi pi-home d-block mx-auto mb-1 icon-menu"></i>Home</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-check-circle d-block mx-auto mb-1 icon-menu"></i>Reservas</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-dollar d-block mx-auto mb-1 icon-menu"></i>Precios</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-flag d-block mx-auto mb-1 icon-menu"></i>Vuelos</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-building d-block mx-auto mb-1 icon-menu"></i>Hoteles</a></li>
+                    </ul>
+                    <div class="px-3 py-2 border-bottom mb-3">
+                        <div class="container d-flex flex-wrap justify-content-center">
+                            <div class="text-end">
+                                <h:form >
+                                    <p:commandButton value="Login" type="button" class="btn btn-outline-light me-2" action="#{inicioBean.irLogin}"/>
+                                    <p:commandButton value="Registrarse" class="btn btn-warning" action="#{inicioBean.irRegistro}"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "card">
+        <p:tabMenu activeIndex="#{param.i}">
+            <p:menuitem value="Inicio" outcome="index" icon="pi pi-fw pi-inicio">
+                <f:param name="i" value="0"/>
+            </p:menuitem>
+
+            <p:menuitem value="Registrarse" outcome="registrar_usuario" icon="pi pi-fw pi-registrarse">
+                <f:param name="i" value="1"/>
+            </p:menuitem>
+
+            <p:menuitem value="Mis reservas" outcome="mis_reservas.xhtml" icon="pi pi-fw pi-mis reservas">
+                <f:param name="i" value="2"/>
+            </p:menuitem>
+
+            <p:menuitem value="Administrador" outcome="espacio_administrador.xhtml" icon="pi pi-fw pi-administrador">
+                <f:param name="i" value="3"/>
+            </p:menuitem>
+
+            <p:menuitem value="Crear hotel" outcome="crear_hotel.xhtml" icon="pi pi-fw pi-crear hotel">
+                <f:param name="i" value="4"/>
+            </p:menuitem>
+
+            <p:menuitem value="Hoteles" outcome="lista_hoteles.xhtml" icon="pi pi-fw pi-lista hoteles">
+                <f:param name="i" value="5"/>
+            </p:menuitem>
+
+        </p:tabMenu>
     </div>
 </h:body>
 </html>
