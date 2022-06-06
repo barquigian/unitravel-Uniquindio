@@ -5,6 +5,7 @@ import co.edu.uniquindio.unitravel.repositorio.*;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
     private AdministradorRepo administradorRepo;
     private HabitacionRepo habitacionRepo;
     private CiudadRepo ciudadRepo;
+
 
 
 
@@ -113,6 +115,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
     @Override
     public Comentario crearComentario(Comentario comentario) throws Exception {
         Comentario comentarioGuardado = comentarioRepo.save(comentario);
+        comentario.setFechaCalificacion(LocalDateTime.now());
 
         if (comentarioGuardado.getCodigo()==null) {
             throw new Exception("El campo de comentario esta vacio");
@@ -209,13 +212,6 @@ public class UsuarioServicioImp implements UsuarioServicio {
     }
 
     @Override
-    public Usuario crearUsuario(String codigo, String nombre, String email, String contrasena, List<String> telefonos) {
-
-        return new Usuario(codigo,nombre,email,contrasena,telefonos);
-
-    }
-
-    @Override
     public void eliminarUsuario(String codigo) {
         Usuario usuario=usuarioRepo.buscarporCedula(codigo);
         eliminarUsuario(usuario.getCedula());
@@ -278,6 +274,8 @@ public class UsuarioServicioImp implements UsuarioServicio {
     public List<Hotel> listarHoteles() {
         return hotelRepo.listarHoteles();
     }
+
+
 
 
 }

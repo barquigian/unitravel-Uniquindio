@@ -34,3 +34,9 @@
 .ui-dataview-content{
     background:none;
 }
+.imagen-hotel{
+    width: 100%;
+}
+.ui-dataview .ui-dataview-content{
+    width: 50%;
+}

@@ -21,7 +21,6 @@ public interface UsuarioServicio {
     Reserva modificarReserva(Reserva reserva)throws  Exception;
     void recuperarContraseña(String email)throws Exception;
     void cambiarEstadoDeHabitacion(Habitacion habitacion,String estado)throws Exception;
-    Usuario crearUsuario(String codigo,String nombre,String email,String contrasena,List<String>telefonos);
     void eliminarUsuario(String codigo);
     double consultarPrecioReserva(String codigoReserva)throws Exception;
     double consultarPrecioReservaMasIva(String codigoReserva)throws Exception;
