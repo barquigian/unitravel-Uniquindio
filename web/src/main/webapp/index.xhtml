@@ -99,8 +99,18 @@
         </div>
     </div>
     <p>Lista de ciudades</p>
-    <p:carousel value="#{inicioBean.ciudades}" var="ciudad">
-        <p>#{ciudad.nombre}</p>
+    <p:carousel value="#{inicioBean.ciudades}" var="ciudad" numVisible="3" numScroll="3">
+        <div class="product-item">
+            <div class="product-item-content">
+                <div class="p-mb-3">
+                    <p:graphicImage name="/img/ciudad.jpg" styleClass="product-image" height="300"/>
+                </div>
+                <div>
+                    <p>#{ciudad.nombre}</p>
+                </div>
+            </div>
+        </div>
+
     </p:carousel>
 
 

@@ -54,6 +54,77 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
         return administradorHotelRepo.obtenerHotelesAdmin(codigoAdmin);
     }
 
+    /**
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<AdministradorHotel> listarAdminHotel() throws Exception {
+        return administradorHotelRepo.findAll();
+    }
+
+    /**
+     * @param administradorHotel
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public AdministradorHotel actualizarAdminHotel(AdministradorHotel administradorHotel) throws Exception {
+        AdministradorHotel buscado = obtenerAdministradorHotel(administradorHotel.getCedula());
+        if (buscado == null) {
+            throw new Exception("El usuario no existe");
+        }
+        return administradorHotelRepo.save(administradorHotel);
+    }
+
+    /**
+     * @param administradorHotel
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public AdministradorHotel registrarAdminHotel(AdministradorHotel administradorHotel) throws Exception {
+        AdministradorHotel buscado = obtenerAdministradorHotel(administradorHotel.getCedula());
+        //Usuario usuarioEmail= bus
+        if (buscado != null) {
+            throw new Exception("La cédula del usuario ya está registrada");
+        }
+        if(buscado!=null){
+
+        }
+        return administradorHotelRepo.save(administradorHotel);
+    }
+
+    /**
+     * @param cedula
+     * @throws Exception
+     */
+    @Override
+    public void eliminarAdminHotel(String cedula) throws Exception {
+        AdministradorHotel buscado = obtenerAdministradorHotel(cedula);
+
+        if (buscado == null) {
+            throw new Exception("El usuario no existe");
+        }
+        administradorHotelRepo.delete(buscado);
+    }
+
+    /**
+     * @param administradorHotels
+     * @throws Exception
+     */
+    @Override
+    public void eliminarAdminHotels(List<AdministradorHotel> administradorHotels) throws Exception {
+        for(AdministradorHotel administradorHotel: administradorHotels){
+            AdministradorHotel buscado = obtenerAdministradorHotel(administradorHotel.getCedula());
+
+            if (buscado == null) {
+                throw new Exception("El usuario no existe");
+            }
+            administradorHotelRepo.delete(buscado);
+        }
+    }
+
     @Override
     public void modificarHotel(Hotel hotel) throws Exception {
         hotel.setDireccion("Cra 20a #83");
