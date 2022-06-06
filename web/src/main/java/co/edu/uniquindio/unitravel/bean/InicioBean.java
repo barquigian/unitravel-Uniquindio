@@ -35,5 +35,7 @@ public class InicioBean implements Serializable {
         return "registrar_usuario?faces-redirec=true";
     }
     public String irLogin(){return "login?faces-redirec=true";}
+    public String irDetalleHotel(String codigoHotel){return "detalle_hotel?faces-redirec=true&amp;hotel_id="+codigoHotel;}
+
 
 }

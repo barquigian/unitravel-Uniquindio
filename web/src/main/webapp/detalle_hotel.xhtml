@@ -13,6 +13,31 @@
 </h:head>
 <h:body>
     <h1>Detalle Hotel</h1>
+
+    <p>#{detalleHotelBean.hotel.nombre}</p>
+    <p>#{detalleHotelBean.hotel.caracteristicas}</p>
+    <p>#{detalleHotelBean.hotel.descripcion}</p>
+    <p>#{detalleHotelBean.hotel.ciudad}</p>
+    <p>#{detalleHotelBean.hotel.numEstrellas}</p>
+    <p>#{detalleHotelBean.hotel.telefono}</p>
+    <p>#{detalleHotelBean.hotel.direccion}</p>
+    <p>#{detalleHotelBean.hotel.habitaciones}</p>
+
+    <p:panel header="Hacer un comentario" styleClass="mt-3" >
+        <p:dataList id="lista-c" value="#{detalleHotelBean.comentarios}" var="com">
+            <p>#{com.comentario} - #{com.usuario.nombre}</p>
+        </p:dataList>
+    </p:panel>
+
+    <p:panel header="Hacer un comentario" styleClass="mt-3" >
+        <h:form id="crear-comentario">
+            <h:panelGrid columns="2" cellpadding="3">
+                <p:inputTextarea value="#{detalleHotelBean.nuevoComentario.comentario}" required="true" styleClass="comentario-usuario" />
+                <p:rating value="#{detalleHotelBean.nuevoComentario.calificacion}" required="true"/> </h:panelGrid>
+            <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form, lista-c" styleClass="mt-4" action="#{detalleHotelBean.crearComentario}" /> <p:growl for="msj-pregunta" showDetail="true" />
+        </h:form>
+    </p:panel>
+
     <h:form>
 
     </h:form>

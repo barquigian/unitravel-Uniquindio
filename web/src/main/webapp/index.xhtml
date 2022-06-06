@@ -119,20 +119,20 @@
         <p:dataView id="lista-hoteles" var="hotel" value="#{inicioBean.hoteles}" rows="12" paginator="true" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
             <p:dataViewGridItem>
                 <div class="card" >
-                    <img src="/uploads/#{hotel.imagenPrincipal}" class="card-img-top"
+                    <img src="/uploads/#{hotel.imagenPrincipal}" class="imagen-hotel"
                          alt="..." />
                     <div class="card-body">
                         <h5 class="card-title">#{hotel.nombre}</h5>
                         <p class="card-text">#{hotel.ciudad.nombre}</p>
                         <hr />
-                        <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
+                        <p:commandButton value="Ver detalle" action="#{inicioBean.irDetalleHotel}" styleClass="ui-button-raised"
                                          icon="pi pi-arrow-right" iconPos="right" />
                     </div>
                 </div>
             </p:dataViewGridItem>
             <p:dataViewListItem>
                 <div class="row d-flex m-2" >
-                    <div class="col-lg-2 col-md-1" style="text-align: center" >
+                    <div  class="col-lg-2 col-md-1" style="text-align: center"  >
                         <img src="/uploads/#{hotel.imagenPrincipal}" class="imagen-hotel" alt="Imagen"/>
                     </div>
                     <div class="col-lg-8 col-md-1 align-self-center" >
@@ -153,7 +153,7 @@
                         </p:outputPanel>
                     </div>
                     <div class="col-lg-2 col-md-1 align-self-center" >
-                        <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
+                        <p:commandButton value="Ver detalle" action="#{inicioBean.irDetalleHotel(hotel.codigo)}" styleClass="ui-button-raised"
                                          icon="pi pi-arrow-right" iconPos="right" />
                     </div>
                 </div>

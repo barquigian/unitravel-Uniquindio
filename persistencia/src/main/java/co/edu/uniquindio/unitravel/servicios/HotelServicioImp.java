@@ -14,12 +14,8 @@ public class HotelServicioImp  implements HotelServicio{
     @Autowired
     private HotelRepo hotelRepo;
 
-    public Hotel obtenerHotel(Integer codigo) throws Exception{
-       try {
+    public Hotel obtenerHotel(Integer codigo){
+
            return hotelRepo.findById(codigo).orElse(null);
-       }catch (Exception e){
-           e.printStackTrace();
-       }
-        return null;
     }
 }
