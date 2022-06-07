@@ -78,7 +78,7 @@ public class HotelBean implements Serializable {
                     AdministradorHotel administradorHotel = administradorHotelServicio.obtenerAdministradorHotel("1");
                     hotel.setCiudad(ciudad);
                     hotel.setAdministradorHotel(administradorHotel);
-                    hotel.setFotos(imagenes);
+                    //hotel.setFotos(imagenes);
                    Hotel h= administradorHotelServicio.crearHotel(hotel);
                    habitaciones.forEach(habitaciones -> {habitaciones.setHotel(h);
                    administradorHotelServicio.crearHabitacion(habitacion);

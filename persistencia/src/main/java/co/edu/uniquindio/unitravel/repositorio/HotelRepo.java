@@ -55,7 +55,7 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
 
     //Obtiene un hotel sugun su precio
     @Query("select h from Hotel h join h.habitaciones ha where ha.precio between :precioMin and :precioMax and ha.capacidad= :cantidadPersonas")
-    List<Hotel> obtenerHotelPorPrecioRango(float precioMin,float precioMax,int cantidadPersonas);
+    List<Hotel> obtenerHotelPorPrecioRango(float precioMin, float precioMax, int cantidadPersonas);
 
     @Query("select h from Hotel h where lower(h.nombre) like concat('%',lower(:nombre), '%') ")
     List<Hotel> obtenerHotelesNombre(String nombre);
@@ -68,4 +68,7 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
 
     @Query("select h from Hotel h")
     List<Hotel> listarHoteles();
+
+    @Query("select distinct f.fotoUrl from Hotel h inner join  Foto f on h.codigo = f.hotel.codigo where h.codigo = :codigo")
+    List<String> urlFotosHotel(Integer codigo);
 }
