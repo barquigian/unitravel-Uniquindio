@@ -1,7 +1,7 @@
-insert into ciudad values (1, "Armenia", "cuidad.jpg");
-insert into ciudad values (2, "Cartagena", "cuidad.jpg");
-insert into ciudad values (3, "Cali", "cuidad.jpg");
-insert into ciudad values (4, "Medellin", "cuidad.jpg");
+insert into ciudad values (1, "Armenia", "cuidad.png");
+insert into ciudad values (2, "Cartagena", "cuidad.png");
+insert into ciudad values (3, "Cali", "cuidad.png");
+insert into ciudad values (4, "Medellin", "cuidad.png");
 
 insert into administrador values ("123456","12345","sebas123@gmail.com","Sebastian Mejia", "1");
 insert into administrador values ("456564","12345","carlos123@gmail.com","Carlos Mauricio", "2");

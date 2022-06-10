@@ -46,4 +46,9 @@ public class Ciudad implements Serializable {
         this.codigo = codigo;
         this.nombre = nombre;
     }
+
+    public String getUrl(){
+        String salida = "" + urlImagen;
+        return salida;
+    }
 }

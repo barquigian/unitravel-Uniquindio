@@ -25,12 +25,12 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary"><i class="pi pi-home d-block mx-auto mb-1 icon-menu"></i>Home</a></li>
+                    <!--<li><a href="#" class="nav-link px-2 text-secondary"><i class="pi pi-home d-block mx-auto mb-1 icon-menu"></i>Home</a></li>
                     <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-check-circle d-block mx-auto mb-1 icon-menu"></i>Reservas</a></li>
                     <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-dollar d-block mx-auto mb-1 icon-menu"></i>Precios</a></li>
                     <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-flag d-block mx-auto mb-1 icon-menu"></i>Vuelos</a></li>
                     <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-building d-block mx-auto mb-1 icon-menu"></i>Hoteles</a></li>
-                </ul>
+                --></ul>
                 <div class="px-3 py-2 border-bottom mb-3">
                     <div class="container d-flex flex-wrap justify-content-center">
                         <div class="text-end">
@@ -79,13 +79,25 @@
             <p:growl id="messages" showDetail="true"/>
             <div class="card">
                 <p:menu>
-                    <p:submenu label="CRUD">
-                        <p:menuitem value="Usuarios" outcome="crud_usuarios" icon="pi pi-users"/>
-                        <p:menuitem value="Admin Hoteles" outcome="crud_administrador_hotel" icon="pi pi-user-plus"/>
-                        <p:menuitem value="Destinos" action="#" update="messages" ajax="false" icon="pi pi-map-marker"/>
-                        <p:menuitem value="Hoteles" action="#" update="messages" icon="pi pi-building"/>
-                        <p:menuitem value="Reservas" action="#" update="messages" icon="pi pi-check-circle"/>
-                        <p:menuitem value="Vuelos" action="#" update="messages" icon="pi pi-flag"/>
+                    <p:submenu label="CRUD" activeIndex="#{param.i}">
+                        <p:menuitem value="Usuarios" outcome="crud_usuarios" icon="pi pi-users">
+                            <f:param name="i" value="3"/>
+                        </p:menuitem>
+                        <p:menuitem value="Admin Hoteles" outcome="crud_administrador_hotel" icon="pi pi-user-plus">
+                            <f:param name="i" value="3"/>
+                        </p:menuitem>
+                        <p:menuitem value="Destinos" action="#" outcome="crud_ciudad" icon="pi pi-map-marker">
+                            <f:param name="i" value="3"/>
+                        </p:menuitem>
+                        <p:menuitem value="Hoteles" action="#" update="messages" icon="pi pi-building">
+                            <f:param name="i" value="3"/>
+                        </p:menuitem>
+                        <p:menuitem value="Reservas" action="#" update="messages" icon="pi pi-check-circle">
+                            <f:param name="i" value="3"/>
+                        </p:menuitem>
+                        <p:menuitem value="Vuelos" action="#" update="messages" icon="pi pi-flag">
+                            <f:param name="i" value="3"/>
+                        </p:menuitem>
                     </p:submenu>
                 </p:menu>
             </div>

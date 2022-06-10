@@ -27,12 +27,12 @@
                     </a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 text-secondary"><i class="pi pi-home d-block mx-auto mb-1 icon-menu"></i>Home</a></li>
+                        <!--<li><a href="#" class="nav-link px-2 text-secondary"><i class="pi pi-home d-block mx-auto mb-1 icon-menu"></i>Home</a></li>
                         <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-check-circle d-block mx-auto mb-1 icon-menu"></i>Reservas</a></li>
                         <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-dollar d-block mx-auto mb-1 icon-menu"></i>Precios</a></li>
                         <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-flag d-block mx-auto mb-1 icon-menu"></i>Vuelos</a></li>
                         <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-building d-block mx-auto mb-1 icon-menu"></i>Hoteles</a></li>
-                    </ul>
+                    --></ul>
                     <div class="px-3 py-2 border-bottom mb-3">
                         <div class="container d-flex flex-wrap justify-content-center">
                             <div class="text-end">
@@ -99,24 +99,26 @@
         </div>
     </div>
     <p>Lista de ciudades</p>
-    <p:carousel value="#{inicioBean.ciudades}" var="ciudad" numVisible="3" numScroll="3">
-        <div class="product-item">
-            <div class="product-item-content">
-                <div class="p-mb-3">
-                    <p:graphicImage name="/img/ciudad.jpg" styleClass="product-image" height="300"/>
-                </div>
-                <div>
-                    <p>#{ciudad.nombre}</p>
+    <h:form>
+        <p:carousel value="#{inicioBean.ciudades}" var="ciudad" numVisible="3" numScroll="3">
+            <div class="product-item">
+                <div class="product-item-content">
+                    <div class="p-mb-3">
+                        <p:graphicImage library="img" name="#{ciudad.url}" styleClass="product-image" height="300"/>
+                    </div>
+                    <div>
+                        <h4 class="p-mb-1">#{ciudad.nombre}</h4>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </p:carousel>
-
+        </p:carousel>
+    </h:form>
 
             <p>Hoteles recomendados</p>
+
     <h:form id="form">
-        <p:dataView id="lista-hoteles" var="hotel" value="#{inicioBean.hoteles}" rows="12" paginator="true" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
+        <p:dataView id="lista-hoteles" var="hotel" value="#{inicioBean.hoteles}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
             <p:dataViewGridItem>
                 <div class="card" >
                     <img src="/uploads/#{hotel.imagenPrincipal}" class="imagen-hotel" width="200" height="200"/>
@@ -159,6 +161,7 @@
             </p:dataViewListItem>
         </p:dataView>
     </h:form>
+
 
     <div class="container">
             <footer class="d-flex-wrap justify-content-end list-unstyled d-flex">

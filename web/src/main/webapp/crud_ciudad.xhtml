@@ -9,7 +9,7 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>CRUD Admin Hotel</title>
+    <title>CRUD Ciudad</title>
     <h:outputStylesheet library="css" name="boostrap.min.css"/>
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="boostrap.min.css"/>
@@ -80,33 +80,33 @@
 
             <p:toolbar>
                 <p:toolbarGroup>
-                    <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{crudAdminHotelBean.openNew()}"
+                    <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{crudUsuarioBean.openNew()}"
                                      update=":form:manage-new-product-content" oncomplete="PF('manageNewProductDialog').show()"
                                      styleClass="ui-button-success" style="margin-right: .5rem">
                         <p:resetInput target=":form:manage-product-content"/>
                     </p:commandButton>
-                    <p:commandButton id="delete-products-button" value="#{crudAdminHotelBean.deleteButtonMessage}"
-                                     icon="pi pi-trash" actionListener="#{crudAdminHotelBean.deleteSelectedProducts}"
-                                     styleClass="ui-button-danger" disabled="#{!crudAdminHotelBean.hasSelectedProducts()}"
+                    <p:commandButton id="delete-products-button" value="#{crudUsuarioBean.deleteButtonMessage}"
+                                     icon="pi pi-trash" actionListener="#{crudUsuarioBean.deleteSelectedProducts}"
+                                     styleClass="ui-button-danger" disabled="#{!crudUsuarioBean.hasSelectedProducts()}"
                                      update="@this">
-                        <p:confirm header="Confirmacion" message="Eliminar los Admin Hotel seleccionados?"
+                        <p:confirm header="Confirmacion" message="Eliminar los usuarios seleccionados?"
                                    icon="pi pi-exclamation-triangle"/>
                     </p:commandButton>
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <p:dataTable id="dt-products" widgetVar="dtProducts" var="administradorHotel" value="#{crudAdminHotelBean.administradorHotels}"
+            <p:dataTable id="dt-products" widgetVar="dtProducts" var="usuario" value="#{crudUsuarioBean.usuarios}"
                          reflow="true" styleClass="products-table"
-                         selection="#{crudAdminHotelBean.selectedadministradorHotels}" rowKey="#{administradorHotel.cedula}" paginator="true"
+                         selection="#{crudUsuarioBean.selectedUsuarios}" rowKey="#{usuario.cedula}" paginator="true"
                          rows="10" rowSelectMode="add" paginatorPosition="bottom">
                 <f:facet name="header">
                     <div class="products-table-header">
-                        <span style="font-weight: bold">Admin Hoteles</span>
+                        <span style="font-weight: bold">Clientes</span>
 
                         <span class="filter-container ui-input-icon-left">
                         <i class="pi pi-search"></i>
                         <p:inputText id="globalFilter" onkeyup="PF('dtProducts').filter()" placeholder="Search"/>
-                        </span>
+                    </span>
 
                     </div>
                 </f:facet>
@@ -119,85 +119,85 @@
 
                 <p:column selectionMode="multiple" exportable="false"></p:column>
 
-                <p:column headerText="Cedula" sortBy="#{administradorHotel.cedula}" filterBy="#{administradorHotel.cedula}">
-                    <h:outputText value="#{administradorHotel.cedula}"/>
+                <p:column headerText="Cedula" sortBy="#{usuario.cedula}" filterBy="#{usuario.cedula}">
+                    <h:outputText value="#{usuario.cedula}"/>
                 </p:column>
-                <p:column headerText="Nombre" sortBy="#{administradorHotel.nombre}" filterBy="#{administradorHotel.nombre}">
-                    <h:outputText value="#{administradorHotel.nombre}"/>
+                <p:column headerText="Nombre" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}">
+                    <h:outputText value="#{usuario.nombre}"/>
                 </p:column>
-                <p:column headerText="Contraseña" sortBy="#{administradorHotel.contrasena}" filterBy="#{administradorHotel.contrasena}">
-                    <h:outputText value="#{administradorHotel.contrasena}"/>
+                <p:column headerText="Contraseña" sortBy="#{usuario.contrasena}" filterBy="#{usuario.contrasena}">
+                    <h:outputText value="#{usuario.contrasena}"/>
                 </p:column>
-                <p:column headerText="Email" sortBy="#{administradorHotel.email}" filterBy="#{administradorHotel.email}">
-                    <h:outputText value="#{administradorHotel.email}"/>
+                <p:column headerText="Email" sortBy="#{usuario.email}" filterBy="#{usuario.email}">
+                    <h:outputText value="#{usuario.email}"/>
                 </p:column>
                 <p:column exportable="false">
                     <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
                                      oncomplete="PF('manageProductDialog').show()"
                                      styleClass="edit-button rounded-button ui-button-success" process="@this">
-                        <f:setPropertyActionListener value="#{administradorHotel}" target="#{crudAdminHotelBean.selectedadministradorHotel}"/>
+                        <f:setPropertyActionListener value="#{usuario}" target="#{crudUsuarioBean.selectedUsuario}"/>
                         <p:resetInput target=":form:manage-product-content"/>
                     </p:commandButton>
                     <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
                                      oncomplete="PF('deleteProductDialog').show()">
-                        <f:setPropertyActionListener value="#{administradorHotel}" target="#{crudAdminHotelBean.selectedadministradorHotel}"/>
+                        <f:setPropertyActionListener value="#{usuario}" target="#{crudUsuarioBean.selectedUsuario}"/>
                     </p:commandButton>
                 </p:column>
 
             </p:dataTable>
 
-            <p:dialog header="Detalles Admin Hotel" showEffect="fade" modal="true"
+            <p:dialog header="Detalles Usuario" showEffect="fade" modal="true"
                       widgetVar="manageProductDialog" responsive="true">
                 <p:outputPanel id="manage-product-content" class="ui-fluid">
-                    <p:outputPanel rendered="#{not empty crudAdminHotelBean.selectedadministradorHotel}">
+                    <p:outputPanel rendered="#{not empty crudUsuarioBean.selectedUsuario}">
                         <div class="p-field">
                             <p:outputLabel for="cedula">Cedula</p:outputLabel>
-                            <p:inputText id="cedula" value="#{crudAdminHotelBean.selectedadministradorHotel.cedula}" required="true"/>
+                            <p:inputText id="cedula" value="#{crudUsuarioBean.selectedUsuario.cedula}" required="true"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="nombre">Nombre</p:outputLabel>
-                            <p:inputText id="nombre" value="#{crudAdminHotelBean.selectedadministradorHotel.nombre}" required="true"/>
+                            <p:inputText id="nombre" value="#{crudUsuarioBean.selectedUsuario.nombre}" required="true"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="contrasena">Contraseña</p:outputLabel>
-                            <p:inputText id="contrasena" value="#{crudAdminHotelBean.selectedadministradorHotel.contrasena}" required="true"/>
+                            <p:inputText id="contrasena" value="#{crudUsuarioBean.selectedUsuario.contrasena}" required="true"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="email">Email</p:outputLabel>
-                            <p:inputText id="email" value="#{crudAdminHotelBean.selectedadministradorHotel.email}" required="true"/>
+                            <p:inputText id="email" value="#{crudUsuarioBean.selectedUsuario.email}" required="true"/>
                         </div>
                     </p:outputPanel>
                 </p:outputPanel>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Actualizar" icon="pi pi-check" actionListener="#{crudAdminHotelBean.saveProduct}"
+                    <p:commandButton value="Actualizar" icon="pi pi-check" actionListener="#{crudUsuarioBean.saveProduct}"
                                      update="manage-product-content" process="manage-product-content @this"/>
                     <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageProductDialog').hide()"
                                      class="ui-button-secondary"/>
                 </f:facet>
             </p:dialog>
 
-            <p:dialog header="Nuevo Admin Hotel" showEffect="fade" modal="true"
+            <p:dialog header="Nuevo Usuario" showEffect="fade" modal="true"
                       widgetVar="manageNewProductDialog" responsive="true">
                 <p:outputPanel id="manage-new-product-content" class="ui-fluid">
-                    <p:outputPanel rendered="#{not empty crudAdminHotelBean.selectedadministradorHotel}">
+                    <p:outputPanel rendered="#{not empty crudUsuarioBean.selectedUsuario}">
                         <div class="p-field">
                             <p:outputLabel for="new_cedula">Cedula</p:outputLabel>
-                            <p:inputText id="new_cedula" value="#{crudAdminHotelBean.selectedadministradorHotel.cedula}" required="true"/>
+                            <p:inputText id="new_cedula" value="#{crudUsuarioBean.selectedUsuario.cedula}" required="true"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="new_nombre">Nombre</p:outputLabel>
-                            <p:inputText id="new_nombre" value="#{crudAdminHotelBean.selectedadministradorHotel.nombre}" required="true"/>
+                            <p:inputText id="new_nombre" value="#{crudUsuarioBean.selectedUsuario.nombre}" required="true"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="new_email">Email</p:outputLabel>
-                            <p:inputText id="new_email" value="#{crudAdminHotelBean.selectedadministradorHotel.email}" required="true"/>
+                            <p:inputText id="new_email" value="#{crudUsuarioBean.selectedUsuario.email}" required="true"/>
                         </div>
                     </p:outputPanel>
                 </p:outputPanel>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{crudAdminHotelBean.saveNewProduct}"
+                    <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{crudUsuarioBean.saveNewProduct}"
                                      update="manage-new-product-content" process="manage-new-product-content @this"/>
                     <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageNewProductDialog').hide()"
                                      class="ui-button-secondary"/>
@@ -205,8 +205,8 @@
             </p:dialog>
 
             <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
-                             message="Eliminar Admin Hotel?" header="Confirmar" severity="warn">
-                <p:commandButton value="Si" icon="pi pi-check" actionListener="#{crudAdminHotelBean.deleteProduct}"
+                             message="Eliminar Usuario?" header="Confirmar" severity="warn">
+                <p:commandButton value="Si" icon="pi pi-check" actionListener="#{crudUsuarioBean.deleteProduct}"
                                  process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
                 <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                                  onclick="PF('deleteProductDialog').hide()"/>

@@ -22,7 +22,7 @@ public class AdministradorHotel extends Persona implements Serializable {
     private String codigo;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn()
     private Administrador administrador;
 
     @OneToMany(mappedBy = "administradorHotel")
