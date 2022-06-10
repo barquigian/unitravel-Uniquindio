@@ -1,10 +1,7 @@
 package co.edu.uniquindio.unitravel;
 
 import co.edu.uniquindio.unitravel.entidades.*;
-import co.edu.uniquindio.unitravel.repositorio.AdministradorHotelRepo;
-import co.edu.uniquindio.unitravel.repositorio.CiudadRepo;
-import co.edu.uniquindio.unitravel.repositorio.FotoRepo;
-import co.edu.uniquindio.unitravel.repositorio.HotelRepo;
+import co.edu.uniquindio.unitravel.repositorio.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +10,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -27,6 +28,9 @@ public class HotelTest {
 
     @Autowired
     private AdministradorHotelRepo administradorHotelRepo;
+
+    @Autowired
+    private HabitacionRepo habitacionRepo;
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -204,4 +208,43 @@ public class HotelTest {
         System.out.println(hoteles);
         Assertions.assertNotNull(hoteles);
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarHabitacionesEnRangoFechas() {
+        LocalDateTime primera =  LocalDateTime.of(2022, 1,1,0,0);
+        LocalDateTime segunda =  LocalDateTime.of(2022, 3,3,0,0);
+        List<Habitacion> habitaciones= habitacionRepo.habitacionesConReserva(primera, segunda);
+        if(!habitaciones.isEmpty()){
+            for(Habitacion habitacion: habitaciones){
+                System.out.println(habitacion.getCodigo() + "," + habitacion.getHotel().getCodigo());
+            }
+        }
+        Assertions.assertTrue(habitaciones.isEmpty());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerFotosHabitacion() {
+        List<String> fotos = habitacionRepo.urlFotosHabitacion(1);
+        if(!fotos.isEmpty()){
+            for(String foto: fotos){
+                System.out.println(foto);
+            }
+        }
+        Assertions.assertTrue(fotos.isEmpty());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerFotosHotel() {
+        List<String> fotos = hotelRepo.urlFotosHotel(1);
+        if(!fotos.isEmpty()){
+            for(String foto: fotos){
+                System.out.println(foto);
+            }
+        }
+        Assertions.assertTrue(!fotos.isEmpty());
+    }
+
 }

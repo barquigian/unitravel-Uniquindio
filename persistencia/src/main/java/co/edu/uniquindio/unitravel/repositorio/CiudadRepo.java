@@ -27,4 +27,6 @@ public interface CiudadRepo extends JpaRepository<Ciudad,Integer> {
 
     @Query("select c from Ciudad c where c.nombre= :nombre" )
     Ciudad obtenerCiudad(String nombre);
+
+    Ciudad findByCodigo(Integer codigo);
 }

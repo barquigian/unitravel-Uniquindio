@@ -9,10 +9,10 @@ import java.util.List;
 public interface CiudadServicio {
 
     Ciudad registrarCiudad(Ciudad c) throws Exception;
-    Ciudad obtenerCiudad(String nombre)throws Exception;
+    Ciudad obtenerCiudad(Integer codigo)throws Exception;
     Ciudad actualizarCiudad(Ciudad c)throws Exception;
     List<Ciudad> listarCiudades();
-    void elimiarCiudad(String nombre)throws Exception;
+    void elimiarCiudad(Integer codigo)throws Exception;
     void elimiarCiudades(List<Ciudad> CiudadList)throws Exception;
 
 }

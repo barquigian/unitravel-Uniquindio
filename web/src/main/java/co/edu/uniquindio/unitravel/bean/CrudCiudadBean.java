@@ -1,11 +1,7 @@
 package co.edu.uniquindio.unitravel.bean;
 
 import co.edu.uniquindio.unitravel.entidades.Ciudad;
-import co.edu.uniquindio.unitravel.entidades.Usuario;
 import co.edu.uniquindio.unitravel.servicios.CiudadServicio;
-import co.edu.uniquindio.unitravel.servicios.UsuarioServicio;
-import lombok.Getter;
-import lombok.Setter;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +19,7 @@ import java.util.List;
 @Component
 @ViewScoped
 @Configuration
-public class CrudCiudad {
+public class CrudCiudadBean {
 
     private List<Ciudad> ciudades;
 
@@ -59,7 +55,7 @@ public class CrudCiudad {
         return selectedCiudades;
     }
 
-    public void setSelectedUsuarios(List<Ciudad> selectedCiudades) {
+    public void setSelectedCiudades(List<Ciudad> selectedCiudades) {
         this.selectedCiudades = selectedCiudades;
     }
 
@@ -84,6 +80,8 @@ public class CrudCiudad {
 
     public void saveNewProduct() {
         try {
+            int codigo = ciudades.get(ciudades.size() - 1).getCodigo();
+            this.selectedCiudad.setCodigo(codigo + 1);
             this.ciudadServicio.registrarCiudad(this.selectedCiudad);
             this.ciudades = this.ciudadServicio.listarCiudades();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ciudad añadidida"));
@@ -96,7 +94,7 @@ public class CrudCiudad {
 
     public void deleteProduct() {
         try {
-            this.ciudadServicio.elimiarCiudad(this.selectedCiudad.getNombre());
+            this.ciudadServicio.elimiarCiudad(this.selectedCiudad.getCodigo());
             this.ciudades = this.ciudadServicio.listarCiudades();
             this.selectedCiudad = null;
         } catch (Exception e) {

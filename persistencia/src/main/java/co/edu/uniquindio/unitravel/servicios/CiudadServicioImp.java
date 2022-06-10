@@ -25,7 +25,7 @@ public class CiudadServicioImp implements CiudadServicio{
      */
     @Override
     public Ciudad registrarCiudad(Ciudad c) throws Exception {
-        Ciudad buscado = obtenerCiudad(c.getNombre());
+        Ciudad buscado = obtenerCiudad(c.getCodigo());
         //Usuario usuarioEmail= bus
         if (buscado != null) {
             throw new Exception("La cédula del usuario ya está registrada");
@@ -37,13 +37,13 @@ public class CiudadServicioImp implements CiudadServicio{
     }
 
     /**
-     * @param nombre
+     * @param codigo
      * @return
      * @throws Exception
      */
     @Override
-    public Ciudad obtenerCiudad(String nombre) throws Exception {
-        return ciudadRepo.obtenerCiudad(nombre);
+    public Ciudad obtenerCiudad(Integer codigo) throws Exception {
+        return ciudadRepo.findByCodigo(codigo);
     }
 
     /**
@@ -53,7 +53,7 @@ public class CiudadServicioImp implements CiudadServicio{
      */
     @Override
     public Ciudad actualizarCiudad(Ciudad c) throws Exception {
-        Ciudad buscado = obtenerCiudad(c.getNombre());
+        Ciudad buscado = obtenerCiudad(c.getCodigo());
         if (buscado == null) {
             throw new Exception("El usuario no existe");
         }
@@ -69,12 +69,12 @@ public class CiudadServicioImp implements CiudadServicio{
     }
 
     /**
-     * @param nombre
+     * @param codigo
      * @throws Exception
      */
     @Override
-    public void elimiarCiudad(String nombre) throws Exception {
-        Ciudad ciudad = obtenerCiudad(nombre);
+    public void elimiarCiudad(Integer codigo) throws Exception {
+        Ciudad ciudad = obtenerCiudad(codigo);
 
         if (ciudad == null) {
             throw new Exception("El usuario no existe");
@@ -90,7 +90,7 @@ public class CiudadServicioImp implements CiudadServicio{
     public void elimiarCiudades(List<Ciudad> ciudadList) throws Exception {
 
         for(Ciudad ciudad: ciudadList){
-            Ciudad ciudadBuscada = obtenerCiudad(ciudad.getNombre());
+            Ciudad ciudadBuscada = obtenerCiudad(ciudad.getCodigo());
 
             if (ciudad == null) {
                 throw new Exception("El usuario no existe");
