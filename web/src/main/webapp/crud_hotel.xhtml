@@ -6,222 +6,111 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>CRUD Hoteles</title>
-    <h:outputStylesheet library="css" name="boostrap.min.css"/>
-    <h:outputStylesheet library="css" name="style.css"/>
-    <h:outputScript library="js" name="boostrap.min.css"/>
-</h:head>
-<body>
-<div id="encabezado">
-    <div class="p-3 bg-dark text-white">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <h:graphicImage library="img" name="icono.png" styleClass="icon_p" width="80" />
-                    <span class="fs-4">Unitravel</span>
-                </a>
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title"> Crud Hoteles</ui:define>
+    <ui:define name="content">
+        <p:panel header="Espacio Administrador">
+            <h:form id="form">
+                <div class="card crud-demo">
+                    <p:growl id="messages" showDetail="true"/>
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <!--<li><a href="#" class="nav-link px-2 text-secondary"><i class="pi pi-home d-block mx-auto mb-1 icon-menu"></i>Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-check-circle d-block mx-auto mb-1 icon-menu"></i>Reservas</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-dollar d-block mx-auto mb-1 icon-menu"></i>Precios</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-flag d-block mx-auto mb-1 icon-menu"></i>Vuelos</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white"><i class="pi pi-building d-block mx-auto mb-1 icon-menu"></i>Hoteles</a></li>
-                --></ul>
-                <div class="px-3 py-2 border-bottom mb-3">
-                    <div class="container d-flex flex-wrap justify-content-center">
-                        <div class="text-end">
-                            <h:form >
-                                <p:commandButton value="Login" type="button" class="btn btn-outline-light me-2" action="#{inicioBean.irLogin}"/>
-                                <p:commandButton value="Registrarse" class="btn btn-warning" action="#{inicioBean.irRegistro}"/>
-                            </h:form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class = "card">
-    <p:tabMenu activeIndex="#{param.i}">
-        <p:menuitem value="Inicio" outcome="index" icon="pi pi-fw pi-inicio">
-            <f:param name="i" value="0"/>
-        </p:menuitem>
-
-        <p:menuitem value="Registrarse" outcome="registrar_usuario" icon="pi pi-fw pi-registrarse">
-            <f:param name="i" value="1"/>
-        </p:menuitem>
-
-        <p:menuitem value="Mis reservas" outcome="mis_reservas.xhtml" icon="pi pi-fw pi-mis reservas">
-            <f:param name="i" value="2"/>
-        </p:menuitem>
-
-        <p:menuitem value="Administrador" outcome="espacio_administrador.xhtml" icon="pi pi-fw pi-administrador">
-            <f:param name="i" value="3"/>
-        </p:menuitem>
-
-        <p:menuitem value="Crear hotel" outcome="crear_hotel.xhtml" icon="pi pi-fw pi-crear hotel">
-            <f:param name="i" value="4"/>
-        </p:menuitem>
-
-        <p:menuitem value="Hoteles" outcome="lista_hoteles.xhtml" icon="pi pi-fw pi-lista hoteles">
-            <f:param name="i" value="5"/>
-        </p:menuitem>
-
-    </p:tabMenu>
-</div>
-    <p:panel header="Espacio Administrador">
-        <h:form id="form">
-            <div class="card crud-demo">
-                <p:growl id="messages" showDetail="true"/>
-
-                <p:toolbar>
-                    <p:toolbarGroup>
-                        <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{crudHotelBean.openNew()}"
-                            update=":form:manage-new-product-content" oncomplete="PF('manageNewProductDialog').show()"
-                            styleClass="ui-button-success" style="margin-right: .5rem">
-                        <p:resetInput target=":form:manage-product-content"/>
-                        </p:commandButton>
-                        <p:commandButton id="delete-products-button" value="#{crudHotelBean.deleteButtonMessage}"
-                            icon="pi pi-trash" actionListener="#{crudHotelBean.deleteSelectedProducts}"
-                            styleClass="ui-button-danger" disabled="#{!crudHotelBean.hasSelectedProducts()}"
-                            update="@this">
-                        <p:confirm header="Confirmacion" message="Eliminar los hoteles seleccionados?"
-                            icon="pi pi-exclamation-triangle"/>
-                        </p:commandButton>
-                    </p:toolbarGroup>
-                </p:toolbar>
-
-                <p:dataTable id="dt-products" widgetVar="dtProducts" var="hotel" value="#{crudHotelBean.hotels}"
-                             reflow="true" styleClass="products-table"
-                             selection="#{crudHotelBean.selectedHotels}" rowKey="#{hotel.codigo}" paginator="true"
-                             rows="10" rowSelectMode="add" paginatorPosition="bottom">
-                    <f:facet name="header">
-                        <div class="products-table-header">
-                            <span style="font-weight: bold">Hoteles</span>
-
-                        </div>
-                    </f:facet>
-
-                    <p:ajax event="rowSelect" update=":form:delete-products-button"/>
-                    <p:ajax event="rowUnselect" update=":form:delete-products-button"/>
-                    <p:ajax event="rowSelectCheckbox" update=":form:delete-products-button"/>
-                    <p:ajax event="rowUnselectCheckbox" update=":form:delete-products-button"/>
-                    <p:ajax event="toggleSelect" update=":form:delete-products-button"/>
-
-                    <p:column selectionMode="multiple" exportable="false"></p:column>
-
-                    <p:column headerText="Codigo" sortBy="#{hotel.codigo}" filterBy="#{hotel.codigo}">
-                        <h:outputText value="#{hotel.codigo}"/>
-                    </p:column>
-                    <p:column headerText="Nombre" sortBy="#{hotel.nombre}" filterBy="#{hotel.nombre}">
-                        <h:outputText value="#{hotel.nombre}"/>
-                    </p:column>
-                    <p:column headerText="Descripcion" sortBy="#{hotel.descripcion}" filterBy="#{hotel.descripcion}">
-                        <h:outputText value="#{hotel.descripcion}"/>
-                    </p:column>
-                    <p:column headerText="Direccion" sortBy="#{hotel.direccion}" filterBy="#{hotel.direccion}">
-                        <h:outputText value="#{hotel.direccion}"/>
-                    </p:column>
-                    <p:column headerText="Num Estre" sortBy="#{hotel.numEstrellas}" filterBy="#{hotel.numEstrellas}">
-                        <h:outputText value="#{hotel.numEstrellas}"/>
-                    </p:column>
-                    <p:column headerText="Telefono" sortBy="#{hotel.telefono}" filterBy="#{hotel.telefono}">
-                        <h:outputText value="#{hotel.telefono}"/>
-                    </p:column>
-                    <p:column headerText="Cod Admin" sortBy="#{hotel.administradorHotel.codigo}" filterBy="#{hotel.administradorHotel.codigo}">
-                        <h:outputText value="#{hotel.administradorHotel.codigo}"/>
-                    </p:column>
-                    <p:column headerText="Nombre Admin" sortBy="#{hotel.administradorHotel.nombre}" filterBy="#{hotel.administradorHotel.nombre}">
-                        <h:outputText value="#{hotel.administradorHotel.nombre}"/>
-                    </p:column>
-                    <p:column headerText="Ciudad" sortBy="#{hotel.ciudad.nombre}" filterBy="#{hotel.ciudad.nombre}">
-                        <h:outputText value="#{hotel.ciudad.nombre}"/>
-                    </p:column>
-                    <p:column exportable="false">
-                        <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
-                                         oncomplete="PF('manageProductDialog').show()"
-                                         styleClass="edit-button rounded-button ui-button-success" process="@this">
-                            <f:setPropertyActionListener value="#{hotel}" target="#{crudHotelBean.selectedHotel}"/>
+                    <p:toolbar>
+                        <p:toolbarGroup>
+                            <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{crudHotelBean.openNew()}"
+                                update=":form:manage-new-product-content" oncomplete="PF('manageNewProductDialog').show()"
+                                styleClass="ui-button-success" style="margin-right: .5rem">
                             <p:resetInput target=":form:manage-product-content"/>
-                        </p:commandButton>
-                        <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
-                                         oncomplete="PF('deleteProductDialog').show()">
-                            <f:setPropertyActionListener value="#{hotel}" target="#{crudHotelBean.selectedHotel}"/>
-                        </p:commandButton>
-                    </p:column>
+                            </p:commandButton>
+                            <p:commandButton id="delete-products-button" value="#{crudHotelBean.deleteButtonMessage}"
+                                icon="pi pi-trash" actionListener="#{crudHotelBean.deleteSelectedProducts}"
+                                styleClass="ui-button-danger" disabled="#{!crudHotelBean.hasSelectedProducts()}"
+                                update="@this">
+                            <p:confirm header="Confirmacion" message="Eliminar los hoteles seleccionados?"
+                                icon="pi pi-exclamation-triangle"/>
+                            </p:commandButton>
+                        </p:toolbarGroup>
+                    </p:toolbar>
 
-                </p:dataTable>
+                    <p:dataTable id="dt-products" widgetVar="dtProducts" var="hotel" value="#{crudHotelBean.hotels}"
+                                 reflow="true" styleClass="products-table"
+                                 selection="#{crudHotelBean.selectedHotels}" rowKey="#{hotel.codigo}" paginator="true"
+                                 rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                        <f:facet name="header">
+                            <div class="products-table-header">
+                                <span style="font-weight: bold">Hoteles</span>
 
-                <p:dialog header="Detalles Hotel" showEffect="fade" modal="true"
-                          widgetVar="manageProductDialog" responsive="true">
-                <p:outputPanel id="manage-product-content" class="ui-fluid">
-                    <p:outputPanel rendered="#{not empty crudHotelBean.selectedHotel}">
-                        <div class="p-field">
-                            <p:outputLabel for="nombre">Nombre</p:outputLabel>
-                            <p:inputText id="nombre" value="#{crudHotelBean.selectedHotel.nombre}" required="true"/>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="descripcion">Descripcion</p:outputLabel>
-                            <p:inputText id="descripcion" value="#{crudHotelBean.selectedHotel.descripcion}" required="true"/>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="direccion">Direccion</p:outputLabel>
-                            <p:inputText id="direccion" value="#{crudHotelBean.selectedHotel.direccion}" required="true"/>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="numEstrellas">Numero Estrellas</p:outputLabel>
-                            <p:selectOneMenu id="numEstrellas" value="#{crudHotelBean.selectedHotel.numEstrellas}"  required="true">
-                                <f:selectItem itemLabel="1" itemValue="1"/>
-                                <f:selectItem itemLabel="2" itemValue="2"/>
-                                <f:selectItem itemLabel="3" itemValue="3"/>
-                                <f:selectItem itemLabel="4" itemValue="4"/>
-                                <f:selectItem itemLabel="5" itemValue="5"/>
-                            </p:selectOneMenu>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="telefono">Telefono</p:outputLabel>
-                            <p:inputText id="telefono" value="#{crudHotelBean.selectedHotel.telefono}" required="true"/>
-                        </div>
-                        <div class="p-field">
-                            <p:outputLabel for="ciudad">Ciudad</p:outputLabel>
-                            <p:selectOneMenu id="ciudad" value="#{crudHotelBean.selectedHotel.ciudad}" converter="#{ciudadConverter}" required="true">
-                                <f:selectItems var="ciudad" value="#{crudHotelBean.ciudades}" itemLabel="#{ciudad.nombre}" />
-                            </p:selectOneMenu>
-                        </div>
-                    </p:outputPanel>
-                </p:outputPanel>
+                            </div>
+                        </f:facet>
 
-                    <f:facet name="footer">
-                        <p:commandButton value="Actualizar" icon="pi pi-check" actionListener="#{crudHotelBean.saveProduct}"
-                                         update="manage-product-content" process="manage-product-content @this"/>
-                        <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageProductDialog').hide()"
-                                         class="ui-button-secondary"/>
-                    </f:facet>
-                </p:dialog>
+                        <p:ajax event="rowSelect" update=":form:delete-products-button"/>
+                        <p:ajax event="rowUnselect" update=":form:delete-products-button"/>
+                        <p:ajax event="rowSelectCheckbox" update=":form:delete-products-button"/>
+                        <p:ajax event="rowUnselectCheckbox" update=":form:delete-products-button"/>
+                        <p:ajax event="toggleSelect" update=":form:delete-products-button"/>
 
-                <p:dialog header="Nuevo Hotel" showEffect="fade" modal="true"
-                          widgetVar="manageNewProductDialog" responsive="true">
-                    <p:outputPanel id="manage-new-product-content" class="ui-fluid">
+                        <p:column selectionMode="multiple" exportable="false"></p:column>
+
+                        <p:column headerText="Codigo" sortBy="#{hotel.codigo}" filterBy="#{hotel.codigo}">
+                            <h:outputText value="#{hotel.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Nombre" sortBy="#{hotel.nombre}" filterBy="#{hotel.nombre}">
+                            <h:outputText value="#{hotel.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Descripcion" sortBy="#{hotel.descripcion}" filterBy="#{hotel.descripcion}">
+                            <h:outputText value="#{hotel.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="Direccion" sortBy="#{hotel.direccion}" filterBy="#{hotel.direccion}">
+                            <h:outputText value="#{hotel.direccion}"/>
+                        </p:column>
+                        <p:column headerText="Num Estre" sortBy="#{hotel.numEstrellas}" filterBy="#{hotel.numEstrellas}">
+                            <h:outputText value="#{hotel.numEstrellas}"/>
+                        </p:column>
+                        <p:column headerText="Telefono" sortBy="#{hotel.telefono}" filterBy="#{hotel.telefono}">
+                            <h:outputText value="#{hotel.telefono}"/>
+                        </p:column>
+                        <p:column headerText="Cod Admin" sortBy="#{hotel.administradorHotel.codigo}" filterBy="#{hotel.administradorHotel.codigo}">
+                            <h:outputText value="#{hotel.administradorHotel.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Admin" sortBy="#{hotel.administradorHotel.nombre}" filterBy="#{hotel.administradorHotel.nombre}">
+                            <h:outputText value="#{hotel.administradorHotel.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Ciudad" sortBy="#{hotel.ciudad.nombre}" filterBy="#{hotel.ciudad.nombre}">
+                            <h:outputText value="#{hotel.ciudad.nombre}"/>
+                        </p:column>
+                        <p:column exportable="false">
+                            <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
+                                             oncomplete="PF('manageProductDialog').show()"
+                                             styleClass="edit-button rounded-button ui-button-success" process="@this">
+                                <f:setPropertyActionListener value="#{hotel}" target="#{crudHotelBean.selectedHotel}"/>
+                                <p:resetInput target=":form:manage-product-content"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                             oncomplete="PF('deleteProductDialog').show()">
+                                <f:setPropertyActionListener value="#{hotel}" target="#{crudHotelBean.selectedHotel}"/>
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:dialog header="Detalles Hotel" showEffect="fade" modal="true"
+                              widgetVar="manageProductDialog" responsive="true">
+                    <p:outputPanel id="manage-product-content" class="ui-fluid">
                         <p:outputPanel rendered="#{not empty crudHotelBean.selectedHotel}">
                             <div class="p-field">
-                                <p:outputLabel for="new_nombre">Nombre</p:outputLabel>
-                                <p:inputText id="new_nombre" value="#{crudHotelBean.selectedHotel.nombre}" required="true"/>
+                                <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                                <p:inputText id="nombre" value="#{crudHotelBean.selectedHotel.nombre}" required="true"/>
                             </div>
                             <div class="p-field">
-                                <p:outputLabel for="new_descripcion">Descripcion</p:outputLabel>
-                                <p:inputText id="new_descripcion" value="#{crudHotelBean.selectedHotel.descripcion}" required="true"/>
+                                <p:outputLabel for="descripcion">Descripcion</p:outputLabel>
+                                <p:inputText id="descripcion" value="#{crudHotelBean.selectedHotel.descripcion}" required="true"/>
                             </div>
                             <div class="p-field">
-                                <p:outputLabel for="new_direccion">Direccion</p:outputLabel>
-                                <p:inputText id="new_direccion" value="#{crudHotelBean.selectedHotel.direccion}" required="true"/>
+                                <p:outputLabel for="direccion">Direccion</p:outputLabel>
+                                <p:inputText id="direccion" value="#{crudHotelBean.selectedHotel.direccion}" required="true"/>
                             </div>
                             <div class="p-field">
-                                <p:outputLabel for="new_numEstrellas">Numero Estrellas</p:outputLabel>
-                                <p:selectOneMenu id="new_numEstrellas" value="#{crudHotelBean.selectedHotel.numEstrellas}"  required="true">
+                                <p:outputLabel for="numEstrellas">Numero Estrellas</p:outputLabel>
+                                <p:selectOneMenu id="numEstrellas" value="#{crudHotelBean.selectedHotel.numEstrellas}"  required="true">
                                     <f:selectItem itemLabel="1" itemValue="1"/>
                                     <f:selectItem itemLabel="2" itemValue="2"/>
                                     <f:selectItem itemLabel="3" itemValue="3"/>
@@ -230,48 +119,96 @@
                                 </p:selectOneMenu>
                             </div>
                             <div class="p-field">
-                                <p:outputLabel for="new_telefono">Telefono</p:outputLabel>
-                                <p:inputText id="new_telefono" value="#{crudHotelBean.selectedHotel.telefono}" required="true"/>
+                                <p:outputLabel for="telefono">Telefono</p:outputLabel>
+                                <p:inputText id="telefono" value="#{crudHotelBean.selectedHotel.telefono}" required="true"/>
                             </div>
                             <div class="p-field">
-                                <p:outputLabel for="administradorHotel">Admin Hotel</p:outputLabel>
-                                <p:selectOneMenu id="administradorHotel" value="#{crudHotelBean.selectedHotel.administradorHotel}" converter="#{administradorHotelConverter}" required="true">
-                                    <f:selectItems var="adminHotel" value="#{crudHotelBean.administradorHotels}" itemLabel="#{adminHotel.nombre}" />
-                                </p:selectOneMenu>
-                            </div>
-                            <div class="p-field">
-                                <p:outputLabel for="new_ciudad">Ciudad</p:outputLabel>
-                                <p:selectOneMenu id="new_ciudad" value="#{crudHotelBean.selectedHotel.ciudad}" converter="#{ciudadConverter}" required="true">
+                                <p:outputLabel for="ciudad">Ciudad</p:outputLabel>
+                                <p:selectOneMenu id="ciudad" value="#{crudHotelBean.selectedHotel.ciudad}" converter="#{ciudadConverter}" required="true">
                                     <f:selectItems var="ciudad" value="#{crudHotelBean.ciudades}" itemLabel="#{ciudad.nombre}" />
                                 </p:selectOneMenu>
                             </div>
                         </p:outputPanel>
                     </p:outputPanel>
 
-                    <f:facet name="footer">
-                        <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{crudHotelBean.saveNewProduct}"
-                                         update="manage-new-product-content" process="manage-new-product-content @this"/>
-                        <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageNewProductDialog').hide()"
-                                         class="ui-button-secondary"/>
-                    </f:facet>
-                </p:dialog>
+                        <f:facet name="footer">
+                            <p:commandButton value="Actualizar" icon="pi pi-check" actionListener="#{crudHotelBean.saveProduct}"
+                                             update="manage-product-content" process="manage-product-content @this"/>
+                            <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageProductDialog').hide()"
+                                             class="ui-button-secondary"/>
+                        </f:facet>
+                    </p:dialog>
 
-                <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
-                                 message="Eliminar Hotel?" header="Confirmar" severity="warn">
-                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{crudHotelBean.deleteProduct}"
-                                     process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
-                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                                     onclick="PF('deleteProductDialog').hide()"/>
-                </p:confirmDialog>
+                    <p:dialog header="Nuevo Hotel" showEffect="fade" modal="true"
+                              widgetVar="manageNewProductDialog" responsive="true">
+                        <p:outputPanel id="manage-new-product-content" class="ui-fluid">
+                            <p:outputPanel rendered="#{not empty crudHotelBean.selectedHotel}">
+                                <div class="p-field">
+                                    <p:outputLabel for="new_nombre">Nombre</p:outputLabel>
+                                    <p:inputText id="new_nombre" value="#{crudHotelBean.selectedHotel.nombre}" required="true"/>
+                                </div>
+                                <div class="p-field">
+                                    <p:outputLabel for="new_descripcion">Descripcion</p:outputLabel>
+                                    <p:inputText id="new_descripcion" value="#{crudHotelBean.selectedHotel.descripcion}" required="true"/>
+                                </div>
+                                <div class="p-field">
+                                    <p:outputLabel for="new_direccion">Direccion</p:outputLabel>
+                                    <p:inputText id="new_direccion" value="#{crudHotelBean.selectedHotel.direccion}" required="true"/>
+                                </div>
+                                <div class="p-field">
+                                    <p:outputLabel for="new_numEstrellas">Numero Estrellas</p:outputLabel>
+                                    <p:selectOneMenu id="new_numEstrellas" value="#{crudHotelBean.selectedHotel.numEstrellas}"  required="true">
+                                        <f:selectItem itemLabel="1" itemValue="1"/>
+                                        <f:selectItem itemLabel="2" itemValue="2"/>
+                                        <f:selectItem itemLabel="3" itemValue="3"/>
+                                        <f:selectItem itemLabel="4" itemValue="4"/>
+                                        <f:selectItem itemLabel="5" itemValue="5"/>
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="p-field">
+                                    <p:outputLabel for="new_telefono">Telefono</p:outputLabel>
+                                    <p:inputText id="new_telefono" value="#{crudHotelBean.selectedHotel.telefono}" required="true"/>
+                                </div>
+                                <div class="p-field">
+                                    <p:outputLabel for="administradorHotel">Admin Hotel</p:outputLabel>
+                                    <p:selectOneMenu id="administradorHotel" value="#{crudHotelBean.selectedHotel.administradorHotel}" converter="#{administradorHotelConverter}" required="true">
+                                        <f:selectItems var="adminHotel" value="#{crudHotelBean.administradorHotels}" itemLabel="#{adminHotel.nombre}" />
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="p-field">
+                                    <p:outputLabel for="new_ciudad">Ciudad</p:outputLabel>
+                                    <p:selectOneMenu id="new_ciudad" value="#{crudHotelBean.selectedHotel.ciudad}" converter="#{ciudadConverter}" required="true">
+                                        <f:selectItems var="ciudad" value="#{crudHotelBean.ciudades}" itemLabel="#{ciudad.nombre}" />
+                                    </p:selectOneMenu>
+                                </div>
+                            </p:outputPanel>
+                        </p:outputPanel>
 
-                <p:confirmDialog global="true" showEffect="fade" width="300">
-                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
-                                     icon="pi pi-times"/>
-                </p:confirmDialog>
+                        <f:facet name="footer">
+                            <p:commandButton value="Guardar" icon="pi pi-check" actionListener="#{crudHotelBean.saveNewProduct}"
+                                             update="manage-new-product-content" process="manage-new-product-content @this"/>
+                            <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageNewProductDialog').hide()"
+                                             class="ui-button-secondary"/>
+                        </f:facet>
+                    </p:dialog>
 
-            </div>
-        </h:form>
-    </p:panel>
-</body>
+                    <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
+                                     message="Eliminar Hotel?" header="Confirmar" severity="warn">
+                        <p:commandButton value="Si" icon="pi pi-check" actionListener="#{crudHotelBean.deleteProduct}"
+                                         process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                         onclick="PF('deleteProductDialog').hide()"/>
+                    </p:confirmDialog>
+
+                    <p:confirmDialog global="true" showEffect="fade" width="300">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                         icon="pi pi-times"/>
+                    </p:confirmDialog>
+
+                </div>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
 </html>
