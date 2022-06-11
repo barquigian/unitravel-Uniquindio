@@ -23,7 +23,7 @@ public class Caracteristica implements Serializable {
     private Integer codigo;
     @Column(length = 100)
     private String nombre;
-@Column(length = 10)
+    @Column(length = 10)
     private String tipo;
 
     @ManyToMany(mappedBy = "caracteristicas")

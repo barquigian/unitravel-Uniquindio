@@ -13,7 +13,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(false)
 public class AdministradorHotelTest {
     @Autowired
     private AdministradorHotelRepo administradorHotelRepo;
