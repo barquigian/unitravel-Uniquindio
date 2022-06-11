@@ -247,4 +247,19 @@ public class HotelTest {
         Assertions.assertTrue(!fotos.isEmpty());
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void hotelesSinReservaFechasYEnCiudad() {
+        LocalDateTime primera =  LocalDateTime.of(2022, 6,1,0,0);
+        LocalDateTime segunda =  LocalDateTime.of(2022, 8,3,0,0);
+        String ciudad = "Armenia";
+        List<Hotel> hoteles= hotelRepo.hotelesSinReservaFechasYEnCiudad(primera,segunda,ciudad);
+        if(!hoteles.isEmpty()){
+            for(Hotel hotel: hoteles){
+                System.out.println(hotel.getCodigo() + "," + hotel.getNombre());
+            }
+        }
+        Assertions.assertTrue(hoteles.isEmpty());
+    }
+
 }
