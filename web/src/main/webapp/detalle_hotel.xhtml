@@ -20,7 +20,7 @@
 </h:head>
 
 
-    <p:panel header="Detalle Hotel">
+
         <p:panel header="Detalle Hotel">
             <h3>#{detalleHotelBean.hotel.nombre}</h3>
             <p>#{detalleHotelBean.hotel.direccion}, #{detalleHotelBean.hotel.ciudad.nombre}</p>
@@ -104,10 +104,6 @@
                 <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form, lista-c" styleClass="mt-4" action="#{detalleHotelBean.crearComentario}" /> <p:growl for="msj-pregunta" showDetail="true" />
             </h:form>
         </p:panel>
-
-        <h:form>
-        </h:form>
-    </p:panel>
     </ui:define>
 </ui:composition>
 </html>

@@ -49,8 +49,9 @@
                             </p:outputPanel>
                         </div>
                         <div class="col-lg-2 col-md-1 align-self-center" >
-                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised"
-                                         icon="pi pi-arrow-right" iconPos="right" />
+                            <p:commandButton label="Hola" value="Ver detalle"  action="#{busquedaBean.detalle}" icon="pi pi-arrow-right" iconPos="right">
+                                <f:setPropertyActionListener value="#{hotel}" target="#{busquedaBean.selectedHotel}"/>
+                            </p:commandButton>
                         </div>
                     </div>
                 </p:dataViewListItem>

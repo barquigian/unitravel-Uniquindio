@@ -37,6 +37,15 @@ public class BusquedaBean implements Serializable {
     private String fechaFinalParam;
 
     @Getter @Setter
+    private Hotel selectedHotel;
+
+    @Getter @Setter
+    private LocalDateTime fechaInicio;
+
+    @Getter @Setter
+    private LocalDateTime fechaFinal;
+
+    @Getter @Setter
     private List<LocalDate> rangoFechas;
 
     @Getter @Setter
@@ -51,6 +60,7 @@ public class BusquedaBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         hoteles = new ArrayList<>();
+        selectedHotel = new Hotel();
         try {
             if (busquedaParam != null && !busquedaParam.isEmpty() && fechaInicialParam != null && !fechaInicialParam.isEmpty() &&
                     fechaFinalParam != null && !fechaFinalParam.isEmpty() ) {
@@ -61,6 +71,9 @@ public class BusquedaBean implements Serializable {
 
                 LocalDateTime fechaInicial = fechaInicialDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 LocalDateTime fechaFinal = fechaFinalDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+                this.fechaInicio = fechaInicial;
+                this.fechaFinal = fechaFinal;
 
                 hoteles = usuarioServicio.buscarHotelporNombre(busquedaParam);
                 List<Hotel> hotelesReserva = hotelServicio.hotelesSinReservaFechasYEnCiudad(fechaInicial,fechaFinal,busqueda);
@@ -91,5 +104,10 @@ public class BusquedaBean implements Serializable {
     public String buscar(){
         return "resultados_busqueda?faces-redirect=true&amp;busqueda="+busqueda+
                 "&amp;fecha_i="+rangoFechas.get(0)+"&amp;fecha_f="+rangoFechas.get(1);
+    }
+
+    public String detalle(){
+        return "detalle_hotel?faces-redirect=true&amp;hotel_id="+selectedHotel.getCodigo()+
+                "&amp;fecha_i="+fechaInicio+"&amp;fecha_f="+fechaFinal;
     }
 }
