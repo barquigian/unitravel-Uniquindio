@@ -87,10 +87,10 @@
 
                      <h:panelGrid columns="6" cellpadding="1">
                         <p:inputText placeholder="A donde vas?..." required="true" value="#{busquedaBean.busqueda}"/>
-                         <p:outputLabel for="fecha_inicio" value="Chek in:"/>
-                         <p:calendar id="fecha_inicio" value="#{calendarViewBean.fecha_inicio}" />
-                         <p:outputLabel for="fecha_final" value="Chek out:"/>
-                         <p:calendar id="fecha_final" value="#{calendarViewBean.fecha_final}" />
+                         <p:outputLabel for="fechas" value="Chek in - out:"/>
+
+                         <p:datePicker id="fechas" selectionMode="range" value="#{busquedaBean.rangoFechas}" readonlyInput="true"  converter="javax.faces.DateTime"/>
+
                          <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
                       </h:panelGrid>
                  </div>

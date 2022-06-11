@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,22 +32,83 @@ public class AdministradorHotelServicioImpl implements AdministradorHotelServici
 
     @Override
     public Hotel crearHotel(Hotel hotel) throws Exception {
-
-
+        List<Hotel> hotels = listarTodosHoteles();
+        Integer codigo = 1;
+        if(!hotels.isEmpty()){
+            codigo += hotels.get(hotels.size()-1).getCodigo();
+        }
+        hotel.setCodigo(codigo);
+        Hotel buscado = obtenerHotel(hotel.getCodigo());
+        if(buscado != null){
+            throw new Exception("La cédula del usuario ya está registrada");
+        }
          return hotelRepo.save(hotel);
 
     }
 
+    /**
+     * @param codigo
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Hotel obtenerHotel(Integer codigo) throws Exception {
+        return hotelRepo.findByCodigo(codigo);
+    }
+
     @Override
     public void elimiarHotel(Integer codigo) throws Exception {
-        Optional<Hotel> hotel= hotelRepo.findById(codigo);
-        if (hotel.isEmpty()){
+        Hotel buscado = obtenerHotel(codigo);
+        if (buscado == null){
           throw new Exception();
 
         }else {
-            hotelRepo.delete(hotel.get());
+            hotelRepo.delete(buscado);
 
         }
+    }
+
+    /**
+     * @param hotels
+     * @throws Exception
+     */
+    @Override
+    public void elimiarHoteles(List<Hotel> hotels) throws Exception {
+        for(Hotel hotel: hotels){
+            Hotel buscado = obtenerHotel(hotel.getCodigo());
+            if (buscado == null){
+                throw new Exception();
+
+            }else {
+                hotelRepo.delete(buscado);
+
+            }
+        }
+    }
+
+    /**
+     * @param hotel
+     * @throws Exception
+     */
+    @Override
+    public void actualizarHotel(Hotel hotel) throws Exception {
+        Hotel buscado = obtenerHotel(hotel.getCodigo());
+        if (buscado == null){
+            throw new Exception();
+
+        }else {
+            hotelRepo.save(hotel);
+
+        }
+    }
+
+    /**
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Hotel> listarTodosHoteles() throws Exception {
+        return hotelRepo.findAll();
     }
 
     @Override

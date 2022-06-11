@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class BusquedaBean implements Serializable {
     @Value("#{param['busqueda']}")
     private String busquedaParam;
 
+    @Getter @Setter
+    private List<LocalDate> rangoFechas;
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -30,7 +34,7 @@ public class BusquedaBean implements Serializable {
     private List<Hotel> hoteles;
     @PostConstruct
     public void inicializar() {
-        hoteles=new ArrayList<>();
+        hoteles = new ArrayList<>();
         try {
             if (busquedaParam != null && !busquedaParam.isEmpty()) {
                 hoteles = usuarioServicio.buscarHotelporNombre(busquedaParam);
@@ -40,7 +44,18 @@ public class BusquedaBean implements Serializable {
         }
 
     }
+
+    public String mirarFechas(){
+        if(!rangoFechas.isEmpty()) {
+            System.out.println(rangoFechas.get(0));
+            System.out.println(rangoFechas.get(1));
+        }else {
+            System.out.println("Vacia");
+        }
+        return "#";
+    }
+
     public String buscar(){
-            return "resultados_busqueda?faces-redirect=true&amp;busqueda="+busqueda;
+        return "resultados_busqueda?faces-redirect=true&amp;busqueda="+busqueda;
     }
 }

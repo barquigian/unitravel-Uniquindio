@@ -21,6 +21,8 @@ public interface HotelRepo extends JpaRepository<Hotel,Integer> {
 
     Optional<Hotel> findById(Integer codigoHotel);
 
+    Hotel findByCodigo(Integer codigoHotel);
+
     //obtiene los hoteles de mayor o igual a un número de estrellas
     @Query("select h from Hotel h where h.numEstrellas>= :estrellas")
     List<Hotel> obtenerHotelesPorCategorias(int estrellas);
