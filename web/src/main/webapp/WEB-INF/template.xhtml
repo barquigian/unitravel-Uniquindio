@@ -15,6 +15,8 @@
 </h:head>
 
 <h:body>
+
+    <p>#{seguridadBean.persona}</p>
     <div id="encabezado">
         <div class="p-3 bg-dark text-white">
             <div class="container">
@@ -33,10 +35,15 @@
                     --></ul>
                     <div class="px-3 py-2 border-bottom mb-3">
                         <div class="container d-flex flex-wrap justify-content-center">
+
                             <div class="text-end">
-                                <h:form >
-                                    <p:commandButton value="Login" type="button" class="btn btn-outline-light me-2" action="#{inicioBean.irLogin}"/>
-                                    <p:commandButton value="Registrarse" class="btn btn-warning" action="#{inicioBean.irRegistro}"/>
+                                <h:form  rendered="#{!seguridadBean.autenticado}">
+                                    <p:commandButton value="Login" onclick="PF('login').show" styleClass="ui-button-raised ui-button-danger" icon="pi pi-lock"
+                                    iconPos="left" />
+                                    <p:commandButton value="Registrarse" styleClass="ui-button-raised" action="#{inicioBean.irRegistro}" />
+                                </h:form>
+                                <h:form  rendered="#{!seguridadBean.autenticado}">
+                                    <p:commandButton value="Cerrar sesión" action="#{seguridadBean.cerrarSesion}" icon="pi pi-lock"  />
                                 </h:form>
                             </div>
                         </div>
@@ -44,6 +51,22 @@
                 </div>
             </div>
         </div>
+        <p:dialog header="Iniciar sesión" showEffect="fade" widgetVar="login" modal="true">
+        <h:form >
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="email_login" value="Email:" />
+                <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
+                <p:message for="email_login" />
+                <p:outputLabel for="password_login" value="Password:" />
+                <p:password id="password_login" value="#{seguridadBean.contrasena}" required="true"
+                />
+                <p:message for="password_login" />
+            </h:panelGrid>
+            <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}"
+                             styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+            <p:growl for="login-bean" showDetail="true" />
+        </h:form>
+        </p:dialog>
     </div>
 
     <div class = "card">
