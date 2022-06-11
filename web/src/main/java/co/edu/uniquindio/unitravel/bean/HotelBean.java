@@ -26,7 +26,7 @@ public class HotelBean implements Serializable {
     @Getter @Setter
     private Hotel hotel;
 
-    @Value("$(upload.url)")
+    @Value("${upload.url}")
     private String urlImagenes;
 
     @Getter @Setter
