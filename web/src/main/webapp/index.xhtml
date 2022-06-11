@@ -117,7 +117,7 @@
 
             <p>Hoteles recomendados</p>
 
-    <h:form id="form">
+    <h:form>
         <p:dataView id="lista-hoteles" var="hotel" value="#{inicioBean.hoteles}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16" gridIcon="pi pi-th-large" listIcon="pi pi-bars" >
             <p:dataViewGridItem>
                 <div class="card" >
@@ -127,7 +127,9 @@
                         <p class="card-text">#{hotel.ciudad.nombre}</p>
                         <hr />
                         <p:commandButton value="Ver detalle" action="#{inicioBean.irDetalleHotel}" styleClass="ui-button-raised"
-                                         icon="pi pi-arrow-right" iconPos="right" />
+                                         icon="pi pi-arrow-right" iconPos="right" >
+                            <f:setPropertyActionListener value="#{hotel}" target="#{inicioBean.selectedHotel}"/>
+                        </p:commandButton>
                     </div>
                 </div>
             </p:dataViewGridItem>
@@ -154,8 +156,10 @@
                         </p:outputPanel>
                     </div>
                     <div class="col-lg-2 col-md-1 align-self-center" >
-                        <p:commandButton value="Ver detalle" action="#{inicioBean.irDetalleHotel(hotel.codigo)}" styleClass="ui-button-raised"
-                                         icon="pi pi-arrow-right" iconPos="right" />
+                        <p:commandButton label="Hola" value="Ver detalle"  action="#{inicioBean.irDetalleHotel}" icon="pi pi-arrow-right" iconPos="right">
+                            <f:param name="hotel_id" value="#{hotel.codigo}"/>
+                            <f:setPropertyActionListener value="#{hotel}" target="#{inicioBean.selectedHotel}"/>
+                        </p:commandButton>
                     </div>
                 </div>
             </p:dataViewListItem>

@@ -10,9 +10,9 @@ import java.util.List;
 public interface HotelServicio {
 
     Hotel obtenerHotel(Integer codigo)throws Exception;
-
     List<Hotel> hotelesSinReservaFechasYEnCiudad(LocalDateTime primera, LocalDateTime segunda, String ciudad);
-
     List<Habitacion> habitacionesSinReservayDeHotel(LocalDateTime primera, LocalDateTime segunda, Integer codigo_hotel);
+    List<String> fotosHotel(Integer codigo);
+    List<String> fotosHabitacion(Integer codigo);
 }
 

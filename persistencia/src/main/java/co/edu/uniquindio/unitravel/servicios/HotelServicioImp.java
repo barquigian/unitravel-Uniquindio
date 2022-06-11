@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,6 +49,32 @@ public class HotelServicioImp  implements HotelServicio{
     @Override
     public List<Habitacion> habitacionesSinReservayDeHotel(LocalDateTime primera, LocalDateTime segunda, Integer codigo_hotel) {
         return habitacionRepo.habitacionesSinReservayDeHotel(primera,segunda,codigo_hotel);
+    }
+
+    /**
+     * @param codigo
+     * @return
+     */
+    @Override
+    public List<String> fotosHotel(Integer codigo) {
+            List<String> fotos = hotelRepo.urlFotosHotel(codigo);
+            if(!fotos.isEmpty()){
+                return fotos;
+            }
+        return new ArrayList<>();
+    }
+
+    /**
+     * @param codigo
+     * @return
+     */
+    @Override
+    public List<String> fotosHabitacion(Integer codigo) {
+        List<String> fotos = habitacionRepo.urlFotosHabitacion(codigo);
+        if(!fotos.isEmpty()){
+            return fotos;
+        }
+        return new ArrayList<>();
     }
 
 

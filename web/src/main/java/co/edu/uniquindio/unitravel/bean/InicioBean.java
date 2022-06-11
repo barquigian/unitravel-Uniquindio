@@ -23,6 +23,9 @@ public class InicioBean implements Serializable {
     @Getter @Setter
     private List<Ciudad> ciudades;
 
+    @Getter @Setter
+    private Hotel selectedHotel;
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -30,12 +33,16 @@ public class InicioBean implements Serializable {
     public void inicializar(){
         hoteles= usuarioServicio.listarHoteles();
         ciudades= usuarioServicio.listarCiudades();
+        selectedHotel = new Hotel();
     }
     public String irRegistro(){
         return "registrar_usuario?faces-redirec=true";
     }
     public String irLogin(){return "login?faces-redirec=true";}
-    public String irDetalleHotel(String codigoHotel){return "detalle_hotel?faces-redirec=true&amp;hotel_id="+codigoHotel;}
+    public String irDetalleHotel(){
+        System.out.println(selectedHotel.getNombre());
+        return "detalle_hotel?faces-redirec=true&amp;hotel_id="+selectedHotel.getCodigo().toString();
+    }
 
 
 }
