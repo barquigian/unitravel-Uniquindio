@@ -17,15 +17,22 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 
 @Component
 @ViewScoped
 public class DetalleHotelBean implements Serializable {
     @Value("#{param['hotel_id']}")
     private String codigoHotel;
+
+    @Value("#{param['fecha_i']}")
+    private String fechaInicialParam;
+
+    @Value("#{param['fecha_f']}")
+    private String fechaFinalParam;
 
     @Getter @Setter
     private Hotel hotel;
@@ -49,6 +56,9 @@ public class DetalleHotelBean implements Serializable {
     private List<ResponsiveOption> responsiveOptions3;
 
     @Getter @Setter
+    private List<Habitacion> habitacionList;
+
+    @Getter @Setter
     private int activeIndex = 0;
 
     @Autowired
@@ -59,18 +69,45 @@ public class DetalleHotelBean implements Serializable {
 
     @PostConstruct
     public void inicializar(){
-        nuevoComentario=new Comentario();
-        comentarios=new ArrayList<>();
-        if(codigoHotel!=null && !codigoHotel.isEmpty()){
+
+        nuevoComentario = new Comentario();
+        comentarios = new ArrayList<>();
+        habitacionList = new ArrayList<>();
+
+        if(codigoHotel != null && !codigoHotel.isEmpty()){
             try {
                 hotel = hotelServicio.obtenerHotel(Integer.parseInt(codigoHotel));
                 comentarios= hotel.getComentarios();
+                habitacionList = new ArrayList<>();
                 this.todasLasFotos();
                 System.out.println(photos);
+
+                for(Habitacion habitacion: hotel.getHabitaciones()){
+                    habitacionList.add(habitacion);
+                }
+
+                if ( fechaInicialParam != null && !fechaInicialParam.isEmpty() &&
+                        fechaFinalParam != null && !fechaFinalParam.isEmpty()) {
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                    Date fechaInicialDate = sdf.parse(fechaInicialParam);
+                    Date fechaFinalDate = sdf.parse(fechaFinalParam);
+
+                    LocalDateTime fechaInicial = fechaInicialDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                    LocalDateTime fechaFinal = fechaFinalDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+                    List<Habitacion> habitacionesReservas = hotelServicio.habitacionesSinReservayDeHotel(fechaInicial,fechaFinal,hotel.getCodigo());
+
+                    if(!habitacionesReservas.isEmpty()){
+                        habitacionList.removeAll(habitacionesReservas);
+                    }
+
+                }
+
             }catch (Exception e){
                 e.printStackTrace();
             }
-        }else {
+        }  else {
             System.out.println("Vacio" + codigoHotel);
         }
     }

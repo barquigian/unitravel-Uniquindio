@@ -112,7 +112,7 @@
 
         <p:panel header="Habitaciones Disponibles" styleClass="mt-3">
             <h:form id="form">
-            <p:dataView var="habitacion" value="#{detalleHotelBean.hotel.habitaciones}" rows="12" paginator="true"
+            <p:dataView var="habitacion" value="#{detalleHotelBean.habitacionList}" rows="12" paginator="true"
                         rowsPerPageTemplate="6,12,16"
                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                         gridIcon="pi pi-th-large" listIcon="pi pi-bars">
@@ -123,7 +123,7 @@
                         </div>
                         <div class="col-lg-8 col-md-1 align-self-center" >
                             <p:outputPanel>
-                                <h:panelGrid columns="2" cellpadding="5">
+                                <h:panelGrid columns="2" cellpadding="5" >
                                     <h:outputText value="Numero habitacion:" />
                                     <h:outputText value="#{habitacion.numeroHabitacion}" style="font-weight:bold" />
                                     <h:outputText value="Capacidad:" />
